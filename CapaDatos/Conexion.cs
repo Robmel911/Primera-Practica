@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-
-   
     namespace CapaDatos
     {
         public class Conexion
