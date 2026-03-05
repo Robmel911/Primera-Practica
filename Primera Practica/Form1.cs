@@ -13,6 +13,7 @@ namespace Primera_Practica
 {
     public partial class Form1 : Form
     {
+        private CN_Colmado Obj_Colmado = new CN_Colmado();
         private const int MENU_COLAPSADO = 60;
         private const int MENU_EXPANDIDO = 200;
         private const int VELOCIDAD_ANIM = 30;
@@ -25,6 +26,15 @@ namespace Primera_Practica
             MarcarBotonActivo(btnInicio);
 
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Tablaproductos();
+        }
+        private void Tablaproductos()
+        {
+            dataGridView1.DataSource = Obj_Colmado.MostrarProd();
+        }
+        #region Funcion del panel
         private void MostrarPanel(Panel panelActivo)
         {
             panelInicio.Visible = false;
@@ -101,7 +111,7 @@ namespace Primera_Practica
                     timerMenu.Stop();
             }
         }
-
+        #endregion
         private void button1_Click(object sender, EventArgs e)
         {
             CN_Colmado prue = new CN_Colmado();
@@ -118,5 +128,7 @@ namespace Primera_Practica
 
 
         }
+
+       
     }
 }

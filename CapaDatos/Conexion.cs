@@ -10,18 +10,34 @@ using System.Data.SqlClient;
     {
         public class Conexion
         {
-        private string textoconexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
+        private string cadenaConexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
 
+        // Propiedad para obtener la conexión
         public SqlConnection ObtenerConexion()
         {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
             try
             {
-                SqlConnection conexion = new SqlConnection(textoconexion); conexion.Open(); return conexion;
+                conexion.Open();
+                return conexion;
             }
             catch (Exception ex)
-            { throw new Exception("Error al conectar: " + ex.Message); }
+            {
+                throw new Exception("Error al conectar con la base de datos: " + ex.Message);
+            }
         }
-        // 3. Método para probar la conexión
+
+        // Método para cerrar la conexión
+        public SqlConnection CerrarConexion()
+        {
+            if (ObtenerConexion().State == System.Data.ConnectionState.Open)
+            {
+                ObtenerConexion().Close();
+            }
+            return ObtenerConexion();
+
+        }
+        // 3Método para probar la conexión
         public bool ProbarConexion()
         {
             try
