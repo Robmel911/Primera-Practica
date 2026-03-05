@@ -40,7 +40,9 @@
             this.panelVentas = new System.Windows.Forms.Panel();
             this.panelClientes = new System.Windows.Forms.Panel();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
+            this.panelInicio.SuspendLayout();
             this.panelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -142,6 +144,7 @@
             // 
             // panelInicio
             // 
+            this.panelInicio.Controls.Add(this.button1);
             this.panelInicio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInicio.Location = new System.Drawing.Point(83, 0);
             this.panelInicio.Name = "panelInicio";
@@ -152,9 +155,9 @@
             // 
             this.panelProductos.Controls.Add(this.dataGridView1);
             this.panelProductos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelProductos.Location = new System.Drawing.Point(83, 0);
+            this.panelProductos.Location = new System.Drawing.Point(0, 0);
             this.panelProductos.Name = "panelProductos";
-            this.panelProductos.Size = new System.Drawing.Size(717, 450);
+            this.panelProductos.Size = new System.Drawing.Size(800, 450);
             this.panelProductos.TabIndex = 2;
             // 
             // dataGridView1
@@ -188,19 +191,30 @@
             this.timerMenu.Interval = 30;
             this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(316, 176);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelInicio);
             this.Controls.Add(this.panelLateral);
             this.Controls.Add(this.panelClientes);
             this.Controls.Add(this.panelVentas);
+            this.Controls.Add(this.panelProductos);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panelLateral.ResumeLayout(false);
+            this.panelInicio.ResumeLayout(false);
             this.panelProductos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -220,10 +234,7 @@
         private System.Windows.Forms.Panel panelClientes;
         private System.Windows.Forms.Timer timerMenu;
         private System.Windows.Forms.DataGridView dataGridView1;
-
-    
-
-
+        private System.Windows.Forms.Button button1;
     }
 }
 

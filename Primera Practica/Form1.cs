@@ -102,6 +102,21 @@ namespace Primera_Practica
             }
         }
 
-  
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CN_Colmado prue = new CN_Colmado();
+            bool conectado = prue.Prueba();
+            if (conectado)
+            {
+                MessageBox.Show("¡Conexión exitosa a la base de datos!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No se pudo conectar a la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+
+        }
     }
 }

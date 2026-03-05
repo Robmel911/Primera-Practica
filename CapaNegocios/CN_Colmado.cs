@@ -9,5 +9,13 @@ namespace CapaNegocios
 {
     public class CN_Colmado
     {
+        public bool Prueba()
+        {
+            Conexion Conexion = new Conexion();
+            bool exito = Conexion.ProbarConexion();
+            if (exito) { return true; }
+            else { return false; }
+            
+        }
     }
 }
