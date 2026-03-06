@@ -13,11 +13,13 @@ namespace Primera_Practica
 {
     public partial class Form1 : Form
     {
-        private CN_Colmado Obj_Colmado = new CN_Colmado();
+        private CN_Colmado CNcolmado = new CN_Colmado();
         private const int MENU_COLAPSADO = 60;
         private const int MENU_EXPANDIDO = 200;
         private const int VELOCIDAD_ANIM = 30;
         private bool menuExpandiendo = false;
+        private bool Editar = false;
+        private string ID;
         
         public Form1()
         {
@@ -30,17 +32,15 @@ namespace Primera_Practica
         {
             Tablaproductos();
         }
-        private void Tablaproductos()
-        {
-            dataGridView1.DataSource = Obj_Colmado.MostrarProd();
-        }
-        #region Funcion del panel
+        
+        #region Funcion del panel lateral
         private void MostrarPanel(Panel panelActivo)
         {
             panelInicio.Visible = false;
             panelProductos.Visible = false;
             panelVentas.Visible = false;
             panelClientes.Visible = false;
+            panelAux.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
@@ -111,24 +111,94 @@ namespace Primera_Practica
                     timerMenu.Stop();
             }
         }
+
         #endregion
-        private void button1_Click(object sender, EventArgs e)
+        #region Panel Productos
+        private void Limpiartextos_Productos()
         {
-            CN_Colmado prue = new CN_Colmado();
-            bool conectado = prue.Prueba();
-            if (conectado)
-            {
-                MessageBox.Show("¡Conexión exitosa a la base de datos!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("No se pudo conectar a la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-
+            textNombre.Clear(); textDesc.Clear(); textMarca.Text = ""; textPrecio.Clear(); textStock.Text = "0";
+        }
+        private void Tablaproductos()
+        {
+            dataGrid_Productos.DataSource = CNcolmado.Mostrartabla_Producto();
+        }
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            panelAux.Visible = false;
+            
         }
 
-       
+        private void btnguardar_Click(object sender, EventArgs e)
+        {
+            //Cuando se agrega
+            if (Editar == false)
+            {
+                try
+                {
+                    CNcolmado.Insertar_producto(textNombre.Text, textDesc.Text, textMarca.Text, textPrecio.Text, textStock.Text);
+                    MessageBox.Show("El producto fue guardado correctamente");
+                    Tablaproductos();
+                    panelAux.Visible = false;
+                }
+                catch (Exception ex) { MessageBox.Show("No se agrego correctamente porque" + ex); }
+            }
+            // Cuando se edita
+            else
+            {
+                try
+                {
+                    CNcolmado.Editar_producto(textNombre.Text, textDesc.Text, textMarca.Text, textPrecio.Text, textStock.Text,ID);
+                    MessageBox.Show("El producto fue editado correctamente");
+                    Tablaproductos();
+                    panelAux.Visible = false;
+                    Editar = false;
+                }
+                catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex); }
+            }
+        }
+        private void btnagregar_Click(object sender, EventArgs e)
+        {
+            Editar = false;
+            panelAux.Visible = true;
+            label_panelAux.Text = "Agregar Producto";
+            //lim[iar todas las text box
+            Limpiartextos_Productos();
+        }
+
+        private void btneditar_Click(object sender, EventArgs e)
+        {
+            if (dataGrid_Productos.SelectedRows.Count > 0) 
+            {
+                Editar = true;
+                panelAux.Visible = true;
+                label_panelAux.Text = "Editar Producto";
+                textNombre.Text = dataGrid_Productos.CurrentRow.Cells["Nombre"].Value.ToString();
+                textDesc.Text = dataGrid_Productos.CurrentRow.Cells["Descripcion"].Value.ToString();
+                textMarca.Text = dataGrid_Productos.CurrentRow.Cells["Marca"].Value.ToString();
+                textPrecio.Text = dataGrid_Productos.CurrentRow.Cells["Precio"].Value.ToString();
+                textStock.Text = dataGrid_Productos.CurrentRow.Cells["Stock"].Value.ToString();
+                ID = dataGrid_Productos.CurrentRow.Cells["IdProducto"].Value.ToString();
+
+            }
+            else { MessageBox.Show("Seleccione una fila"); }
+        }
+
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+            if(dataGrid_Productos.SelectedRows.Count > 0)
+            {
+                
+                ID = dataGrid_Productos.CurrentRow.Cells["IdProducto"].Value.ToString();
+                MessageBox.Show("Esta seguro");
+                CNcolmado.Eliminar_Producto(ID);
+                MessageBox.Show("Se ha eliminado el producto");
+                Tablaproductos();
+            }
+            else { MessageBox.Show("Seleccione una fila"); }
+        }
+
+        #endregion
+
+
     }
 }
