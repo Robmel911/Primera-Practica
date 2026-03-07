@@ -12,6 +12,7 @@ namespace CapaNegocios
     public class CN_Colmado
     {
         private CD_Productos CDproductos = new CD_Productos();
+        private CD_Clientes CDclientes = new CD_Clientes();
         private TablasDB tablasdb = new TablasDB();
       
         public DataTable Mostrartabla(string Datagrid)
@@ -20,6 +21,7 @@ namespace CapaNegocios
             tabla = tablasdb.MostrarTabla(Datagrid);
             return tabla;
         }
+        #region Funciones de Productos
         public DataTable Mostrartabla_Producto()
         {
             DataTable tabla = new DataTable();
@@ -28,19 +30,27 @@ namespace CapaNegocios
         }
         public void Insertar_producto(string nombre, string desc, string marca, string precio, string stock)
         {
-            CDproductos.Insertar(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock));
+            CDproductos.Insertar_Productos(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock));
             
         }
         public void Editar_producto(string nombre, string desc, string marca, string precio, string stock, string id)
         {
-            CDproductos.Editar(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock),Convert.ToInt32(id));
+            CDproductos.Editar_Productos(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock),Convert.ToInt32(id));
 
         }
         public void Eliminar_Producto(string id)
         {
-            CDproductos.Eliminar (Convert.ToInt32(id));
+            CDproductos.Eliminar_Productos(Convert.ToInt32(id));
 
         }
-
+        #endregion
+        public void Registrar_Cliente(string nombre,string telefono, string informacion)
+        {
+            CDclientes.Registrar_Clientes(nombre, telefono, informacion);
+        }
+        public void Editar_Cliente(string nombre, string telefono, string informacion, string id)
+        {
+            CDclientes.Editar_Clientes(nombre, telefono, informacion,Convert.ToInt32(id));
+        }
     }
 }
