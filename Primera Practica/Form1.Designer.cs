@@ -56,30 +56,30 @@
             this.dataGrid_Productos = new System.Windows.Forms.DataGridView();
             this.panelVentas = new System.Windows.Forms.Panel();
             this.panelClientes = new System.Windows.Forms.Panel();
+            this.btneliminar_Cl = new System.Windows.Forms.Button();
+            this.btneditar_Cl = new System.Windows.Forms.Button();
+            this.btnregistrar_Cl = new System.Windows.Forms.Button();
+            this.panelAux_Clientes = new System.Windows.Forms.Panel();
+            this.btnguardar_Cl = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textInfoCl = new System.Windows.Forms.RichTextBox();
+            this.textTelefonoCl = new System.Windows.Forms.MaskedTextBox();
+            this.textNombreCl = new System.Windows.Forms.TextBox();
+            this.tituloauxCl = new System.Windows.Forms.Label();
+            this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
-            this.panelAux_Clientes = new System.Windows.Forms.Panel();
-            this.btnregistrar_Cl = new System.Windows.Forms.Button();
-            this.btneditar_Cl = new System.Windows.Forms.Button();
-            this.btneliminar_Cl = new System.Windows.Forms.Button();
-            this.tituloauxCl = new System.Windows.Forms.Label();
-            this.textNombreCl = new System.Windows.Forms.TextBox();
-            this.textTelefonoCl = new System.Windows.Forms.MaskedTextBox();
-            this.textInfoCl = new System.Windows.Forms.RichTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnguardar_Cl = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             this.panelProductos.SuspendLayout();
             this.panelAux_Productos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).BeginInit();
             this.panelClientes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             this.panelAux_Clientes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
@@ -234,7 +234,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(23, 440);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.Size = new System.Drawing.Size(73, 20);
             this.label6.TabIndex = 12;
             this.label6.Text = "Cantidad";
             // 
@@ -243,7 +243,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(19, 340);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.Size = new System.Drawing.Size(53, 20);
             this.label5.TabIndex = 11;
             this.label5.Text = "Precio";
             // 
@@ -252,7 +252,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(19, 249);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.Size = new System.Drawing.Size(53, 20);
             this.label4.TabIndex = 10;
             this.label4.Text = "Marca";
             // 
@@ -261,7 +261,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(23, 151);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.Size = new System.Drawing.Size(92, 20);
             this.label3.TabIndex = 9;
             this.label3.Text = "Descripción";
             // 
@@ -270,7 +270,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(23, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.Size = new System.Drawing.Size(65, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "Nombre";
             // 
@@ -283,7 +283,7 @@
             0,
             0});
             this.textStockProd.Name = "textStockProd";
-            this.textStockProd.Size = new System.Drawing.Size(176, 20);
+            this.textStockProd.Size = new System.Drawing.Size(176, 26);
             this.textStockProd.TabIndex = 7;
             // 
             // textMarcaProd
@@ -298,21 +298,21 @@
             // 
             this.textPrecioProd.Location = new System.Drawing.Point(23, 363);
             this.textPrecioProd.Name = "textPrecioProd";
-            this.textPrecioProd.Size = new System.Drawing.Size(176, 20);
+            this.textPrecioProd.Size = new System.Drawing.Size(176, 26);
             this.textPrecioProd.TabIndex = 5;
             // 
             // textDescProd
             // 
             this.textDescProd.Location = new System.Drawing.Point(23, 174);
             this.textDescProd.Name = "textDescProd";
-            this.textDescProd.Size = new System.Drawing.Size(176, 20);
+            this.textDescProd.Size = new System.Drawing.Size(176, 26);
             this.textDescProd.TabIndex = 3;
             // 
             // textNombreProd
             // 
             this.textNombreProd.Location = new System.Drawing.Point(23, 80);
             this.textNombreProd.Name = "textNombreProd";
-            this.textNombreProd.Size = new System.Drawing.Size(176, 20);
+            this.textNombreProd.Size = new System.Drawing.Size(176, 26);
             this.textNombreProd.TabIndex = 2;
             // 
             // btnguardarProd
@@ -331,7 +331,7 @@
             this.label_panelAux.AutoSize = true;
             this.label_panelAux.Location = new System.Drawing.Point(64, 13);
             this.label_panelAux.Name = "label_panelAux";
-            this.label_panelAux.Size = new System.Drawing.Size(36, 13);
+            this.label_panelAux.Size = new System.Drawing.Size(51, 20);
             this.label_panelAux.TabIndex = 0;
             this.label_panelAux.Text = "Titulo ";
             // 
@@ -396,23 +396,35 @@
             this.panelClientes.Size = new System.Drawing.Size(1091, 651);
             this.panelClientes.TabIndex = 4;
             // 
-            // timerMenu
+            // btneliminar_Cl
             // 
-            this.timerMenu.Interval = 30;
-            this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
+            this.btneliminar_Cl.Location = new System.Drawing.Point(561, 567);
+            this.btneliminar_Cl.Name = "btneliminar_Cl";
+            this.btneliminar_Cl.Size = new System.Drawing.Size(124, 47);
+            this.btneliminar_Cl.TabIndex = 4;
+            this.btneliminar_Cl.Text = "Eliminar Cliente";
+            this.btneliminar_Cl.UseVisualStyleBackColor = true;
+            this.btneliminar_Cl.Click += new System.EventHandler(this.btneliminar_Cl_Click);
             // 
-            // errorProvider1
+            // btneditar_Cl
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.btneditar_Cl.Location = new System.Drawing.Point(350, 567);
+            this.btneditar_Cl.Name = "btneditar_Cl";
+            this.btneditar_Cl.Size = new System.Drawing.Size(88, 47);
+            this.btneditar_Cl.TabIndex = 3;
+            this.btneditar_Cl.Text = "Ediar Cliente";
+            this.btneditar_Cl.UseVisualStyleBackColor = true;
+            this.btneditar_Cl.Click += new System.EventHandler(this.btneditar_Cl_Click);
             // 
-            // dataGrid_Clientes
+            // btnregistrar_Cl
             // 
-            this.dataGrid_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid_Clientes.Location = new System.Drawing.Point(12, 50);
-            this.dataGrid_Clientes.Name = "dataGrid_Clientes";
-            this.dataGrid_Clientes.ReadOnly = true;
-            this.dataGrid_Clientes.Size = new System.Drawing.Size(740, 461);
-            this.dataGrid_Clientes.TabIndex = 0;
+            this.btnregistrar_Cl.Location = new System.Drawing.Point(150, 567);
+            this.btnregistrar_Cl.Name = "btnregistrar_Cl";
+            this.btnregistrar_Cl.Size = new System.Drawing.Size(105, 44);
+            this.btnregistrar_Cl.TabIndex = 2;
+            this.btnregistrar_Cl.Text = "Regisrar Cliente";
+            this.btnregistrar_Cl.UseVisualStyleBackColor = true;
+            this.btnregistrar_Cl.Click += new System.EventHandler(this.btnregistrar_Cl_Click);
             // 
             // panelAux_Clientes
             // 
@@ -431,95 +443,6 @@
             this.panelAux_Clientes.TabIndex = 1;
             this.panelAux_Clientes.Visible = false;
             // 
-            // btnregistrar_Cl
-            // 
-            this.btnregistrar_Cl.Location = new System.Drawing.Point(150, 567);
-            this.btnregistrar_Cl.Name = "btnregistrar_Cl";
-            this.btnregistrar_Cl.Size = new System.Drawing.Size(105, 44);
-            this.btnregistrar_Cl.TabIndex = 2;
-            this.btnregistrar_Cl.Text = "Regisrar Cliente";
-            this.btnregistrar_Cl.UseVisualStyleBackColor = true;
-            this.btnregistrar_Cl.Click += new System.EventHandler(this.btnregistrar_Cl_Click);
-            // 
-            // btneditar_Cl
-            // 
-            this.btneditar_Cl.Location = new System.Drawing.Point(350, 567);
-            this.btneditar_Cl.Name = "btneditar_Cl";
-            this.btneditar_Cl.Size = new System.Drawing.Size(88, 47);
-            this.btneditar_Cl.TabIndex = 3;
-            this.btneditar_Cl.Text = "Ediar Cliente";
-            this.btneditar_Cl.UseVisualStyleBackColor = true;
-            this.btneditar_Cl.Click += new System.EventHandler(this.btneditar_Cl_Click);
-            // 
-            // btneliminar_Cl
-            // 
-            this.btneliminar_Cl.Location = new System.Drawing.Point(561, 567);
-            this.btneliminar_Cl.Name = "btneliminar_Cl";
-            this.btneliminar_Cl.Size = new System.Drawing.Size(124, 47);
-            this.btneliminar_Cl.TabIndex = 4;
-            this.btneliminar_Cl.Text = "Eliminar Cliente";
-            this.btneliminar_Cl.UseVisualStyleBackColor = true;
-            // 
-            // tituloauxCl
-            // 
-            this.tituloauxCl.AutoSize = true;
-            this.tituloauxCl.Location = new System.Drawing.Point(64, 13);
-            this.tituloauxCl.Name = "tituloauxCl";
-            this.tituloauxCl.Size = new System.Drawing.Size(35, 13);
-            this.tituloauxCl.TabIndex = 0;
-            this.tituloauxCl.Text = "label1";
-            // 
-            // textNombreCl
-            // 
-            this.textNombreCl.Location = new System.Drawing.Point(22, 67);
-            this.textNombreCl.Name = "textNombreCl";
-            this.textNombreCl.Size = new System.Drawing.Size(100, 20);
-            this.textNombreCl.TabIndex = 1;
-            // 
-            // textTelefonoCl
-            // 
-            this.textTelefonoCl.Location = new System.Drawing.Point(22, 128);
-            this.textTelefonoCl.Mask = "000-000-0000";
-            this.textTelefonoCl.Name = "textTelefonoCl";
-            this.textTelefonoCl.Size = new System.Drawing.Size(100, 20);
-            this.textTelefonoCl.TabIndex = 2;
-            // 
-            // textInfoCl
-            // 
-            this.textInfoCl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textInfoCl.Location = new System.Drawing.Point(22, 184);
-            this.textInfoCl.Name = "textInfoCl";
-            this.textInfoCl.Size = new System.Drawing.Size(177, 96);
-            this.textInfoCl.TabIndex = 3;
-            this.textInfoCl.Text = "Direccion, otros telefonos, familia,etc";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Nombre";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 112);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Telefono";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(22, 168);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 13);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Informacion ";
-            // 
             // btnguardar_Cl
             // 
             this.btnguardar_Cl.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -531,16 +454,95 @@
             this.btnguardar_Cl.UseVisualStyleBackColor = true;
             this.btnguardar_Cl.Click += new System.EventHandler(this.btnguardar_Cl_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(22, 168);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(97, 20);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Informacion ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(22, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 20);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Telefono";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(22, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 20);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Nombre";
+            // 
+            // textInfoCl
+            // 
+            this.textInfoCl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textInfoCl.Location = new System.Drawing.Point(22, 184);
+            this.textInfoCl.Name = "textInfoCl";
+            this.textInfoCl.Size = new System.Drawing.Size(177, 96);
+            this.textInfoCl.TabIndex = 3;
+            this.textInfoCl.Text = "Direccion, otros telefonos, familia,etc";
+            // 
+            // textTelefonoCl
+            // 
+            this.textTelefonoCl.Location = new System.Drawing.Point(22, 128);
+            this.textTelefonoCl.Mask = "000-000-0000";
+            this.textTelefonoCl.Name = "textTelefonoCl";
+            this.textTelefonoCl.Size = new System.Drawing.Size(114, 26);
+            this.textTelefonoCl.TabIndex = 2;
+            // 
+            // textNombreCl
+            // 
+            this.textNombreCl.Location = new System.Drawing.Point(22, 67);
+            this.textNombreCl.Name = "textNombreCl";
+            this.textNombreCl.Size = new System.Drawing.Size(100, 26);
+            this.textNombreCl.TabIndex = 1;
+            // 
+            // tituloauxCl
+            // 
+            this.tituloauxCl.AutoSize = true;
+            this.tituloauxCl.Location = new System.Drawing.Point(64, 13);
+            this.tituloauxCl.Name = "tituloauxCl";
+            this.tituloauxCl.Size = new System.Drawing.Size(51, 20);
+            this.tituloauxCl.TabIndex = 0;
+            this.tituloauxCl.Text = "label1";
+            // 
+            // dataGrid_Clientes
+            // 
+            this.dataGrid_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_Clientes.Location = new System.Drawing.Point(12, 50);
+            this.dataGrid_Clientes.Name = "dataGrid_Clientes";
+            this.dataGrid_Clientes.ReadOnly = true;
+            this.dataGrid_Clientes.RowHeadersWidth = 62;
+            this.dataGrid_Clientes.Size = new System.Drawing.Size(740, 461);
+            this.dataGrid_Clientes.TabIndex = 0;
+            // 
+            // timerMenu
+            // 
+            this.timerMenu.Interval = 30;
+            this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 651);
             this.Controls.Add(this.panelLateral);
-            this.Controls.Add(this.panelClientes);
-            this.Controls.Add(this.panelVentas);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelInicio);
+            this.Controls.Add(this.panelClientes);
+            this.Controls.Add(this.panelVentas);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -551,10 +553,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).EndInit();
             this.panelClientes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             this.panelAux_Clientes.ResumeLayout(false);
             this.panelAux_Clientes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

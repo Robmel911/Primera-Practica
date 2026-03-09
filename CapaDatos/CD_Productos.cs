@@ -22,7 +22,7 @@ namespace CapaDatos
             SqlDataReader Leer;
             DataTable Tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = $"select *from Productos where Activo=1";
+            cmd.CommandText = "select IdProducto,Nombre,Descripcion,Marca,Precio,Stock from Productos where Activo=1";
             Leer = cmd.ExecuteReader();
             Tabla.Load(Leer);
             cmd.Connection = conexion.CerrarConexion();
@@ -54,8 +54,19 @@ namespace CapaDatos
         {
             SqlDataReader Leer;
             cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
+            //Linea para eliminar productos a la bd
             cmd.CommandText = $"UPDATE Productos SET Activo=0 WHERE IdProducto={id}";
+            cmd.CommandType = CommandType.Text;
+            Leer = cmd.ExecuteReader();
+            cmd.Parameters.Clear();
+            cmd.Connection = Conector.CerrarConexion();
+        }
+        public void Reactivar_Productos(int id)
+        {
+            SqlDataReader Leer;
+            cmd.Connection = Conector.ObtenerConexion();
+            //Linea para reactivar productos a la bd
+            cmd.CommandText = $"UPDATE Productos SET Activo=1 WHERE IdProducto={id}";
             cmd.CommandType = CommandType.Text;
             Leer = cmd.ExecuteReader();
             cmd.Parameters.Clear();

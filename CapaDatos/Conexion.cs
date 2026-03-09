@@ -48,24 +48,7 @@ using System.Data.SqlClient;
             catch { return false; }
         }
     }
-        public class TablasDB
-    {
-        //metodo para mostrar todas las tablas 
-        public DataTable MostrarTabla(string Tabladb)
-        {
-            Conexion conexion = new Conexion();
-            
-            SqlDataReader Leer;
-            DataTable Tabla = new DataTable();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = $"select *from {Tabladb}";
-            Leer = cmd.ExecuteReader();
-            Tabla.Load(Leer);
-            cmd.Connection = conexion.CerrarConexion();
-            return Tabla;
-        }
-    }
+    
     
     }
 
