@@ -15,6 +15,7 @@ namespace Primera_Practica
     public partial class Form1 : Form
     {
         private CN_Colmado CNcolmado = new CN_Colmado();
+        private Menu_Ventas menuVentas = new Menu_Ventas();
         private const int MENU_COLAPSADO = 35;
         private const int MENU_EXPANDIDO = 200;
         private const int VELOCIDAD_ANIM = 30;
@@ -28,6 +29,7 @@ namespace Primera_Practica
             InitializeComponent();
             MostrarPanel(panelInicio);
             MarcarBotonActivo(btnInicio);
+            Estilotabla_productos();
 
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -135,10 +137,40 @@ namespace Primera_Practica
         #endregion
         #region Panel Productos
         // Fuentes de la combobox
+
+        public void Estilotabla_productos()
+        {
+            // Header verde oscuro
+            dataGrid_Productos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(27, 94, 32);
+            dataGrid_Productos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGrid_Productos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dataGrid_Productos.EnableHeadersVisualStyles = false;
+            dataGrid_Productos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            // Filas
+            dataGrid_Productos.RowsDefaultCellStyle.BackColor = Color.White;
+            dataGrid_Productos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
+            dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.None;
+
+            // Bordes y fondo
+            dataGrid_Productos.BorderStyle = BorderStyle.None;
+            dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGrid_Productos.GridColor = Color.LightGray;
+            dataGrid_Productos.BackgroundColor = Color.White;
+
+            // Selección
+            dataGrid_Productos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(165, 214, 167);
+            dataGrid_Productos.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGrid_Productos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Otros
+            dataGrid_Productos.RowHeadersVisible = false;
+            dataGrid_Productos.Font = new Font("Segoe UI", 9);
+        }
         public void DataCombobox_Productos(string campo)
         {
                 CN_Colmado TablaProd = new CN_Colmado();
-                textMarcaProd.DataSource = TablaProd.Mostrartabla_Producto();
+                textMarcaProd.DataSource = TablaProd.Obtenerdatos_Producto();
                 textMarcaProd.DisplayMember = campo;
                 textMarcaProd.ValueMember = campo;   
         }
@@ -148,7 +180,7 @@ namespace Primera_Practica
         }
         private void Tablaproductos()
         {
-            dataGrid_Productos.DataSource = CNcolmado.Mostrartabla_Producto();
+            dataGrid_Productos.DataSource = CNcolmado.Obtenerdatos_Producto();
             DataCombobox_Productos("Marca");
         }
         private void btnSalir_Click(object sender, EventArgs e)
@@ -312,8 +344,53 @@ namespace Primera_Practica
             else { VentanaEmergente("Seleccione una fila", "Error"); }
         }
 
+
         #endregion
+        private void button1_Click(object sender, EventArgs e)
+        {
+            menuVentas.Show();
+        }
 
+        private void btnVerHistorial_Click(object sender, EventArgs e)
+        {
+            dgvHistorialVentas.DataSource = CNcolmado.HistorialVentas();
+        }
+        private void btnAnularVenta_Click(object sender, EventArgs e)
+        {
+            if (dgvHistorialVentas.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecciona una venta primero.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            string estado = dgvHistorialVentas.SelectedRows[0].Cells["Estado"].Value.ToString();
+            if (estado == "Anulada")
+            {
+                MessageBox.Show("Esta venta ya está anulada.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show(
+                "¿Estás seguro que deseas anular esta venta?",
+                "Confirmar anulación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (respuesta == DialogResult.Yes)
+            {
+                string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
+               CNcolmado.AnularVenta(idVenta);
+                MessageBox.Show("Venta anulada correctamente.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnVerHistorial_Click(sender, e); // recargar historial
+            }
+        }
     }
+    #region Panel Ventas
+
+    #endregion
+
+
 }

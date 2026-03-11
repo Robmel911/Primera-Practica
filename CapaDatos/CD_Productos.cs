@@ -16,13 +16,13 @@ namespace CapaDatos
     
         SqlCommand cmd = new SqlCommand();
 
-        public DataTable MostrarTabla()
+        public DataTable ObtenerProductos()
         {
             Conexion conexion = new Conexion();
             SqlDataReader Leer;
             DataTable Tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = "select IdProducto,Nombre,Descripcion,Marca,Precio,Stock from Productos where Activo=1";
+            cmd.CommandText = "select *from Productos where Activo=1";
             Leer = cmd.ExecuteReader();
             Tabla.Load(Leer);
             cmd.Connection = conexion.CerrarConexion();

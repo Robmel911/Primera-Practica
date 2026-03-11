@@ -13,13 +13,14 @@ namespace CapaNegocios
     {
         private CD_Productos CDproductos = new CD_Productos();
         private CD_Clientes CDclientes = new CD_Clientes();
-        
-      
+        private CD_Ventas CDventas = new CD_Ventas();
+
+
         #region Funciones de Productos
-        public DataTable Mostrartabla_Producto()
+        public DataTable Obtenerdatos_Producto()
         {
             DataTable tabla = new DataTable();
-            tabla = CDproductos.MostrarTabla();
+            tabla = CDproductos.ObtenerProductos();
             return tabla;
         }
         public void Insertar_producto(string nombre, string desc, string marca, string precio, string stock)
@@ -68,6 +69,35 @@ namespace CapaNegocios
         public void Agrgarsaldo_Cliente(string saldo,string id)
         {
             CDclientes.Agregarsaldo(Convert.ToInt32(saldo),Convert.ToInt32(id));
+        }
+        #endregion
+        #region Funciones de Ventas
+        public DataTable ObtenerProductos_Venta()
+        {
+            DataTable tabla = new DataTable();
+            tabla = CDproductos.ObtenerProductos();
+            return tabla;
+        }
+
+        public DataTable ObtenerClientes_Venta()
+        {
+            DataTable tabla = new DataTable();
+            tabla = CDclientes.MostrarTabla();
+            return tabla;
+        }
+
+        public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total)
+        {
+            return CDventas.RegistrarVenta(idCliente, carrito, total);
+        }
+        public DataTable HistorialVentas()
+        {
+            return CDventas.HistorialVentas();
+        }
+
+        public void AnularVenta(string idVenta)
+        {
+            CDventas.AnularVenta(Convert.ToInt32(idVenta));
         }
         #endregion
     }

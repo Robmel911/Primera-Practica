@@ -52,10 +52,28 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu_auxiliar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu_auxiliar.Designer.cs">
+      <DependentUpon>Menu_auxiliar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu_Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu_Ventas.Designer.cs">
+      <DependentUpon>Menu_Ventas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu_auxiliar.resx">
+      <DependentUpon>Menu_auxiliar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu_Ventas.resx">
+      <DependentUpon>Menu_Ventas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

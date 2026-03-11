@@ -21,7 +21,7 @@ namespace CapaDatos
             SqlDataReader Leer;
             DataTable Tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = $"select IdCliente,Nombre,Telefono,Informacion,Saldo from Clientes where Activo=1";
+            cmd.CommandText = $"select *from Clientes where Activo=1";
             Leer = cmd.ExecuteReader();
             Tabla.Load(Leer);
             cmd.Connection = conexion.CerrarConexion();

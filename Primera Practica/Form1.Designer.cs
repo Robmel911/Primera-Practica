@@ -71,15 +71,21 @@
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.dgvHistorialVentas = new System.Windows.Forms.DataGridView();
+            this.btnAnularVenta = new System.Windows.Forms.Button();
+            this.btnVerHistorial = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             this.panelProductos.SuspendLayout();
             this.panelAux_Productos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).BeginInit();
+            this.panelVentas.SuspendLayout();
             this.panelClientes.SuspendLayout();
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
@@ -92,7 +98,7 @@
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLateral.Location = new System.Drawing.Point(0, 0);
             this.panelLateral.Name = "panelLateral";
-            this.panelLateral.Size = new System.Drawing.Size(58, 651);
+            this.panelLateral.Size = new System.Drawing.Size(58, 734);
             this.panelLateral.TabIndex = 0;
             this.panelLateral.MouseEnter += new System.EventHandler(this.panelLateral_MouseEnter);
             this.panelLateral.MouseLeave += new System.EventHandler(this.panelLateral_MouseLeave);
@@ -182,7 +188,7 @@
             this.panelInicio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInicio.Location = new System.Drawing.Point(0, 0);
             this.panelInicio.Name = "panelInicio";
-            this.panelInicio.Size = new System.Drawing.Size(1091, 651);
+            this.panelInicio.Size = new System.Drawing.Size(1222, 734);
             this.panelInicio.TabIndex = 1;
             // 
             // panelProductos
@@ -195,7 +201,7 @@
             this.panelProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelProductos.Location = new System.Drawing.Point(0, 0);
             this.panelProductos.Name = "panelProductos";
-            this.panelProductos.Size = new System.Drawing.Size(1091, 651);
+            this.panelProductos.Size = new System.Drawing.Size(1222, 734);
             this.panelProductos.TabIndex = 2;
             // 
             // panelAux_Productos
@@ -214,9 +220,9 @@
             this.panelAux_Productos.Controls.Add(this.btnguardarProd);
             this.panelAux_Productos.Controls.Add(this.label_panelAux);
             this.panelAux_Productos.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAux_Productos.Location = new System.Drawing.Point(856, 0);
+            this.panelAux_Productos.Location = new System.Drawing.Point(987, 0);
             this.panelAux_Productos.Name = "panelAux_Productos";
-            this.panelAux_Productos.Size = new System.Drawing.Size(235, 651);
+            this.panelAux_Productos.Size = new System.Drawing.Size(235, 734);
             this.panelAux_Productos.TabIndex = 7;
             // 
             // btnSalir
@@ -318,7 +324,7 @@
             // btnguardarProd
             // 
             this.btnguardarProd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnguardarProd.Location = new System.Drawing.Point(0, 601);
+            this.btnguardarProd.Location = new System.Drawing.Point(0, 684);
             this.btnguardarProd.Name = "btnguardarProd";
             this.btnguardarProd.Size = new System.Drawing.Size(235, 50);
             this.btnguardarProd.TabIndex = 1;
@@ -337,7 +343,7 @@
             // 
             // btneliminarProd
             // 
-            this.btneliminarProd.Location = new System.Drawing.Point(586, 564);
+            this.btneliminarProd.Location = new System.Drawing.Point(738, 650);
             this.btneliminarProd.Name = "btneliminarProd";
             this.btneliminarProd.Size = new System.Drawing.Size(99, 39);
             this.btneliminarProd.TabIndex = 6;
@@ -347,7 +353,7 @@
             // 
             // btneditarProd
             // 
-            this.btneditarProd.Location = new System.Drawing.Point(405, 565);
+            this.btneditarProd.Location = new System.Drawing.Point(537, 651);
             this.btneditarProd.Name = "btneditarProd";
             this.btneditarProd.Size = new System.Drawing.Size(91, 38);
             this.btneditarProd.TabIndex = 5;
@@ -357,7 +363,7 @@
             // 
             // btnagregarProd
             // 
-            this.btnagregarProd.Location = new System.Drawing.Point(215, 565);
+            this.btnagregarProd.Location = new System.Drawing.Point(313, 651);
             this.btnagregarProd.Name = "btnagregarProd";
             this.btnagregarProd.Size = new System.Drawing.Size(86, 38);
             this.btnagregarProd.TabIndex = 4;
@@ -367,20 +373,29 @@
             // 
             // dataGrid_Productos
             // 
+            this.dataGrid_Productos.AllowUserToAddRows = false;
+            this.dataGrid_Productos.AllowUserToDeleteRows = false;
+            this.dataGrid_Productos.AllowUserToResizeColumns = false;
+            this.dataGrid_Productos.AllowUserToResizeRows = false;
             this.dataGrid_Productos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid_Productos.Location = new System.Drawing.Point(6, 36);
             this.dataGrid_Productos.Name = "dataGrid_Productos";
+            this.dataGrid_Productos.ReadOnly = true;
             this.dataGrid_Productos.RowHeadersWidth = 62;
             this.dataGrid_Productos.RowTemplate.Height = 28;
-            this.dataGrid_Productos.Size = new System.Drawing.Size(752, 464);
+            this.dataGrid_Productos.Size = new System.Drawing.Size(950, 575);
             this.dataGrid_Productos.TabIndex = 1;
             // 
             // panelVentas
             // 
+            this.panelVentas.Controls.Add(this.btnVerHistorial);
+            this.panelVentas.Controls.Add(this.btnAnularVenta);
+            this.panelVentas.Controls.Add(this.dgvHistorialVentas);
+            this.panelVentas.Controls.Add(this.button1);
             this.panelVentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelVentas.Location = new System.Drawing.Point(0, 0);
             this.panelVentas.Name = "panelVentas";
-            this.panelVentas.Size = new System.Drawing.Size(1091, 651);
+            this.panelVentas.Size = new System.Drawing.Size(1222, 734);
             this.panelVentas.TabIndex = 3;
             // 
             // panelClientes
@@ -393,12 +408,12 @@
             this.panelClientes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelClientes.Location = new System.Drawing.Point(0, 0);
             this.panelClientes.Name = "panelClientes";
-            this.panelClientes.Size = new System.Drawing.Size(1091, 651);
+            this.panelClientes.Size = new System.Drawing.Size(1222, 734);
             this.panelClientes.TabIndex = 4;
             // 
             // btneliminar_Cl
             // 
-            this.btneliminar_Cl.Location = new System.Drawing.Point(561, 567);
+            this.btneliminar_Cl.Location = new System.Drawing.Point(696, 651);
             this.btneliminar_Cl.Name = "btneliminar_Cl";
             this.btneliminar_Cl.Size = new System.Drawing.Size(124, 47);
             this.btneliminar_Cl.TabIndex = 4;
@@ -408,7 +423,7 @@
             // 
             // btneditar_Cl
             // 
-            this.btneditar_Cl.Location = new System.Drawing.Point(350, 567);
+            this.btneditar_Cl.Location = new System.Drawing.Point(537, 651);
             this.btneditar_Cl.Name = "btneditar_Cl";
             this.btneditar_Cl.Size = new System.Drawing.Size(88, 47);
             this.btneditar_Cl.TabIndex = 3;
@@ -418,7 +433,7 @@
             // 
             // btnregistrar_Cl
             // 
-            this.btnregistrar_Cl.Location = new System.Drawing.Point(150, 567);
+            this.btnregistrar_Cl.Location = new System.Drawing.Point(294, 654);
             this.btnregistrar_Cl.Name = "btnregistrar_Cl";
             this.btnregistrar_Cl.Size = new System.Drawing.Size(105, 44);
             this.btnregistrar_Cl.TabIndex = 2;
@@ -437,16 +452,16 @@
             this.panelAux_Clientes.Controls.Add(this.textNombreCl);
             this.panelAux_Clientes.Controls.Add(this.tituloauxCl);
             this.panelAux_Clientes.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAux_Clientes.Location = new System.Drawing.Point(856, 0);
+            this.panelAux_Clientes.Location = new System.Drawing.Point(987, 0);
             this.panelAux_Clientes.Name = "panelAux_Clientes";
-            this.panelAux_Clientes.Size = new System.Drawing.Size(235, 651);
+            this.panelAux_Clientes.Size = new System.Drawing.Size(235, 734);
             this.panelAux_Clientes.TabIndex = 1;
             this.panelAux_Clientes.Visible = false;
             // 
             // btnguardar_Cl
             // 
             this.btnguardar_Cl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnguardar_Cl.Location = new System.Drawing.Point(0, 567);
+            this.btnguardar_Cl.Location = new System.Drawing.Point(0, 650);
             this.btnguardar_Cl.Name = "btnguardar_Cl";
             this.btnguardar_Cl.Size = new System.Drawing.Size(235, 84);
             this.btnguardar_Cl.TabIndex = 7;
@@ -521,7 +536,7 @@
             this.dataGrid_Clientes.Name = "dataGrid_Clientes";
             this.dataGrid_Clientes.ReadOnly = true;
             this.dataGrid_Clientes.RowHeadersWidth = 62;
-            this.dataGrid_Clientes.Size = new System.Drawing.Size(740, 461);
+            this.dataGrid_Clientes.Size = new System.Drawing.Size(896, 545);
             this.dataGrid_Clientes.TabIndex = 0;
             // 
             // timerMenu
@@ -533,16 +548,57 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1111, 615);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 63);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dgvHistorialVentas
+            // 
+            this.dgvHistorialVentas.AllowUserToAddRows = false;
+            this.dgvHistorialVentas.AllowUserToDeleteRows = false;
+            this.dgvHistorialVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistorialVentas.Location = new System.Drawing.Point(118, 38);
+            this.dgvHistorialVentas.Name = "dgvHistorialVentas";
+            this.dgvHistorialVentas.RowTemplate.Height = 28;
+            this.dgvHistorialVentas.Size = new System.Drawing.Size(1052, 504);
+            this.dgvHistorialVentas.TabIndex = 1;
+            // 
+            // btnAnularVenta
+            // 
+            this.btnAnularVenta.Location = new System.Drawing.Point(213, 601);
+            this.btnAnularVenta.Name = "btnAnularVenta";
+            this.btnAnularVenta.Size = new System.Drawing.Size(75, 63);
+            this.btnAnularVenta.TabIndex = 2;
+            this.btnAnularVenta.Text = "Anular venta";
+            this.btnAnularVenta.UseVisualStyleBackColor = true;
+            this.btnAnularVenta.Click += new System.EventHandler(this.btnAnularVenta_Click);
+            // 
+            // btnVerHistorial
+            // 
+            this.btnVerHistorial.Location = new System.Drawing.Point(377, 601);
+            this.btnVerHistorial.Name = "btnVerHistorial";
+            this.btnVerHistorial.Size = new System.Drawing.Size(75, 63);
+            this.btnVerHistorial.TabIndex = 3;
+            this.btnVerHistorial.Text = "Mostrar historial";
+            this.btnVerHistorial.UseVisualStyleBackColor = true;
+            this.btnVerHistorial.Click += new System.EventHandler(this.btnVerHistorial_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 651);
+            this.ClientSize = new System.Drawing.Size(1222, 734);
             this.Controls.Add(this.panelLateral);
+            this.Controls.Add(this.panelVentas);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelInicio);
             this.Controls.Add(this.panelClientes);
-            this.Controls.Add(this.panelVentas);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -552,11 +608,13 @@
             this.panelAux_Productos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).EndInit();
+            this.panelVentas.ResumeLayout(false);
             this.panelClientes.ResumeLayout(false);
             this.panelAux_Clientes.ResumeLayout(false);
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -605,6 +663,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnguardar_Cl;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAnularVenta;
+        private System.Windows.Forms.DataGridView dgvHistorialVentas;
+        private System.Windows.Forms.Button btnVerHistorial;
     }
 }
 
