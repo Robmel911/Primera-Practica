@@ -84,7 +84,14 @@ namespace Primera_Practica
             lblPrecioProducto.Text = "RD$ " + fila["Precio"].ToString();
             lblStockProducto.Text = fila["Stock"].ToString() + " unidades";
             nudCantidad.Maximum = Convert.ToInt32(fila["Stock"]);
-            nudCantidad.Value = 1;
+            if (nudCantidad.Maximum > 0)
+                nudCantidad.Value = 1;
+            else
+            {
+                MessageBox.Show("Producto sin stock disponible.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    nudCantidad.Value = 0;
+                cmbCliente.SelectedIndex = -1;
+            }
         }
 
         // Agregar producto al carrito
@@ -92,7 +99,7 @@ namespace Primera_Practica
         {
 
 
-            if (cmbProductos.SelectedItem == null) return;
+            if (cmbProductos.SelectedItem == null ) return;
 
             DataRowView fila = (DataRowView)cmbProductos.SelectedItem;
             int cantidad = (int)nudCantidad.Value;
@@ -100,7 +107,7 @@ namespace Primera_Practica
             decimal subtotal = precio * cantidad;
             int stock = Convert.ToInt32(fila["Stock"]);
 
-            if (cantidad > stock)
+            if (cantidad ==0 || stock ==0)
             {
                 MessageBox.Show("Stock insuficiente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

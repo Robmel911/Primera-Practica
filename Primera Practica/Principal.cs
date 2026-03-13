@@ -12,7 +12,7 @@ using CapaNegocios;
 
 namespace Primera_Practica
 {
-    public partial class Form1 : Form
+    public partial class Principal : Form
     {
         private CN_Colmado CNcolmado = new CN_Colmado();
         private Menu_Ventas menuVentas = new Menu_Ventas();
@@ -26,12 +26,12 @@ namespace Primera_Practica
         private string ID;
         private bool RealizarAct = false;
 
-        public Form1()
+        public Principal()
         {
             InitializeComponent();
             MostrarPanel(panelInicio);
             MarcarBotonActivo(btnInicio);
-            Estilotabla_productos();
+            EstiloDataGrid_Productos();
             EstiloDataGrid_Clientes();
             EstiloDataGrid_HistorialVentas();
             CargarInicio();
@@ -289,38 +289,69 @@ namespace Primera_Practica
         {
             dataGrid_Productos.DataSource = CNcolmado.Obtenerdatos_Producto();
             DataCombobox_Productos();
+                VerificarStockBajo();
         }
-        public void Estilotabla_productos()
+        private void dataGrid_Productos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            // Header verde oscuro
+            foreach (DataGridViewRow fila in dataGrid_Productos.Rows)
+            {
+                if (fila.Cells["Stock"] == null) continue;
+
+                int stock = Convert.ToInt32(fila.Cells["Stock"].Value);
+                if (stock <= 5)
+                {
+                    fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 205, 210); // rojo claro
+                    fila.DefaultCellStyle.ForeColor = Color.FromArgb(183, 28, 28);   // rojo oscuro
+                    fila.DefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+                }
+            }
+        }
+        private void VerificarStockBajo()
+        {
+            int count = 0;
+            foreach (DataGridViewRow fila in dataGrid_Productos.Rows)
+            {
+                if (Convert.ToInt32(fila.Cells["Stock"].Value) <= 5)
+                    count++;
+            }
+
+            if (count > 0)
+            {
+                lblAlerta.Text = $"¡Alerta! {count} producto(s) con stock bajo.";
+            }
+                
+        }
+        private void EstiloDataGrid_Productos()
+        {
+            dataGrid_Productos.BackgroundColor = Color.White;
+            dataGrid_Productos.BorderStyle = BorderStyle.None;
+            dataGrid_Productos.RowHeadersVisible = false;
+            dataGrid_Productos.AllowUserToAddRows = false;
+            dataGrid_Productos.AllowUserToResizeRows = false;
+            dataGrid_Productos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid_Productos.ReadOnly = true;
             dataGrid_Productos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(27, 94, 32);
             dataGrid_Productos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGrid_Productos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dataGrid_Productos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGrid_Productos.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+            dataGrid_Productos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGrid_Productos.ColumnHeadersHeight = 40;
             dataGrid_Productos.EnableHeadersVisualStyles = false;
+            dataGrid_Productos.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dataGrid_Productos.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGrid_Productos.DefaultCellStyle.BackColor = Color.White;
+            dataGrid_Productos.DefaultCellStyle.Padding = new Padding(5);
+            dataGrid_Productos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 125, 50);
+            dataGrid_Productos.DefaultCellStyle.SelectionForeColor = Color.White;
+            dataGrid_Productos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
+            dataGrid_Productos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid_Productos.GridColor = Color.FromArgb(200, 230, 201);
+            dataGrid_Productos.RowTemplate.Height = 35;
+            dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGrid_Productos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
-            // Filas
-            dataGrid_Productos.RowsDefaultCellStyle.BackColor = Color.White;
-            dataGrid_Productos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
-            dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
-            // Bordes y fondo
-            dataGrid_Productos.BorderStyle = BorderStyle.None;
-            dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGrid_Productos.GridColor = Color.LightGray;
-            dataGrid_Productos.BackgroundColor = Color.White;
-
-            // Selección
-            dataGrid_Productos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(165, 214, 167);
-            dataGrid_Productos.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-
-
-            // Otros
-            dataGrid_Productos.RowHeadersVisible = false;
-            dataGrid_Productos.Font = new Font("Segoe UI", 9);
-
-        }
+            }
         public void DataCombobox_Productos()
         {
             CN_Colmado TablaProd = new CN_Colmado();

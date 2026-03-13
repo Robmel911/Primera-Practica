@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu_Ventas));
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkAsociarCliente = new System.Windows.Forms.CheckBox();
             this.btnCancelarVenta = new System.Windows.Forms.Button();
@@ -38,6 +39,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cmbCliente = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBuscarCodigo = new System.Windows.Forms.TextBox();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.lblStockProducto = new System.Windows.Forms.Label();
@@ -55,8 +58,6 @@
             this.colmado_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBuscarCodigo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
@@ -82,9 +83,11 @@
             // chkAsociarCliente
             // 
             this.chkAsociarCliente.AutoSize = true;
+            this.chkAsociarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAsociarCliente.ForeColor = System.Drawing.Color.DarkGreen;
             this.chkAsociarCliente.Location = new System.Drawing.Point(83, 57);
             this.chkAsociarCliente.Name = "chkAsociarCliente";
-            this.chkAsociarCliente.Size = new System.Drawing.Size(141, 24);
+            this.chkAsociarCliente.Size = new System.Drawing.Size(156, 24);
             this.chkAsociarCliente.TabIndex = 14;
             this.chkAsociarCliente.Text = "Venta a cliente";
             this.chkAsociarCliente.UseVisualStyleBackColor = true;
@@ -92,6 +95,8 @@
             // 
             // btnCancelarVenta
             // 
+            this.btnCancelarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelarVenta.ForeColor = System.Drawing.Color.DarkGreen;
             this.btnCancelarVenta.Location = new System.Drawing.Point(517, 63);
             this.btnCancelarVenta.Name = "btnCancelarVenta";
             this.btnCancelarVenta.Size = new System.Drawing.Size(104, 32);
@@ -102,6 +107,8 @@
             // 
             // btnConfirmarVenta
             // 
+            this.btnConfirmarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmarVenta.ForeColor = System.Drawing.Color.DarkGreen;
             this.btnConfirmarVenta.Location = new System.Drawing.Point(517, 25);
             this.btnConfirmarVenta.Name = "btnConfirmarVenta";
             this.btnConfirmarVenta.Size = new System.Drawing.Size(104, 32);
@@ -113,9 +120,11 @@
             // rbCredito
             // 
             this.rbCredito.AutoSize = true;
+            this.rbCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbCredito.ForeColor = System.Drawing.Color.DarkGreen;
             this.rbCredito.Location = new System.Drawing.Point(298, 75);
             this.rbCredito.Name = "rbCredito";
-            this.rbCredito.Size = new System.Drawing.Size(74, 24);
+            this.rbCredito.Size = new System.Drawing.Size(79, 24);
             this.rbCredito.TabIndex = 13;
             this.rbCredito.TabStop = true;
             this.rbCredito.Text = "Fiado";
@@ -125,9 +134,11 @@
             // rbContado
             // 
             this.rbContado.AutoSize = true;
+            this.rbContado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbContado.ForeColor = System.Drawing.Color.DarkGreen;
             this.rbContado.Location = new System.Drawing.Point(298, 45);
             this.rbContado.Name = "rbContado";
-            this.rbContado.Size = new System.Drawing.Size(113, 24);
+            this.rbContado.Size = new System.Drawing.Size(123, 24);
             this.rbContado.TabIndex = 12;
             this.rbContado.TabStop = true;
             this.rbContado.Text = "Al Contado";
@@ -137,18 +148,22 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblTotal.Location = new System.Drawing.Point(297, 22);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(120, 20);
+            this.lblTotal.Size = new System.Drawing.Size(135, 20);
             this.lblTotal.TabIndex = 11;
             this.lblTotal.Text = "Total: RD$ 0.00";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 25);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label9.Location = new System.Drawing.Point(32, 25);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 20);
+            this.label9.Size = new System.Drawing.Size(70, 20);
             this.label9.TabIndex = 11;
             this.label9.Text = "Cliente:";
             // 
@@ -156,8 +171,9 @@
             // 
             this.cmbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCliente.Enabled = false;
+            this.cmbCliente.ForeColor = System.Drawing.Color.ForestGreen;
             this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new System.Drawing.Point(83, 22);
+            this.cmbCliente.Location = new System.Drawing.Point(107, 22);
             this.cmbCliente.Name = "cmbCliente";
             this.cmbCliente.Size = new System.Drawing.Size(121, 28);
             this.cmbCliente.TabIndex = 11;
@@ -183,9 +199,30 @@
             this.panel2.Size = new System.Drawing.Size(633, 215);
             this.panel2.TabIndex = 1;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label5.Location = new System.Drawing.Point(342, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Codigo:";
+            // 
+            // txtBuscarCodigo
+            // 
+            this.txtBuscarCodigo.ForeColor = System.Drawing.Color.DarkGreen;
+            this.txtBuscarCodigo.Location = new System.Drawing.Point(424, 14);
+            this.txtBuscarCodigo.Name = "txtBuscarCodigo";
+            this.txtBuscarCodigo.Size = new System.Drawing.Size(197, 26);
+            this.txtBuscarCodigo.TabIndex = 11;
+            this.txtBuscarCodigo.TextChanged += new System.EventHandler(this.txtBuscarCodigo_TextChanged);
+            // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(92, 175);
+            this.nudCantidad.Location = new System.Drawing.Point(97, 175);
             this.nudCantidad.Minimum = new decimal(new int[] {
             1,
             0,
@@ -203,15 +240,20 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 177);
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label8.Location = new System.Drawing.Point(9, 177);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 20);
+            this.label8.Size = new System.Drawing.Size(86, 20);
             this.label8.TabIndex = 9;
             this.label8.Text = "Cantidad:";
             // 
             // lblStockProducto
             // 
             this.lblStockProducto.AutoSize = true;
+            this.lblStockProducto.BackColor = System.Drawing.Color.Transparent;
+            this.lblStockProducto.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblStockProducto.Location = new System.Drawing.Point(114, 136);
             this.lblStockProducto.Name = "lblStockProducto";
             this.lblStockProducto.Size = new System.Drawing.Size(14, 20);
@@ -221,6 +263,8 @@
             // lblPrecioProducto
             // 
             this.lblPrecioProducto.AutoSize = true;
+            this.lblPrecioProducto.BackColor = System.Drawing.Color.Transparent;
+            this.lblPrecioProducto.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblPrecioProducto.Location = new System.Drawing.Point(114, 98);
             this.lblPrecioProducto.Name = "lblPrecioProducto";
             this.lblPrecioProducto.Size = new System.Drawing.Size(14, 20);
@@ -230,6 +274,8 @@
             // lblNombreProducto
             // 
             this.lblNombreProducto.AutoSize = true;
+            this.lblNombreProducto.BackColor = System.Drawing.Color.Transparent;
+            this.lblNombreProducto.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblNombreProducto.Location = new System.Drawing.Point(114, 62);
             this.lblNombreProducto.Name = "lblNombreProducto";
             this.lblNombreProducto.Size = new System.Drawing.Size(14, 20);
@@ -238,9 +284,11 @@
             // 
             // btnAgregarCarrito
             // 
+            this.btnAgregarCarrito.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarCarrito.ForeColor = System.Drawing.Color.DarkGreen;
             this.btnAgregarCarrito.Location = new System.Drawing.Point(278, 177);
             this.btnAgregarCarrito.Name = "btnAgregarCarrito";
-            this.btnAgregarCarrito.Size = new System.Drawing.Size(104, 32);
+            this.btnAgregarCarrito.Size = new System.Drawing.Size(134, 32);
             this.btnAgregarCarrito.TabIndex = 5;
             this.btnAgregarCarrito.Text = "+ Agregar";
             this.btnAgregarCarrito.UseVisualStyleBackColor = true;
@@ -248,8 +296,9 @@
             // 
             // cmbProductos
             // 
+            this.cmbProductos.ForeColor = System.Drawing.Color.DarkGreen;
             this.cmbProductos.FormattingEnabled = true;
-            this.cmbProductos.Location = new System.Drawing.Point(83, 14);
+            this.cmbProductos.Location = new System.Drawing.Point(102, 14);
             this.cmbProductos.Name = "cmbProductos";
             this.cmbProductos.Size = new System.Drawing.Size(121, 28);
             this.cmbProductos.TabIndex = 4;
@@ -258,36 +307,48 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkGreen;
             this.label4.Location = new System.Drawing.Point(13, 136);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 20);
+            this.label4.Size = new System.Drawing.Size(60, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Stock:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkGreen;
             this.label3.Location = new System.Drawing.Point(13, 98);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.Size = new System.Drawing.Size(64, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Precio:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DarkGreen;
             this.label2.Location = new System.Drawing.Point(13, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.Size = new System.Drawing.Size(76, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 17);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.Location = new System.Drawing.Point(5, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
+            this.label1.Size = new System.Drawing.Size(86, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Producto:";
             // 
@@ -351,23 +412,6 @@
             this.colmado_Subtotal.ReadOnly = true;
             this.colmado_Subtotal.Width = 150;
             // 
-            // txtBuscarCodigo
-            // 
-            this.txtBuscarCodigo.Location = new System.Drawing.Point(424, 14);
-            this.txtBuscarCodigo.Name = "txtBuscarCodigo";
-            this.txtBuscarCodigo.Size = new System.Drawing.Size(197, 26);
-            this.txtBuscarCodigo.TabIndex = 11;
-            this.txtBuscarCodigo.TextChanged += new System.EventHandler(this.txtBuscarCodigo_TextChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(360, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Codigo:";
-            // 
             // Menu_Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -376,8 +420,10 @@
             this.Controls.Add(this.dgvCarrito);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "Menu_Ventas";
-            this.Text = "Menu_Ventas";
+            this.Text = "Ventas";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
