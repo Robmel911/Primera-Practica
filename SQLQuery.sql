@@ -1,5 +1,5 @@
 
-Create [SistemaColmado]
+Create DATABASE [SistemaColmado]
 GO
 
 USE [SistemaColmado]
