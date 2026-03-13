@@ -24,6 +24,7 @@ namespace CapaDatos
             cmd.CommandText = $"select *from Clientes where Activo=1";
             Leer = cmd.ExecuteReader();
             Tabla.Load(Leer);
+            cmd.Parameters.Clear();
             cmd.Connection = conexion.CerrarConexion();
             return Tabla;
         }
@@ -54,7 +55,7 @@ namespace CapaDatos
             SqlDataReader Leer;
             cmd.Connection = Conector.ObtenerConexion();
             //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Saldo='{saldo}' WHERE IdCliente={id}";
+            cmd.CommandText = $"UPDATE Clientes SET Saldo= Saldo + {saldo} WHERE IdCliente={id}";
             cmd.CommandType = CommandType.Text;
             Leer = cmd.ExecuteReader();
             cmd.Parameters.Clear();
@@ -81,6 +82,27 @@ namespace CapaDatos
             Leer = cmd.ExecuteReader();
             cmd.Parameters.Clear();
             cmd.Connection = Conector.CerrarConexion();
+        }
+        public bool ExisteTelefono(string telefono)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = Conector.ObtenerConexion();
+            cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono";
+            cmd.Parameters.AddWithValue("@telefono", telefono);
+            int cantidad = (int)cmd.ExecuteScalar();
+            cmd.Connection = Conector.CerrarConexion();
+            return cantidad > 0;
+        }
+        public bool ExisteTelefonoEditar(string telefono, int id)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = Conector.ObtenerConexion();
+            cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono AND IdCliente != @id";
+            cmd.Parameters.AddWithValue("@telefono", telefono);
+            cmd.Parameters.AddWithValue("@id", id);
+            int cantidad = (int)cmd.ExecuteScalar();
+            cmd.Connection = Conector.CerrarConexion();
+            return cantidad > 0;
         }
     }
 }

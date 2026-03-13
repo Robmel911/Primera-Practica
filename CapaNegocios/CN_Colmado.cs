@@ -23,14 +23,19 @@ namespace CapaNegocios
             tabla = CDproductos.ObtenerProductos();
             return tabla;
         }
-        public void Insertar_producto(string nombre, string desc, string marca, string precio, string stock)
+        public DataTable Obtenermarcas()
         {
-            CDproductos.Insertar_Productos(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock));
-            
+            DataTable tabla = new DataTable();
+            tabla = CDproductos.ObtenerMarcas();
+            return tabla;
         }
-        public void Editar_producto(string nombre, string desc, string marca, string precio, string stock, string id)
+        public void Insertar_producto(string nombre, string desc, string marca, string precio, string codigo,string stock)
         {
-            CDproductos.Editar_Productos(nombre, desc, marca, Convert.ToDouble(precio), Convert.ToInt32(stock),Convert.ToInt32(id));
+            CDproductos.Insertar_Productos(nombre, desc, marca, Convert.ToDouble(precio),Convert.ToInt32(stock), codigo);   
+        }
+        public void Editar_producto(string nombre, string desc, string marca, string precio,string stock, string codigo, string id)
+        {
+            CDproductos.Editar_Productos(nombre, desc, marca, Convert.ToDouble(precio),Convert.ToInt32(stock),Convert.ToInt32(id), codigo);
 
         }
         public void Eliminar_Producto(string id)
@@ -42,6 +47,13 @@ namespace CapaNegocios
         {
             CDproductos.Reactivar_Productos(Convert.ToInt32(id));
         }
+        public DataTable ObtenerProductosdesactivados()
+        {
+            DataTable tabla = new DataTable();
+            tabla = CDproductos.ObtenerProductosDesactivados();
+            return tabla;
+        }
+
         #endregion
         #region Funciones de Clientes
         public DataTable Mostrartabla_Clientes()
@@ -70,6 +82,14 @@ namespace CapaNegocios
         {
             CDclientes.Agregarsaldo(Convert.ToInt32(saldo),Convert.ToInt32(id));
         }
+        public bool ExisteTelefono(string telefono)
+        {
+            return CDclientes.ExisteTelefono(telefono);
+        }
+        public bool ExisteTelefonoEditar(string telefono, string id)
+        {
+            return CDclientes.ExisteTelefonoEditar(telefono, Convert.ToInt32(id));
+        }
         #endregion
         #region Funciones de Ventas
         public DataTable ObtenerProductos_Venta()
@@ -86,9 +106,9 @@ namespace CapaNegocios
             return tabla;
         }
 
-        public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total)
+        public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total, string estado)
         {
-            return CDventas.RegistrarVenta(idCliente, carrito, total);
+            return CDventas.RegistrarVenta(idCliente, carrito, total, estado);
         }
         public DataTable HistorialVentas()
         {
@@ -98,6 +118,28 @@ namespace CapaNegocios
         public void AnularVenta(string idVenta)
         {
             CDventas.AnularVenta(Convert.ToInt32(idVenta));
+        }
+        public DataTable BuscarProducto(string criterio)
+        {
+            return CDproductos.BuscarPorCodigo(criterio);
+        }
+        public void CompletarVenta(string idVenta)
+        {
+            CDventas.CompletarVenta(Convert.ToInt32(idVenta));
+        }
+        public DataTable ObtenerDetalleVenta(string idVenta)
+        {
+            return CDventas.ObtenerDetalleVenta(Convert.ToInt32(idVenta));
+        }
+        #endregion
+        #region Funciones de Reportes
+        public DataTable ReporteVentas()
+        {
+            return CDventas.VentasDelDia();
+        }
+        public DataTable Top5Productos()
+        {
+            return CDventas.Top5Productos();
         }
         #endregion
     }

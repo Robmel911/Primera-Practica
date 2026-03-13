@@ -14,16 +14,55 @@ namespace Primera_Practica
     public partial class Menu_Ventas : Form
     {
         CN_Colmado CNcolmado = new CN_Colmado();
-        int idproducto;
-        int idcliente;
-        int cantidad;
         decimal totalVenta = 0;
         public Menu_Ventas()
         {
             InitializeComponent();
             CargarDatosVenta();
+            cmbCliente.SelectedIndex = -1;
+            EstiloDataGrid_Carrito();
+
+
         }
-        //para darle los datos a los combo box de productos y clientes
+        private void EstiloDataGrid_Carrito()
+        {
+            dgvCarrito.BackgroundColor = Color.White;
+            dgvCarrito.BorderStyle = BorderStyle.None;
+            dgvCarrito.RowHeadersVisible = false;
+            dgvCarrito.AllowUserToAddRows = false;
+            dgvCarrito.AllowUserToResizeRows = false;
+            dgvCarrito.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCarrito.ReadOnly = true;
+
+            // Encabezado
+            dgvCarrito.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(27, 94, 32);
+            dgvCarrito.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCarrito.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvCarrito.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+            dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvCarrito.ColumnHeadersHeight = 40;
+            dgvCarrito.EnableHeadersVisualStyles = false;
+
+            // Filas
+            dgvCarrito.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dgvCarrito.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 40);
+            dgvCarrito.DefaultCellStyle.BackColor = Color.White;
+            dgvCarrito.DefaultCellStyle.Padding = new Padding(5);
+            dgvCarrito.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 125, 50);
+            dgvCarrito.DefaultCellStyle.SelectionForeColor = Color.White;
+            
+
+            // Filas alternas
+            dgvCarrito.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
+            dgvCarrito.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCarrito.Columns["colmado_IdProducto"].Visible = false;
+            dgvCarrito.GridColor = Color.FromArgb(200, 230, 201);
+            dgvCarrito.RowTemplate.Height = 35;
+            dgvCarrito.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvCarrito.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+        }
+
+ 
         private void CargarDatosVenta()
         {
             cmbProductos.DataSource = CNcolmado.ObtenerProductos_Venta();
@@ -51,7 +90,7 @@ namespace Primera_Practica
         // Agregar producto al carrito
         private void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
-           
+
 
             if (cmbProductos.SelectedItem == null) return;
 
@@ -100,8 +139,8 @@ namespace Primera_Practica
             totalVenta += subtotal;
             lblTotal.Text = "Total: RD$ " + totalVenta.ToString("0.00");
         }
-    
-            private void RecalcularTotal()
+
+        private void RecalcularTotal()
         {
             totalVenta = 0;
             foreach (DataGridViewRow fila in dgvCarrito.Rows)
@@ -113,6 +152,7 @@ namespace Primera_Practica
         // Confirmar venta
         private void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
+          
             if (dgvCarrito.Rows.Count == 0)
             {
                 MessageBox.Show("El carrito está vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -120,8 +160,27 @@ namespace Primera_Practica
             }
 
             int? idCliente = null;
-            if (rbCredito.Checked && cmbCliente.SelectedItem != null)
+            string estado = "Completada";
+
+            if (chkAsociarCliente.Checked && cmbCliente.SelectedItem != null)
                 idCliente = Convert.ToInt32(cmbCliente.SelectedValue);
+            else if (chkAsociarCliente.Checked && cmbCliente.SelectedItem == null)
+            {
+                MessageBox.Show("Debes seleccionar un cliente o desmarcar la opción de asociar cliente.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (rbCredito.Checked)
+            {
+                if (idCliente == null)
+                {
+                    MessageBox.Show("Debes seleccionar un cliente para venta a crédito.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                estado = "Pendiente";
+            }
 
             // Convertir carrito a DataTable
             DataTable carrito = new DataTable();
@@ -137,12 +196,13 @@ namespace Primera_Practica
                     fila.Cells["colmado_Nombre"].Value,
                     fila.Cells["colmado_Cantidad"].Value,
                     fila.Cells["colmado_Precio"].Value
+                    
                 );
             }
 
             try
             {
-                CNcolmado.RegistrarVenta(idCliente, carrito, totalVenta);
+                CNcolmado.RegistrarVenta(idCliente, carrito, totalVenta,estado);
                 MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarVenta();
             }
@@ -176,14 +236,39 @@ namespace Primera_Practica
         {
             LimpiarVenta();
         }
-       
-      
 
-    
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void rbContado_CheckedChanged(object sender, EventArgs e)
         {
+            chkAsociarCliente.Enabled = true;
+            cmbCliente.Enabled = chkAsociarCliente.Checked;
+        }
 
+        private void rbCredito_CheckedChanged(object sender, EventArgs e)
+        {
+            chkAsociarCliente.Checked = true;
+            chkAsociarCliente.Enabled = false;  // obligatorio en crédito
+            cmbCliente.Enabled = true;
+        }
+
+        private void chkAsociarCliente_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbCliente.Enabled = chkAsociarCliente.Checked;
+            if (!chkAsociarCliente.Checked)
+                cmbCliente.SelectedIndex = -1;
+        }
+        private void txtBuscarCodigo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarCodigo.Text.Length >= 2)
+            {
+                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtBuscarCodigo.Text);
+                cmbProductos.DisplayMember = "Nombre";
+                cmbProductos.ValueMember = "IdProducto";
+            }
+            else
+            {
+                CargarDatosVenta(); 
+            }
         }
     }
 }
+

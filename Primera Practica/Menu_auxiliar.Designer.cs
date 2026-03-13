@@ -28,19 +28,342 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.Panel_activarprod = new System.Windows.Forms.Panel();
+            this.btnAgregarProducto = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblCodigoProducto = new System.Windows.Forms.Label();
+            this.lblDescripcionProducto = new System.Windows.Forms.Label();
+            this.lblStockProducto = new System.Windows.Forms.Label();
+            this.lblPrecioProducto = new System.Windows.Forms.Label();
+            this.lblNombreProducto = new System.Windows.Forms.Label();
+            this.cmbProductos = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Panel_Saldo = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbClientes = new System.Windows.Forms.ComboBox();
+            this.lbl = new System.Windows.Forms.Label();
+            this.lbl1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblSaldoCliente = new System.Windows.Forms.Label();
+            this.lblTelefonoCliente = new System.Windows.Forms.Label();
+            this.lblNombreCliente = new System.Windows.Forms.Label();
+            this.btnagregarSaldo = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSaldo = new System.Windows.Forms.TextBox();
+            this.Panel_activarprod.SuspendLayout();
+            this.Panel_Saldo.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // Panel_activarprod
+            // 
+            this.Panel_activarprod.Controls.Add(this.btnAgregarProducto);
+            this.Panel_activarprod.Controls.Add(this.label11);
+            this.Panel_activarprod.Controls.Add(this.label10);
+            this.Panel_activarprod.Controls.Add(this.label7);
+            this.Panel_activarprod.Controls.Add(this.label8);
+            this.Panel_activarprod.Controls.Add(this.label9);
+            this.Panel_activarprod.Controls.Add(this.lblCodigoProducto);
+            this.Panel_activarprod.Controls.Add(this.lblDescripcionProducto);
+            this.Panel_activarprod.Controls.Add(this.lblStockProducto);
+            this.Panel_activarprod.Controls.Add(this.lblPrecioProducto);
+            this.Panel_activarprod.Controls.Add(this.lblNombreProducto);
+            this.Panel_activarprod.Controls.Add(this.cmbProductos);
+            this.Panel_activarprod.Controls.Add(this.label1);
+            this.Panel_activarprod.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_activarprod.Location = new System.Drawing.Point(0, 0);
+            this.Panel_activarprod.Name = "Panel_activarprod";
+            this.Panel_activarprod.Size = new System.Drawing.Size(515, 531);
+            this.Panel_activarprod.TabIndex = 0;
+            // 
+            // btnAgregarProducto
+            // 
+            this.btnAgregarProducto.Location = new System.Drawing.Point(379, 440);
+            this.btnAgregarProducto.Name = "btnAgregarProducto";
+            this.btnAgregarProducto.Size = new System.Drawing.Size(124, 79);
+            this.btnAgregarProducto.TabIndex = 14;
+            this.btnAgregarProducto.Text = "Agregar";
+            this.btnAgregarProducto.UseVisualStyleBackColor = true;
+            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(50, 443);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(63, 20);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Codigo:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(50, 374);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(96, 20);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Descripcion:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(50, 303);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 20);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Stock:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(50, 217);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 20);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Precio:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(50, 139);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 20);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Nombre:";
+            // 
+            // lblCodigoProducto
+            // 
+            this.lblCodigoProducto.AutoSize = true;
+            this.lblCodigoProducto.Location = new System.Drawing.Point(187, 443);
+            this.lblCodigoProducto.Name = "lblCodigoProducto";
+            this.lblCodigoProducto.Size = new System.Drawing.Size(14, 20);
+            this.lblCodigoProducto.TabIndex = 6;
+            this.lblCodigoProducto.Text = "-";
+            // 
+            // lblDescripcionProducto
+            // 
+            this.lblDescripcionProducto.AutoSize = true;
+            this.lblDescripcionProducto.Location = new System.Drawing.Point(187, 374);
+            this.lblDescripcionProducto.Name = "lblDescripcionProducto";
+            this.lblDescripcionProducto.Size = new System.Drawing.Size(14, 20);
+            this.lblDescripcionProducto.TabIndex = 5;
+            this.lblDescripcionProducto.Text = "-";
+            // 
+            // lblStockProducto
+            // 
+            this.lblStockProducto.AutoSize = true;
+            this.lblStockProducto.Location = new System.Drawing.Point(187, 303);
+            this.lblStockProducto.Name = "lblStockProducto";
+            this.lblStockProducto.Size = new System.Drawing.Size(14, 20);
+            this.lblStockProducto.TabIndex = 4;
+            this.lblStockProducto.Text = "-";
+            // 
+            // lblPrecioProducto
+            // 
+            this.lblPrecioProducto.AutoSize = true;
+            this.lblPrecioProducto.Location = new System.Drawing.Point(187, 217);
+            this.lblPrecioProducto.Name = "lblPrecioProducto";
+            this.lblPrecioProducto.Size = new System.Drawing.Size(14, 20);
+            this.lblPrecioProducto.TabIndex = 3;
+            this.lblPrecioProducto.Text = "-";
+            // 
+            // lblNombreProducto
+            // 
+            this.lblNombreProducto.AutoSize = true;
+            this.lblNombreProducto.Location = new System.Drawing.Point(187, 139);
+            this.lblNombreProducto.Name = "lblNombreProducto";
+            this.lblNombreProducto.Size = new System.Drawing.Size(14, 20);
+            this.lblNombreProducto.TabIndex = 2;
+            this.lblNombreProducto.Text = "-";
+            // 
+            // cmbProductos
+            // 
+            this.cmbProductos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProductos.FormattingEnabled = true;
+            this.cmbProductos.Location = new System.Drawing.Point(191, 36);
+            this.cmbProductos.Name = "cmbProductos";
+            this.cmbProductos.Size = new System.Drawing.Size(121, 28);
+            this.cmbProductos.TabIndex = 1;
+            this.cmbProductos.SelectedIndexChanged += new System.EventHandler(this.cmbProductos_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(176, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Selecciona un producto";
+            // 
+            // Panel_Saldo
+            // 
+            this.Panel_Saldo.Controls.Add(this.txtSaldo);
+            this.Panel_Saldo.Controls.Add(this.label3);
+            this.Panel_Saldo.Controls.Add(this.btnagregarSaldo);
+            this.Panel_Saldo.Controls.Add(this.lbl);
+            this.Panel_Saldo.Controls.Add(this.cmbClientes);
+            this.Panel_Saldo.Controls.Add(this.lbl1);
+            this.Panel_Saldo.Controls.Add(this.label2);
+            this.Panel_Saldo.Controls.Add(this.label5);
+            this.Panel_Saldo.Controls.Add(this.lblSaldoCliente);
+            this.Panel_Saldo.Controls.Add(this.lblNombreCliente);
+            this.Panel_Saldo.Controls.Add(this.lblTelefonoCliente);
+            this.Panel_Saldo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_Saldo.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Saldo.Name = "Panel_Saldo";
+            this.Panel_Saldo.Size = new System.Drawing.Size(515, 531);
+            this.Panel_Saldo.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(43, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
+            // 
+            // cmbClientes
+            // 
+            this.cmbClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbClientes.FormattingEnabled = true;
+            this.cmbClientes.Location = new System.Drawing.Point(133, 43);
+            this.cmbClientes.Name = "cmbClientes";
+            this.cmbClientes.Size = new System.Drawing.Size(121, 28);
+            this.cmbClientes.TabIndex = 1;
+            this.cmbClientes.SelectedIndexChanged += new System.EventHandler(this.cmbClientes_SelectedIndexChanged);
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(44, 293);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(54, 20);
+            this.lbl.TabIndex = 20;
+            this.lbl.Text = "Stock:";
+            // 
+            // lbl1
+            // 
+            this.lbl1.AutoSize = true;
+            this.lbl1.Location = new System.Drawing.Point(44, 207);
+            this.lbl1.Name = "lbl1";
+            this.lbl1.Size = new System.Drawing.Size(57, 20);
+            this.lbl1.TabIndex = 19;
+            this.lbl1.Text = "Precio:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(44, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Nombre:";
+            // 
+            // lblSaldoCliente
+            // 
+            this.lblSaldoCliente.AutoSize = true;
+            this.lblSaldoCliente.Location = new System.Drawing.Point(181, 293);
+            this.lblSaldoCliente.Name = "lblSaldoCliente";
+            this.lblSaldoCliente.Size = new System.Drawing.Size(14, 20);
+            this.lblSaldoCliente.TabIndex = 17;
+            this.lblSaldoCliente.Text = "-";
+            // 
+            // lblTelefonoCliente
+            // 
+            this.lblTelefonoCliente.AutoSize = true;
+            this.lblTelefonoCliente.Location = new System.Drawing.Point(181, 207);
+            this.lblTelefonoCliente.Name = "lblTelefonoCliente";
+            this.lblTelefonoCliente.Size = new System.Drawing.Size(14, 20);
+            this.lblTelefonoCliente.TabIndex = 16;
+            this.lblTelefonoCliente.Text = "-";
+            // 
+            // lblNombreCliente
+            // 
+            this.lblNombreCliente.AutoSize = true;
+            this.lblNombreCliente.Location = new System.Drawing.Point(181, 129);
+            this.lblNombreCliente.Name = "lblNombreCliente";
+            this.lblNombreCliente.Size = new System.Drawing.Size(14, 20);
+            this.lblNombreCliente.TabIndex = 15;
+            this.lblNombreCliente.Text = "-";
+            // 
+            // btnagregarSaldo
+            // 
+            this.btnagregarSaldo.Location = new System.Drawing.Point(338, 426);
+            this.btnagregarSaldo.Name = "btnagregarSaldo";
+            this.btnagregarSaldo.Size = new System.Drawing.Size(153, 86);
+            this.btnagregarSaldo.TabIndex = 21;
+            this.btnagregarSaldo.Text = "Confirmar";
+            this.btnagregarSaldo.UseVisualStyleBackColor = true;
+            this.btnagregarSaldo.Click += new System.EventHandler(this.btnagregarSaldo_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(35, 400);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(111, 20);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Agregar Saldo";
+            // 
+            // txtSaldo
+            // 
+            this.txtSaldo.Location = new System.Drawing.Point(154, 397);
+            this.txtSaldo.Name = "txtSaldo";
+            this.txtSaldo.Size = new System.Drawing.Size(100, 26);
+            this.txtSaldo.TabIndex = 23;
             // 
             // Menu_auxiliar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 531);
+            this.Controls.Add(this.Panel_Saldo);
+            this.Controls.Add(this.Panel_activarprod);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.HelpButton = true;
+            this.MaximizeBox = false;
             this.Name = "Menu_auxiliar";
-            this.Text = "Menu_auxiliar";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Panel_activarprod.ResumeLayout(false);
+            this.Panel_activarprod.PerformLayout();
+            this.Panel_Saldo.ResumeLayout(false);
+            this.Panel_Saldo.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel Panel_activarprod;
+        private System.Windows.Forms.ComboBox cmbProductos;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCodigoProducto;
+        private System.Windows.Forms.Label lblDescripcionProducto;
+        private System.Windows.Forms.Label lblStockProducto;
+        private System.Windows.Forms.Label lblPrecioProducto;
+        private System.Windows.Forms.Label lblNombreProducto;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAgregarProducto;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel Panel_Saldo;
+        private System.Windows.Forms.ComboBox cmbClientes;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Label lbl1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblSaldoCliente;
+        private System.Windows.Forms.Label lblNombreCliente;
+        private System.Windows.Forms.Label lblTelefonoCliente;
+        private System.Windows.Forms.TextBox txtSaldo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnagregarSaldo;
     }
 }

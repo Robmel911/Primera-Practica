@@ -29,39 +29,43 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkAsociarCliente = new System.Windows.Forms.CheckBox();
+            this.btnCancelarVenta = new System.Windows.Forms.Button();
+            this.btnConfirmarVenta = new System.Windows.Forms.Button();
+            this.rbCredito = new System.Windows.Forms.RadioButton();
+            this.rbContado = new System.Windows.Forms.RadioButton();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbCliente = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbProductos = new System.Windows.Forms.ComboBox();
-            this.dgvCarrito = new System.Windows.Forms.DataGridView();
-            this.btnAgregarCarrito = new System.Windows.Forms.Button();
+            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.lblStockProducto = new System.Windows.Forms.Label();
             this.lblPrecioProducto = new System.Windows.Forms.Label();
             this.lblNombreProducto = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
-            this.cmbCliente = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.rbContado = new System.Windows.Forms.RadioButton();
-            this.rbCredito = new System.Windows.Forms.RadioButton();
-            this.btnConfirmarVenta = new System.Windows.Forms.Button();
-            this.btnCancelarVenta = new System.Windows.Forms.Button();
+            this.btnAgregarCarrito = new System.Windows.Forms.Button();
+            this.cmbProductos = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvCarrito = new System.Windows.Forms.DataGridView();
             this.colmado_IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtBuscarCodigo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkAsociarCliente);
             this.panel1.Controls.Add(this.btnCancelarVenta);
             this.panel1.Controls.Add(this.btnConfirmarVenta);
             this.panel1.Controls.Add(this.rbCredito);
@@ -75,8 +79,93 @@
             this.panel1.Size = new System.Drawing.Size(633, 113);
             this.panel1.TabIndex = 0;
             // 
+            // chkAsociarCliente
+            // 
+            this.chkAsociarCliente.AutoSize = true;
+            this.chkAsociarCliente.Location = new System.Drawing.Point(83, 57);
+            this.chkAsociarCliente.Name = "chkAsociarCliente";
+            this.chkAsociarCliente.Size = new System.Drawing.Size(141, 24);
+            this.chkAsociarCliente.TabIndex = 14;
+            this.chkAsociarCliente.Text = "Venta a cliente";
+            this.chkAsociarCliente.UseVisualStyleBackColor = true;
+            this.chkAsociarCliente.CheckedChanged += new System.EventHandler(this.chkAsociarCliente_CheckedChanged);
+            // 
+            // btnCancelarVenta
+            // 
+            this.btnCancelarVenta.Location = new System.Drawing.Point(517, 63);
+            this.btnCancelarVenta.Name = "btnCancelarVenta";
+            this.btnCancelarVenta.Size = new System.Drawing.Size(104, 32);
+            this.btnCancelarVenta.TabIndex = 11;
+            this.btnCancelarVenta.Text = "Cancelar";
+            this.btnCancelarVenta.UseVisualStyleBackColor = true;
+            this.btnCancelarVenta.Click += new System.EventHandler(this.btnCancelarVenta_Click);
+            // 
+            // btnConfirmarVenta
+            // 
+            this.btnConfirmarVenta.Location = new System.Drawing.Point(517, 25);
+            this.btnConfirmarVenta.Name = "btnConfirmarVenta";
+            this.btnConfirmarVenta.Size = new System.Drawing.Size(104, 32);
+            this.btnConfirmarVenta.TabIndex = 11;
+            this.btnConfirmarVenta.Text = "Confirmar";
+            this.btnConfirmarVenta.UseVisualStyleBackColor = true;
+            this.btnConfirmarVenta.Click += new System.EventHandler(this.btnConfirmarVenta_Click);
+            // 
+            // rbCredito
+            // 
+            this.rbCredito.AutoSize = true;
+            this.rbCredito.Location = new System.Drawing.Point(298, 75);
+            this.rbCredito.Name = "rbCredito";
+            this.rbCredito.Size = new System.Drawing.Size(74, 24);
+            this.rbCredito.TabIndex = 13;
+            this.rbCredito.TabStop = true;
+            this.rbCredito.Text = "Fiado";
+            this.rbCredito.UseVisualStyleBackColor = true;
+            this.rbCredito.CheckedChanged += new System.EventHandler(this.rbCredito_CheckedChanged);
+            // 
+            // rbContado
+            // 
+            this.rbContado.AutoSize = true;
+            this.rbContado.Location = new System.Drawing.Point(298, 45);
+            this.rbContado.Name = "rbContado";
+            this.rbContado.Size = new System.Drawing.Size(113, 24);
+            this.rbContado.TabIndex = 12;
+            this.rbContado.TabStop = true;
+            this.rbContado.Text = "Al Contado";
+            this.rbContado.UseVisualStyleBackColor = true;
+            this.rbContado.CheckedChanged += new System.EventHandler(this.rbContado_CheckedChanged);
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(297, 22);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(120, 20);
+            this.lblTotal.TabIndex = 11;
+            this.lblTotal.Text = "Total: RD$ 0.00";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 20);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Cliente:";
+            // 
+            // cmbCliente
+            // 
+            this.cmbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCliente.Enabled = false;
+            this.cmbCliente.FormattingEnabled = true;
+            this.cmbCliente.Location = new System.Drawing.Point(83, 22);
+            this.cmbCliente.Name = "cmbCliente";
+            this.cmbCliente.Size = new System.Drawing.Size(121, 28);
+            this.cmbCliente.TabIndex = 11;
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.txtBuscarCodigo);
             this.panel2.Controls.Add(this.nudCantidad);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.lblStockProducto);
@@ -94,79 +183,31 @@
             this.panel2.Size = new System.Drawing.Size(633, 215);
             this.panel2.TabIndex = 1;
             // 
-            // label1
+            // nudCantidad
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Producto:";
+            this.nudCantidad.Location = new System.Drawing.Point(92, 175);
+            this.nudCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudCantidad.Name = "nudCantidad";
+            this.nudCantidad.Size = new System.Drawing.Size(120, 26);
+            this.nudCantidad.TabIndex = 10;
+            this.nudCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // label2
+            // label8
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Nombre:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Precio:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 20);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Stock:";
-            // 
-            // cmbProductos
-            // 
-            this.cmbProductos.FormattingEnabled = true;
-            this.cmbProductos.Location = new System.Drawing.Point(83, 14);
-            this.cmbProductos.Name = "cmbProductos";
-            this.cmbProductos.Size = new System.Drawing.Size(121, 28);
-            this.cmbProductos.TabIndex = 4;
-            this.cmbProductos.SelectedIndexChanged += new System.EventHandler(this.cmbProductos_SelectedIndexChanged);
-            // 
-            // dgvCarrito
-            // 
-            this.dgvCarrito.AllowUserToAddRows = false;
-            this.dgvCarrito.AllowUserToDeleteRows = false;
-            this.dgvCarrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCarrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colmado_IdProducto,
-            this.colmado_Nombre,
-            this.colmado_Cantidad,
-            this.colmado_Precio,
-            this.colmado_Subtotal});
-            this.dgvCarrito.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCarrito.Location = new System.Drawing.Point(0, 215);
-            this.dgvCarrito.Name = "dgvCarrito";
-            this.dgvCarrito.ReadOnly = true;
-            this.dgvCarrito.RowTemplate.Height = 28;
-            this.dgvCarrito.Size = new System.Drawing.Size(633, 250);
-            this.dgvCarrito.TabIndex = 2;
-            // 
-            // btnAgregarCarrito
-            // 
-            this.btnAgregarCarrito.Location = new System.Drawing.Point(278, 177);
-            this.btnAgregarCarrito.Name = "btnAgregarCarrito";
-            this.btnAgregarCarrito.Size = new System.Drawing.Size(104, 32);
-            this.btnAgregarCarrito.TabIndex = 5;
-            this.btnAgregarCarrito.Text = "+ Agregar";
-            this.btnAgregarCarrito.UseVisualStyleBackColor = true;
-            this.btnAgregarCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 177);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 20);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Cantidad:";
             // 
             // lblStockProducto
             // 
@@ -195,130 +236,137 @@
             this.lblNombreProducto.TabIndex = 6;
             this.lblNombreProducto.Text = "-";
             // 
-            // label8
+            // btnAgregarCarrito
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 177);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 20);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Cantidad:";
+            this.btnAgregarCarrito.Location = new System.Drawing.Point(278, 177);
+            this.btnAgregarCarrito.Name = "btnAgregarCarrito";
+            this.btnAgregarCarrito.Size = new System.Drawing.Size(104, 32);
+            this.btnAgregarCarrito.TabIndex = 5;
+            this.btnAgregarCarrito.Text = "+ Agregar";
+            this.btnAgregarCarrito.UseVisualStyleBackColor = true;
+            this.btnAgregarCarrito.Click += new System.EventHandler(this.btnAgregarCarrito_Click);
             // 
-            // nudCantidad
+            // cmbProductos
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(92, 175);
-            this.nudCantidad.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(120, 26);
-            this.nudCantidad.TabIndex = 10;
-            this.nudCantidad.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.cmbProductos.FormattingEnabled = true;
+            this.cmbProductos.Location = new System.Drawing.Point(83, 14);
+            this.cmbProductos.Name = "cmbProductos";
+            this.cmbProductos.Size = new System.Drawing.Size(121, 28);
+            this.cmbProductos.TabIndex = 4;
+            this.cmbProductos.SelectedIndexChanged += new System.EventHandler(this.cmbProductos_SelectedIndexChanged);
             // 
-            // cmbCliente
+            // label4
             // 
-            this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new System.Drawing.Point(83, 22);
-            this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(121, 28);
-            this.cmbCliente.TabIndex = 11;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 136);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Stock:";
             // 
-            // label9
+            // label3
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 20);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Cliente:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Precio:";
             // 
-            // lblTotal
+            // label2
             // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(297, 22);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(120, 20);
-            this.lblTotal.TabIndex = 11;
-            this.lblTotal.Text = "Total: RD$ 0.00";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Nombre:";
             // 
-            // rbContado
+            // label1
             // 
-            this.rbContado.AutoSize = true;
-            this.rbContado.Location = new System.Drawing.Point(298, 45);
-            this.rbContado.Name = "rbContado";
-            this.rbContado.Size = new System.Drawing.Size(106, 24);
-            this.rbContado.TabIndex = 12;
-            this.rbContado.TabStop = true;
-            this.rbContado.Text = "Al Contado";
-            this.rbContado.UseVisualStyleBackColor = true;
-            this.rbContado.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Producto:";
             // 
-            // rbCredito
+            // dgvCarrito
             // 
-            this.rbCredito.AutoSize = true;
-            this.rbCredito.Location = new System.Drawing.Point(298, 75);
-            this.rbCredito.Name = "rbCredito";
-            this.rbCredito.Size = new System.Drawing.Size(67, 24);
-            this.rbCredito.TabIndex = 13;
-            this.rbCredito.TabStop = true;
-            this.rbCredito.Text = "Fiado";
-            this.rbCredito.UseVisualStyleBackColor = true;
-            // 
-            // btnConfirmarVenta
-            // 
-            this.btnConfirmarVenta.Location = new System.Drawing.Point(517, 25);
-            this.btnConfirmarVenta.Name = "btnConfirmarVenta";
-            this.btnConfirmarVenta.Size = new System.Drawing.Size(104, 32);
-            this.btnConfirmarVenta.TabIndex = 11;
-            this.btnConfirmarVenta.Text = "Confirmar";
-            this.btnConfirmarVenta.UseVisualStyleBackColor = true;
-            this.btnConfirmarVenta.Click += new System.EventHandler(this.btnConfirmarVenta_Click);
-            // 
-            // btnCancelarVenta
-            // 
-            this.btnCancelarVenta.Location = new System.Drawing.Point(517, 63);
-            this.btnCancelarVenta.Name = "btnCancelarVenta";
-            this.btnCancelarVenta.Size = new System.Drawing.Size(104, 32);
-            this.btnCancelarVenta.TabIndex = 11;
-            this.btnCancelarVenta.Text = "Cancelar";
-            this.btnCancelarVenta.UseVisualStyleBackColor = true;
-            this.btnCancelarVenta.Click += new System.EventHandler(this.btnCancelarVenta_Click);
+            this.dgvCarrito.AllowUserToAddRows = false;
+            this.dgvCarrito.AllowUserToDeleteRows = false;
+            this.dgvCarrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCarrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colmado_IdProducto,
+            this.colmado_Nombre,
+            this.colmado_Cantidad,
+            this.colmado_Precio,
+            this.colmado_Subtotal});
+            this.dgvCarrito.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCarrito.Location = new System.Drawing.Point(0, 215);
+            this.dgvCarrito.Name = "dgvCarrito";
+            this.dgvCarrito.ReadOnly = true;
+            this.dgvCarrito.RowHeadersWidth = 62;
+            this.dgvCarrito.RowTemplate.Height = 28;
+            this.dgvCarrito.Size = new System.Drawing.Size(633, 250);
+            this.dgvCarrito.TabIndex = 2;
             // 
             // colmado_IdProducto
             // 
             this.colmado_IdProducto.HeaderText = "IdProducto";
+            this.colmado_IdProducto.MinimumWidth = 8;
             this.colmado_IdProducto.Name = "colmado_IdProducto";
             this.colmado_IdProducto.ReadOnly = true;
+            this.colmado_IdProducto.Width = 150;
             // 
             // colmado_Nombre
             // 
             this.colmado_Nombre.HeaderText = "Nombre";
+            this.colmado_Nombre.MinimumWidth = 8;
             this.colmado_Nombre.Name = "colmado_Nombre";
             this.colmado_Nombre.ReadOnly = true;
+            this.colmado_Nombre.Width = 150;
             // 
             // colmado_Cantidad
             // 
             this.colmado_Cantidad.HeaderText = "Cantidad";
+            this.colmado_Cantidad.MinimumWidth = 8;
             this.colmado_Cantidad.Name = "colmado_Cantidad";
             this.colmado_Cantidad.ReadOnly = true;
+            this.colmado_Cantidad.Width = 150;
             // 
             // colmado_Precio
             // 
             this.colmado_Precio.HeaderText = "Precio";
+            this.colmado_Precio.MinimumWidth = 8;
             this.colmado_Precio.Name = "colmado_Precio";
             this.colmado_Precio.ReadOnly = true;
+            this.colmado_Precio.Width = 150;
             // 
             // colmado_Subtotal
             // 
             this.colmado_Subtotal.HeaderText = "Subtotal";
+            this.colmado_Subtotal.MinimumWidth = 8;
             this.colmado_Subtotal.Name = "colmado_Subtotal";
             this.colmado_Subtotal.ReadOnly = true;
+            this.colmado_Subtotal.Width = 150;
+            // 
+            // txtBuscarCodigo
+            // 
+            this.txtBuscarCodigo.Location = new System.Drawing.Point(424, 14);
+            this.txtBuscarCodigo.Name = "txtBuscarCodigo";
+            this.txtBuscarCodigo.Size = new System.Drawing.Size(197, 26);
+            this.txtBuscarCodigo.TabIndex = 11;
+            this.txtBuscarCodigo.TextChanged += new System.EventHandler(this.txtBuscarCodigo_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(360, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Codigo:";
             // 
             // Menu_Ventas
             // 
@@ -334,8 +382,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCarrito)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -368,5 +416,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colmado_Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn colmado_Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colmado_Subtotal;
+        private System.Windows.Forms.CheckBox chkAsociarCliente;
+        private System.Windows.Forms.TextBox txtBuscarCodigo;
+        private System.Windows.Forms.Label label5;
     }
 }

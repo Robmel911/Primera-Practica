@@ -36,7 +36,14 @@
             this.btnInicio = new System.Windows.Forms.Button();
             this.panelInicio = new System.Windows.Forms.Panel();
             this.panelProductos = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnreactivarProd = new System.Windows.Forms.Button();
+            this.btnagregarProd = new System.Windows.Forms.Button();
+            this.btneditarProd = new System.Windows.Forms.Button();
+            this.btneliminarProd = new System.Windows.Forms.Button();
             this.panelAux_Productos = new System.Windows.Forms.Panel();
+            this.TextCodigoProd = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,12 +57,14 @@
             this.textNombreProd = new System.Windows.Forms.TextBox();
             this.btnguardarProd = new System.Windows.Forms.Button();
             this.label_panelAux = new System.Windows.Forms.Label();
-            this.btneliminarProd = new System.Windows.Forms.Button();
-            this.btneditarProd = new System.Windows.Forms.Button();
-            this.btnagregarProd = new System.Windows.Forms.Button();
             this.dataGrid_Productos = new System.Windows.Forms.DataGridView();
             this.panelVentas = new System.Windows.Forms.Panel();
+            this.btnVerHistorial = new System.Windows.Forms.Button();
+            this.btnAnularVenta = new System.Windows.Forms.Button();
+            this.dgvHistorialVentas = new System.Windows.Forms.DataGridView();
+            this.btnRegistrar_venta = new System.Windows.Forms.Button();
             this.panelClientes = new System.Windows.Forms.Panel();
+            this.btnRegistrarSaldo = new System.Windows.Forms.Button();
             this.btneliminar_Cl = new System.Windows.Forms.Button();
             this.btneditar_Cl = new System.Windows.Forms.Button();
             this.btnregistrar_Cl = new System.Windows.Forms.Button();
@@ -71,21 +80,32 @@
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnAprobarVenta = new System.Windows.Forms.Button();
+            this.btnVerDetalle = new System.Windows.Forms.Button();
+            this.lblTotalDia = new System.Windows.Forms.Label();
+            this.dgvVentasDelDia = new System.Windows.Forms.DataGridView();
+            this.panelVentasdia = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.dgvHistorialVentas = new System.Windows.Forms.DataGridView();
-            this.btnAnularVenta = new System.Windows.Forms.Button();
-            this.btnVerHistorial = new System.Windows.Forms.Button();
+            this.btntop5 = new System.Windows.Forms.Button();
+            this.panelTop5 = new System.Windows.Forms.Panel();
+            this.dataGrid_Top5 = new System.Windows.Forms.DataGridView();
             this.panelLateral.SuspendLayout();
+            this.panelInicio.SuspendLayout();
             this.panelProductos.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelAux_Productos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).BeginInit();
             this.panelVentas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).BeginInit();
             this.panelClientes.SuspendLayout();
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentasDelDia)).BeginInit();
+            this.panelVentasdia.SuspendLayout();
+            this.panelTop5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Top5)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
@@ -185,6 +205,10 @@
             // 
             // panelInicio
             // 
+            this.panelInicio.Controls.Add(this.btntop5);
+            this.panelInicio.Controls.Add(this.panelTop5);
+            this.panelInicio.Controls.Add(this.button1);
+            this.panelInicio.Controls.Add(this.panelVentasdia);
             this.panelInicio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInicio.Location = new System.Drawing.Point(0, 0);
             this.panelInicio.Name = "panelInicio";
@@ -193,10 +217,8 @@
             // 
             // panelProductos
             // 
+            this.panelProductos.Controls.Add(this.panel1);
             this.panelProductos.Controls.Add(this.panelAux_Productos);
-            this.panelProductos.Controls.Add(this.btneliminarProd);
-            this.panelProductos.Controls.Add(this.btneditarProd);
-            this.panelProductos.Controls.Add(this.btnagregarProd);
             this.panelProductos.Controls.Add(this.dataGrid_Productos);
             this.panelProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelProductos.Location = new System.Drawing.Point(0, 0);
@@ -204,8 +226,66 @@
             this.panelProductos.Size = new System.Drawing.Size(1222, 734);
             this.panelProductos.TabIndex = 2;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnreactivarProd);
+            this.panel1.Controls.Add(this.btnagregarProd);
+            this.panel1.Controls.Add(this.btneditarProd);
+            this.panel1.Controls.Add(this.btneliminarProd);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 593);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(987, 141);
+            this.panel1.TabIndex = 8;
+            // 
+            // btnreactivarProd
+            // 
+            this.btnreactivarProd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnreactivarProd.Location = new System.Drawing.Point(687, 0);
+            this.btnreactivarProd.Name = "btnreactivarProd";
+            this.btnreactivarProd.Size = new System.Drawing.Size(229, 141);
+            this.btnreactivarProd.TabIndex = 7;
+            this.btnreactivarProd.Text = "Reactivar";
+            this.btnreactivarProd.UseVisualStyleBackColor = true;
+            this.btnreactivarProd.Click += new System.EventHandler(this.btnreactivarProd_Click);
+            // 
+            // btnagregarProd
+            // 
+            this.btnagregarProd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnagregarProd.Location = new System.Drawing.Point(464, 0);
+            this.btnagregarProd.Name = "btnagregarProd";
+            this.btnagregarProd.Size = new System.Drawing.Size(223, 141);
+            this.btnagregarProd.TabIndex = 4;
+            this.btnagregarProd.Text = "Agregar";
+            this.btnagregarProd.UseVisualStyleBackColor = true;
+            this.btnagregarProd.Click += new System.EventHandler(this.btnagregar_Click);
+            // 
+            // btneditarProd
+            // 
+            this.btneditarProd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btneditarProd.Location = new System.Drawing.Point(236, 0);
+            this.btneditarProd.Name = "btneditarProd";
+            this.btneditarProd.Size = new System.Drawing.Size(228, 141);
+            this.btneditarProd.TabIndex = 5;
+            this.btneditarProd.Text = "Editar";
+            this.btneditarProd.UseVisualStyleBackColor = true;
+            this.btneditarProd.Click += new System.EventHandler(this.btneditar_Click);
+            // 
+            // btneliminarProd
+            // 
+            this.btneliminarProd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btneliminarProd.Location = new System.Drawing.Point(0, 0);
+            this.btneliminarProd.Name = "btneliminarProd";
+            this.btneliminarProd.Size = new System.Drawing.Size(236, 141);
+            this.btneliminarProd.TabIndex = 6;
+            this.btneliminarProd.Text = "Eliminar";
+            this.btneliminarProd.UseVisualStyleBackColor = true;
+            this.btneliminarProd.Click += new System.EventHandler(this.btneliminar_Click);
+            // 
             // panelAux_Productos
             // 
+            this.panelAux_Productos.Controls.Add(this.TextCodigoProd);
+            this.panelAux_Productos.Controls.Add(this.label1);
             this.panelAux_Productos.Controls.Add(this.btnSalir);
             this.panelAux_Productos.Controls.Add(this.label6);
             this.panelAux_Productos.Controls.Add(this.label5);
@@ -224,6 +304,23 @@
             this.panelAux_Productos.Name = "panelAux_Productos";
             this.panelAux_Productos.Size = new System.Drawing.Size(235, 734);
             this.panelAux_Productos.TabIndex = 7;
+            // 
+            // TextCodigoProd
+            // 
+            this.TextCodigoProd.Location = new System.Drawing.Point(27, 569);
+            this.TextCodigoProd.Mask = "aa-000";
+            this.TextCodigoProd.Name = "TextCodigoProd";
+            this.TextCodigoProd.Size = new System.Drawing.Size(100, 26);
+            this.TextCodigoProd.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 546);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Codigo";
             // 
             // btnSalir
             // 
@@ -341,36 +438,6 @@
             this.label_panelAux.TabIndex = 0;
             this.label_panelAux.Text = "Titulo ";
             // 
-            // btneliminarProd
-            // 
-            this.btneliminarProd.Location = new System.Drawing.Point(738, 650);
-            this.btneliminarProd.Name = "btneliminarProd";
-            this.btneliminarProd.Size = new System.Drawing.Size(99, 39);
-            this.btneliminarProd.TabIndex = 6;
-            this.btneliminarProd.Text = "Eliminar";
-            this.btneliminarProd.UseVisualStyleBackColor = true;
-            this.btneliminarProd.Click += new System.EventHandler(this.btneliminar_Click);
-            // 
-            // btneditarProd
-            // 
-            this.btneditarProd.Location = new System.Drawing.Point(537, 651);
-            this.btneditarProd.Name = "btneditarProd";
-            this.btneditarProd.Size = new System.Drawing.Size(91, 38);
-            this.btneditarProd.TabIndex = 5;
-            this.btneditarProd.Text = "Editar";
-            this.btneditarProd.UseVisualStyleBackColor = true;
-            this.btneditarProd.Click += new System.EventHandler(this.btneditar_Click);
-            // 
-            // btnagregarProd
-            // 
-            this.btnagregarProd.Location = new System.Drawing.Point(313, 651);
-            this.btnagregarProd.Name = "btnagregarProd";
-            this.btnagregarProd.Size = new System.Drawing.Size(86, 38);
-            this.btnagregarProd.TabIndex = 4;
-            this.btnagregarProd.Text = "Agregar";
-            this.btnagregarProd.UseVisualStyleBackColor = true;
-            this.btnagregarProd.Click += new System.EventHandler(this.btnagregar_Click);
-            // 
             // dataGrid_Productos
             // 
             this.dataGrid_Productos.AllowUserToAddRows = false;
@@ -378,28 +445,74 @@
             this.dataGrid_Productos.AllowUserToResizeColumns = false;
             this.dataGrid_Productos.AllowUserToResizeRows = false;
             this.dataGrid_Productos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid_Productos.Location = new System.Drawing.Point(6, 36);
+            this.dataGrid_Productos.Location = new System.Drawing.Point(0, 80);
             this.dataGrid_Productos.Name = "dataGrid_Productos";
             this.dataGrid_Productos.ReadOnly = true;
             this.dataGrid_Productos.RowHeadersWidth = 62;
             this.dataGrid_Productos.RowTemplate.Height = 28;
-            this.dataGrid_Productos.Size = new System.Drawing.Size(950, 575);
+            this.dataGrid_Productos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGrid_Productos.Size = new System.Drawing.Size(953, 515);
             this.dataGrid_Productos.TabIndex = 1;
             // 
             // panelVentas
             // 
+            this.panelVentas.Controls.Add(this.btnVerDetalle);
+            this.panelVentas.Controls.Add(this.btnAprobarVenta);
             this.panelVentas.Controls.Add(this.btnVerHistorial);
             this.panelVentas.Controls.Add(this.btnAnularVenta);
             this.panelVentas.Controls.Add(this.dgvHistorialVentas);
-            this.panelVentas.Controls.Add(this.button1);
+            this.panelVentas.Controls.Add(this.btnRegistrar_venta);
             this.panelVentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelVentas.Location = new System.Drawing.Point(0, 0);
             this.panelVentas.Name = "panelVentas";
             this.panelVentas.Size = new System.Drawing.Size(1222, 734);
             this.panelVentas.TabIndex = 3;
             // 
+            // btnVerHistorial
+            // 
+            this.btnVerHistorial.Location = new System.Drawing.Point(538, 552);
+            this.btnVerHistorial.Name = "btnVerHistorial";
+            this.btnVerHistorial.Size = new System.Drawing.Size(172, 95);
+            this.btnVerHistorial.TabIndex = 3;
+            this.btnVerHistorial.Text = "Mostrar historial";
+            this.btnVerHistorial.UseVisualStyleBackColor = true;
+            this.btnVerHistorial.Click += new System.EventHandler(this.btnVerHistorial_Click);
+            // 
+            // btnAnularVenta
+            // 
+            this.btnAnularVenta.Location = new System.Drawing.Point(141, 546);
+            this.btnAnularVenta.Name = "btnAnularVenta";
+            this.btnAnularVenta.Size = new System.Drawing.Size(186, 95);
+            this.btnAnularVenta.TabIndex = 2;
+            this.btnAnularVenta.Text = "Anular venta";
+            this.btnAnularVenta.UseVisualStyleBackColor = true;
+            this.btnAnularVenta.Click += new System.EventHandler(this.btnAnularVenta_Click);
+            // 
+            // dgvHistorialVentas
+            // 
+            this.dgvHistorialVentas.AllowUserToAddRows = false;
+            this.dgvHistorialVentas.AllowUserToDeleteRows = false;
+            this.dgvHistorialVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistorialVentas.Location = new System.Drawing.Point(39, 25);
+            this.dgvHistorialVentas.Name = "dgvHistorialVentas";
+            this.dgvHistorialVentas.RowHeadersWidth = 62;
+            this.dgvHistorialVentas.RowTemplate.Height = 28;
+            this.dgvHistorialVentas.Size = new System.Drawing.Size(1147, 504);
+            this.dgvHistorialVentas.TabIndex = 1;
+            // 
+            // btnRegistrar_venta
+            // 
+            this.btnRegistrar_venta.Location = new System.Drawing.Point(945, 549);
+            this.btnRegistrar_venta.Name = "btnRegistrar_venta";
+            this.btnRegistrar_venta.Size = new System.Drawing.Size(264, 95);
+            this.btnRegistrar_venta.TabIndex = 0;
+            this.btnRegistrar_venta.Text = "Realizar Venta";
+            this.btnRegistrar_venta.UseVisualStyleBackColor = true;
+            this.btnRegistrar_venta.Click += new System.EventHandler(this.btnRegistrar_Venta_Click);
+            // 
             // panelClientes
             // 
+            this.panelClientes.Controls.Add(this.btnRegistrarSaldo);
             this.panelClientes.Controls.Add(this.btneliminar_Cl);
             this.panelClientes.Controls.Add(this.btneditar_Cl);
             this.panelClientes.Controls.Add(this.btnregistrar_Cl);
@@ -411,9 +524,19 @@
             this.panelClientes.Size = new System.Drawing.Size(1222, 734);
             this.panelClientes.TabIndex = 4;
             // 
+            // btnRegistrarSaldo
+            // 
+            this.btnRegistrarSaldo.Location = new System.Drawing.Point(815, 647);
+            this.btnRegistrarSaldo.Name = "btnRegistrarSaldo";
+            this.btnRegistrarSaldo.Size = new System.Drawing.Size(124, 47);
+            this.btnRegistrarSaldo.TabIndex = 5;
+            this.btnRegistrarSaldo.Text = "Agregar Saldo";
+            this.btnRegistrarSaldo.UseVisualStyleBackColor = true;
+            this.btnRegistrarSaldo.Click += new System.EventHandler(this.btnRegistrarSaldo_Click);
+            // 
             // btneliminar_Cl
             // 
-            this.btneliminar_Cl.Location = new System.Drawing.Point(696, 651);
+            this.btneliminar_Cl.Location = new System.Drawing.Point(637, 653);
             this.btneliminar_Cl.Name = "btneliminar_Cl";
             this.btneliminar_Cl.Size = new System.Drawing.Size(124, 47);
             this.btneliminar_Cl.TabIndex = 4;
@@ -423,7 +546,7 @@
             // 
             // btneditar_Cl
             // 
-            this.btneditar_Cl.Location = new System.Drawing.Point(537, 651);
+            this.btneditar_Cl.Location = new System.Drawing.Point(482, 651);
             this.btneditar_Cl.Name = "btneditar_Cl";
             this.btneditar_Cl.Size = new System.Drawing.Size(88, 47);
             this.btneditar_Cl.TabIndex = 3;
@@ -548,46 +671,100 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnAprobarVenta
+            // 
+            this.btnAprobarVenta.Location = new System.Drawing.Point(346, 549);
+            this.btnAprobarVenta.Name = "btnAprobarVenta";
+            this.btnAprobarVenta.Size = new System.Drawing.Size(169, 95);
+            this.btnAprobarVenta.TabIndex = 4;
+            this.btnAprobarVenta.Text = "AprobarVenta";
+            this.btnAprobarVenta.UseVisualStyleBackColor = true;
+            this.btnAprobarVenta.Click += new System.EventHandler(this.btnAprobarVenta_Click);
+            // 
+            // btnVerDetalle
+            // 
+            this.btnVerDetalle.Location = new System.Drawing.Point(716, 552);
+            this.btnVerDetalle.Name = "btnVerDetalle";
+            this.btnVerDetalle.Size = new System.Drawing.Size(205, 95);
+            this.btnVerDetalle.TabIndex = 5;
+            this.btnVerDetalle.Text = "Mostrar venta";
+            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
+            // 
+            // lblTotalDia
+            // 
+            this.lblTotalDia.AutoSize = true;
+            this.lblTotalDia.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalDia.Location = new System.Drawing.Point(48, 372);
+            this.lblTotalDia.Name = "lblTotalDia";
+            this.lblTotalDia.Size = new System.Drawing.Size(148, 46);
+            this.lblTotalDia.TabIndex = 0;
+            this.lblTotalDia.Text = "label10";
+            // 
+            // dgvVentasDelDia
+            // 
+            this.dgvVentasDelDia.AllowUserToAddRows = false;
+            this.dgvVentasDelDia.AllowUserToDeleteRows = false;
+            this.dgvVentasDelDia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentasDelDia.Location = new System.Drawing.Point(34, 3);
+            this.dgvVentasDelDia.Name = "dgvVentasDelDia";
+            this.dgvVentasDelDia.ReadOnly = true;
+            this.dgvVentasDelDia.RowHeadersWidth = 62;
+            this.dgvVentasDelDia.RowTemplate.Height = 28;
+            this.dgvVentasDelDia.Size = new System.Drawing.Size(516, 350);
+            this.dgvVentasDelDia.TabIndex = 1;
+            // 
+            // panelVentasdia
+            // 
+            this.panelVentasdia.Controls.Add(this.dgvVentasDelDia);
+            this.panelVentasdia.Controls.Add(this.lblTotalDia);
+            this.panelVentasdia.Location = new System.Drawing.Point(551, 249);
+            this.panelVentasdia.Name = "panelVentasdia";
+            this.panelVentasdia.Size = new System.Drawing.Size(668, 482);
+            this.panelVentasdia.TabIndex = 2;
+            this.panelVentasdia.Visible = false;
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1111, 615);
+            this.button1.Location = new System.Drawing.Point(160, 365);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 63);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 50);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Ver Ventas de hoy";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dgvHistorialVentas
+            // btntop5
             // 
-            this.dgvHistorialVentas.AllowUserToAddRows = false;
-            this.dgvHistorialVentas.AllowUserToDeleteRows = false;
-            this.dgvHistorialVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorialVentas.Location = new System.Drawing.Point(118, 38);
-            this.dgvHistorialVentas.Name = "dgvHistorialVentas";
-            this.dgvHistorialVentas.RowTemplate.Height = 28;
-            this.dgvHistorialVentas.Size = new System.Drawing.Size(1052, 504);
-            this.dgvHistorialVentas.TabIndex = 1;
+            this.btntop5.Location = new System.Drawing.Point(160, 440);
+            this.btntop5.Name = "btntop5";
+            this.btntop5.Size = new System.Drawing.Size(152, 49);
+            this.btntop5.TabIndex = 4;
+            this.btntop5.Text = "Ver top 5 productos";
+            this.btntop5.UseVisualStyleBackColor = true;
+            this.btntop5.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnAnularVenta
+            // panelTop5
             // 
-            this.btnAnularVenta.Location = new System.Drawing.Point(213, 601);
-            this.btnAnularVenta.Name = "btnAnularVenta";
-            this.btnAnularVenta.Size = new System.Drawing.Size(75, 63);
-            this.btnAnularVenta.TabIndex = 2;
-            this.btnAnularVenta.Text = "Anular venta";
-            this.btnAnularVenta.UseVisualStyleBackColor = true;
-            this.btnAnularVenta.Click += new System.EventHandler(this.btnAnularVenta_Click);
+            this.panelTop5.Controls.Add(this.dataGrid_Top5);
+            this.panelTop5.Location = new System.Drawing.Point(551, 249);
+            this.panelTop5.Name = "panelTop5";
+            this.panelTop5.Size = new System.Drawing.Size(668, 482);
+            this.panelTop5.TabIndex = 3;
+            this.panelTop5.Visible = false;
             // 
-            // btnVerHistorial
+            // dataGrid_Top5
             // 
-            this.btnVerHistorial.Location = new System.Drawing.Point(377, 601);
-            this.btnVerHistorial.Name = "btnVerHistorial";
-            this.btnVerHistorial.Size = new System.Drawing.Size(75, 63);
-            this.btnVerHistorial.TabIndex = 3;
-            this.btnVerHistorial.Text = "Mostrar historial";
-            this.btnVerHistorial.UseVisualStyleBackColor = true;
-            this.btnVerHistorial.Click += new System.EventHandler(this.btnVerHistorial_Click);
+            this.dataGrid_Top5.AllowUserToAddRows = false;
+            this.dataGrid_Top5.AllowUserToDeleteRows = false;
+            this.dataGrid_Top5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_Top5.Location = new System.Drawing.Point(34, 3);
+            this.dataGrid_Top5.Name = "dataGrid_Top5";
+            this.dataGrid_Top5.ReadOnly = true;
+            this.dataGrid_Top5.RowHeadersWidth = 62;
+            this.dataGrid_Top5.RowTemplate.Height = 28;
+            this.dataGrid_Top5.Size = new System.Drawing.Size(570, 395);
+            this.dataGrid_Top5.TabIndex = 1;
             // 
             // Form1
             // 
@@ -595,26 +772,34 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 734);
             this.Controls.Add(this.panelLateral);
-            this.Controls.Add(this.panelVentas);
-            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelInicio);
             this.Controls.Add(this.panelClientes);
+            this.Controls.Add(this.panelVentas);
+            this.Controls.Add(this.panelProductos);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Colmado";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelLateral.ResumeLayout(false);
+            this.panelInicio.ResumeLayout(false);
             this.panelProductos.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panelAux_Productos.ResumeLayout(false);
             this.panelAux_Productos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).EndInit();
             this.panelVentas.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).EndInit();
             this.panelClientes.ResumeLayout(false);
             this.panelAux_Clientes.ResumeLayout(false);
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentasDelDia)).EndInit();
+            this.panelVentasdia.ResumeLayout(false);
+            this.panelVentasdia.PerformLayout();
+            this.panelTop5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Top5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -663,10 +848,24 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnguardar_Cl;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRegistrar_venta;
         private System.Windows.Forms.Button btnAnularVenta;
         private System.Windows.Forms.DataGridView dgvHistorialVentas;
         private System.Windows.Forms.Button btnVerHistorial;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnreactivarProd;
+        private System.Windows.Forms.Button btnRegistrarSaldo;
+        private System.Windows.Forms.MaskedTextBox TextCodigoProd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAprobarVenta;
+        private System.Windows.Forms.Button btnVerDetalle;
+        private System.Windows.Forms.DataGridView dgvVentasDelDia;
+        private System.Windows.Forms.Label lblTotalDia;
+        private System.Windows.Forms.Panel panelVentasdia;
+        private System.Windows.Forms.Button btntop5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panelTop5;
+        private System.Windows.Forms.DataGridView dataGrid_Top5;
     }
 }
 
