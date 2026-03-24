@@ -185,18 +185,21 @@ namespace Primera_Practica
         {
             MostrarPanel(panelProductos);
             MarcarBotonActivo(btnProductos);
+            Tablaproductos();
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelVentas);
             MarcarBotonActivo(btnVentas);
+            
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelClientes);
             MarcarBotonActivo(btnClientes);
+            Tablaclientes();
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
@@ -276,9 +279,9 @@ namespace Primera_Practica
                 errorProvider1.SetError(textStockProd, vStock.MostrarError());
                 valido = false;
             }
-            if (!vPrecio.Validar(textPrecioProd.Text) || !vPrecio.MaximosDecimales(textPrecioProd.Text, 2))
+            if (!vPrecio.Validar(textPrecioProd.Text) || !vPrecio.MaximosDecimales(textPrecioProd.Text, 0))
             {
-                errorProvider1.SetError(textPrecioProd, "El precio debe ser un número válido con máximo 2 decimales.");
+                errorProvider1.SetError(textPrecioProd, "El precio debe ser un número entero válido .");
                 valido = false;
             }
 
@@ -547,6 +550,7 @@ namespace Primera_Practica
         {
             panelAux_Clientes.Visible = true;
             tituloauxCl.Text = "Registrar cliente";
+            textInfoCl.Clear(); textNombreCl.Clear(); textTelefonoCl.Clear();
         }
 
         private void btneditar_Cl_Click(object sender, EventArgs e)
