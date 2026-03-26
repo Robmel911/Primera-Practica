@@ -16,99 +16,169 @@ namespace CapaDatos
     
         public DataTable ObtenerProductos()
         {
-            SqlCommand cmd = new SqlCommand();
-            Conexion conexion = new Conexion();
-            SqlDataReader Leer;
-            DataTable Tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = "select *from Productos where Activo=1";
-            Leer = cmd.ExecuteReader();
-            Tabla.Load(Leer);
-            cmd.Parameters.Clear();
-            cmd.Connection = conexion.CerrarConexion();
-            return Tabla;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                Conexion conexion = new Conexion();
+                SqlDataReader Leer;
+                DataTable Tabla = new DataTable();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = "select *from Productos where Activo=1";
+                Leer = cmd.ExecuteReader();
+                Tabla.Load(Leer);
+                cmd.Parameters.Clear();
+                cmd.Connection = conexion.CerrarConexion();
+                return Tabla;
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception ("No se puedo obtener los productos: " + ex.Message); 
+            }
+
+            
         }
         public DataTable ObtenerProductosDesactivados()
         {
-            Conexion conexion = new Conexion();
-            SqlDataReader Leer;
-            DataTable Tabla = new DataTable();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = "select *from Productos where Activo=0";
-            Leer = cmd.ExecuteReader();
-            Tabla.Load(Leer);
-            cmd.Parameters.Clear();
-            cmd.Connection = conexion.CerrarConexion();
-            return Tabla;
+            try
+            {
+                Conexion conexion = new Conexion();
+                SqlDataReader Leer;
+                DataTable Tabla = new DataTable();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = "select *from Productos where Activo=0";
+                Leer = cmd.ExecuteReader();
+                Tabla.Load(Leer);
+                cmd.Parameters.Clear();
+                cmd.Connection = conexion.CerrarConexion();
+                return Tabla;
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se puedo obtener los productos desactivados: " + ex.Message);
+            }
+         
         }
         public void Insertar_Productos(string nombre,string desc,string marca,double precio,int stock, string codigo)
         {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para insertar productos a la bd
-            cmd.CommandText = $"INSERT INTO Productos (Nombre, Descripcion, Marca, Precio, Stock,Codigo) VALUES ('{nombre}', '{desc}', '{marca}', {precio}, {stock}, '{codigo}' )";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para insertar productos a la bd
+                cmd.CommandText = $"INSERT INTO Productos (Nombre, Descripcion, Marca, Precio, Stock,Codigo) VALUES ('{nombre}', '{desc}', '{marca}', {precio}, {stock}, '{codigo}' )";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo insertar productos :" + ex.Message);
+            }
+           
         }
         public void Editar_Productos(string nombre, string desc, string marca, double precio, int stock, int id,string codigo)
         {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Productos SET Nombre='{nombre}', Descripcion='{desc}', Marca='{marca}', Precio={precio}, Stock={stock}, Codigo='{codigo}'  WHERE IdProducto={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para editar productos a la bd
+                cmd.CommandText = $"UPDATE Productos SET Nombre='{nombre}', Descripcion='{desc}', Marca='{marca}', Precio={precio}, Stock={stock}, Codigo='{codigo}'  WHERE IdProducto={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+
+            }
+            catch (SqlException ex)
+            {
+             throw new Exception("No se pudo editar los productos :" + ex.Message);
+            }
         }
         public void Eliminar_Productos(int id)
         {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para eliminar productos a la bd
-            cmd.CommandText = $"UPDATE Productos SET Activo=0 WHERE IdProducto={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para eliminar productos a la bd
+                cmd.CommandText = $"UPDATE Productos SET Activo=0 WHERE IdProducto={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo eliminar los productos :" + ex.Message);
+            }
+
         }
         public void Reactivar_Productos(int id)
         {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para reactivar productos a la bd
-            cmd.CommandText = $"UPDATE Productos SET Activo=1 WHERE IdProducto={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para reactivar productos a la bd
+                cmd.CommandText = $"UPDATE Productos SET Activo=1 WHERE IdProducto={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo reactivar los productos :" + ex.Message);
+            }
         }
         public bool ExisteProducto(string nombre, string marca)
         {
-            SqlCommand cmd = new SqlCommand(); // local
-            cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}'";
-            int cantidad = (int)cmd.ExecuteScalar();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
-            return cantidad > 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand(); // local
+                cmd.Connection = Conector.ObtenerConexion();
+                cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}'";
+                int cantidad = (int)cmd.ExecuteScalar();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+                return cantidad > 0;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo verificar si existe el producto :" + ex.Message);
+            
+            }
         }
         public bool ExisteProductoEditar(string nombre, string marca, int id)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}' AND IdProducto != {id}";
-            int cantidad = (int)cmd.ExecuteScalar();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
-            return cantidad > 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}' AND IdProducto != {id}";
+                int cantidad = (int)cmd.ExecuteScalar();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+                return cantidad > 0;
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo editar producto existente :" + ex.Message);
+            }
+
         }
         public DataTable ObtenerMarcas()
         {
@@ -124,19 +194,27 @@ namespace CapaDatos
         }
         public DataTable BuscarPorCodigo(string codigo)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = @"SELECT IdProducto, Nombre, Codigo, Precio, Stock 
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                cmd.CommandText = @"SELECT IdProducto, Nombre, Codigo, Precio, Stock 
                         FROM Productos 
                         WHERE Activo = 1 
                         AND (Codigo LIKE @codigo OR Nombre LIKE @nombre)";
-            cmd.Parameters.AddWithValue("@codigo", "%" + codigo + "%");
-            cmd.Parameters.AddWithValue("@nombre", "%" + codigo + "%");
-            SqlDataReader leer = cmd.ExecuteReader();
-            DataTable tabla = new DataTable();
-            tabla.Load(leer);
-            cmd.Connection = Conector.CerrarConexion();
-            return tabla;
+                cmd.Parameters.AddWithValue("@codigo", "%" + codigo + "%");
+                cmd.Parameters.AddWithValue("@nombre", "%" + codigo + "%");
+                SqlDataReader leer = cmd.ExecuteReader();
+                DataTable tabla = new DataTable();
+                tabla.Load(leer);
+                cmd.Connection = Conector.CerrarConexion();
+                return tabla;
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo buscar por codigo :" + ex.Message);
+            }
         }
     }
 }
