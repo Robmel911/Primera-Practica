@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Runtime.ConstrainedExecution;
 
+
 namespace CapaDatos
 {
     public class CD_Productos
