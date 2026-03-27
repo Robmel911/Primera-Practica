@@ -288,9 +288,11 @@ namespace Primera_Practica
             return valido;
         }
         #endregion
+
+        CN_Producto CNproducto = new CN_Producto();
         private void Tablaproductos()
         {
-            dataGrid_Productos.DataSource = CNcolmado.Obtenerdatos_Producto();
+            dataGrid_Productos.DataSource = CNproducto.Obtenerdatos_Producto();
             DataCombobox_Productos();
                 VerificarStockBajo();
         }
@@ -357,7 +359,7 @@ namespace Primera_Practica
             }
         public void DataCombobox_Productos()
         {
-            CN_Colmado TablaProd = new CN_Colmado();
+            CN_Producto TablaProd = new CN_Producto();
             textMarcaProd.DataSource = TablaProd.Obtenermarcas();
             textMarcaProd.DisplayMember = "Marca";
             textMarcaProd.ValueMember = "Marca";
@@ -391,7 +393,7 @@ namespace Primera_Practica
                         VentanaEmergente("El producto ya existe", "Error");
                         return;
                     }
-                    CNcolmado.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
+                    CNproducto.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
                     Tablaproductos();
                     panelAux_Productos.Visible = false;
@@ -412,7 +414,7 @@ namespace Primera_Practica
                     if (RealizarAct == true)
                     {
 
-                        CNcolmado.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
+                        CNproducto.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
                         VentanaEmergente("Se edito correctamente", "Exito");
                         Tablaproductos();
                         panelAux_Productos.Visible = false;
@@ -461,7 +463,7 @@ namespace Primera_Practica
                 RealizarAct = VentanaConfirmacion();
                 if (RealizarAct == true)
                 {
-                    CNcolmado.Eliminar_Producto(ID);
+                    CNproducto.Eliminar_Producto(ID);
                     VentanaEmergente("Se elimino correctamente", "Exito");
                     Tablaproductos();
                 }

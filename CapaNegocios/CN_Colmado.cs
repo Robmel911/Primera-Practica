@@ -16,45 +16,7 @@ namespace CapaNegocios
         private CD_Ventas CDventas = new CD_Ventas();
 
 
-        #region Funciones de Productos
-        public DataTable Obtenerdatos_Producto()
-        {
-            DataTable tabla = new DataTable();
-            tabla = CDproductos.ObtenerProductos();
-            return tabla;
-        }
-        public DataTable Obtenermarcas()
-        {
-            DataTable tabla = new DataTable();
-            tabla = CDproductos.ObtenerMarcas();
-            return tabla;
-        }
-        public void Insertar_producto(string nombre, string desc, string marca, string precio, string codigo,string stock)
-        {
-            CDproductos.Insertar_Productos(nombre, desc, marca, Convert.ToDouble(precio),Convert.ToInt32(stock), codigo);   
-        }
-        public void Editar_producto(string nombre, string desc, string marca, string precio,string stock, string codigo, string id)
-        {
-            CDproductos.Editar_Productos(nombre, desc, marca, Convert.ToDouble(precio),Convert.ToInt32(stock),Convert.ToInt32(id), codigo);
-
-        }
-        public void Eliminar_Producto(string id)
-        {
-            CDproductos.Eliminar_Productos(Convert.ToInt32(id));
-
-        }
-        public void Reactivar_Producto(string id)
-        {
-            CDproductos.Reactivar_Productos(Convert.ToInt32(id));
-        }
-        public DataTable ObtenerProductosdesactivados()
-        {
-            DataTable tabla = new DataTable();
-            tabla = CDproductos.ObtenerProductosDesactivados();
-            return tabla;
-        }
-
-        #endregion
+       
         #region Funciones de Clientes
         public DataTable Mostrartabla_Clientes()
         {
