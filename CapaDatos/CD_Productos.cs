@@ -179,6 +179,7 @@ namespace CapaDatos
                 throw new Exception("No se pudo editar producto existente :" + ex.Message);
             }
 
+
         }
         public DataTable ObtenerMarcas()
         {
