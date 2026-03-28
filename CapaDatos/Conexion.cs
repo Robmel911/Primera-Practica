@@ -8,8 +8,9 @@ using System.Data.SqlClient;
 
     namespace CapaDatos
     {
-        public class Conexion
-        {
+      
+     public class Conexion
+     {
         private string cadenaConexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
 
         // Propiedad para obtener la conexión

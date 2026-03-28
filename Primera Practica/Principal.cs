@@ -751,9 +751,16 @@ namespace Primera_Practica
         }
 
 
-        #endregion
 
-       
+        #endregion
+        #region Panel Auditoria
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            CN_Auditoria auditoria = new CN_Auditoria();
+            dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
+        }
+
+        #endregion
     }
 
 }
