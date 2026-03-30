@@ -13,6 +13,7 @@ namespace Primera_Practica
 {
     public partial class Menu_auxiliar : Form
     {
+        CN_Producto CNproducto = new CN_Producto();
         CN_Colmado CNcolmado = new CN_Colmado();
         string ID;
         
@@ -42,10 +43,11 @@ namespace Primera_Practica
         #region Cargar productos desactivados
         private void CargarDatosProductos()
         {
-            cmbProductos.DataSource = CNcolmado.ObtenerProductosdesactivados();
+            cmbProductos.DataSource = CNproducto.ObtenerProductosdesactivados();
             cmbProductos.DisplayMember = "Nombre";
             cmbProductos.ValueMember = "IdProducto";
             cmbProductos.SelectedIndex = -1;
+
 
         }
 
@@ -67,7 +69,7 @@ namespace Primera_Practica
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            CNcolmado.Reactivar_Producto(ID);
+            CNproducto.Reactivar_Producto(ID);
             MessageBox.Show("Producto reactivado exitosamente.");
             CargarDatosProductos();
         }
@@ -75,7 +77,7 @@ namespace Primera_Practica
         #region Registrar saldo
         private void CargarDatosClientes()
         {
-            cmbClientes.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbClientes.DataSource = CNproducto.Mostrartabla_Clientes();
             cmbClientes.DisplayMember = "Nombre";
             cmbClientes.ValueMember = "IdCliente";
             cmbClientes.SelectedIndex = -1;
@@ -94,7 +96,7 @@ namespace Primera_Practica
         }
         private void btnagregarSaldo_Click(object sender, EventArgs e)
         {
-            CNcolmado.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            CNproducto.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
         }
         #endregion
 
