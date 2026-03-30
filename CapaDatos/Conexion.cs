@@ -27,6 +27,13 @@ using System.Data.SqlClient;
                 throw new Exception("Error al conectar con la base de datos: " + ex.Message);
             }
         }
+        // Método asíncrono Para tareas asincronas
+        public async Task<SqlConnection> ObtenerConexionAsync()
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            await conexion.OpenAsync();
+            return conexion;
+        }
 
         // Método para cerrar la conexión
         public SqlConnection CerrarConexion()
