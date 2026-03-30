@@ -40,6 +40,19 @@ namespace Primera_Practica
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Oculta el principal 
+            this.Hide();
+            Login login = new Login();
+            if (login.ShowDialog() != DialogResult.OK)
+            {
+                // Si cierra sin loguearse cierra toda la app
+                Application.Exit();
+                return;
+            }
+            // Login exitoso, muestra el principal
+            this.Show();
+            // Maximiza la ventana
+            this.WindowState= FormWindowState.Maximized;
             Tablaproductos();
             Tablaclientes();
             dataGrid_Productos.Columns["IdProducto"].Visible = false;
