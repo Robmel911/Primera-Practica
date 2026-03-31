@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CapaDatos
 {
     public class CD_Clientes
@@ -30,24 +31,28 @@ namespace CapaDatos
         }
         public void Registrar_Clientes(string nombre, string telefono, string informacion)
         {
-            SqlDataReader Leer;
+            SqlCommand cmd = new SqlCommand();
+            //Linea de productos en la bd
             cmd.Connection = Conector.ObtenerConexion();
-            //Linea para insertar productos a la bd
-            cmd.CommandText = $"INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES ('{nombre}', '{telefono}', '{informacion}')";
+            cmd.CommandText = "INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES (@nombre, @telefono, @informacion)";
             cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            cmd.Parameters.AddWithValue("@telefono", telefono);
+            cmd.Parameters.AddWithValue("@informacion", informacion);
+            cmd.ExecuteNonQuery();
             cmd.Connection = Conector.CerrarConexion();
         }
         public void Editar_Clientes(string nombre, string telefono, string informacion, int id)
         {
-            SqlDataReader Leer;
+            SqlCommand cmd = new SqlCommand();
             cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Nombre='{nombre}', Telefono='{telefono}', Informacion='{informacion}' WHERE IdCliente={id}";
+            cmd.CommandText = "UPDATE Clientes SET Nombre=@nombre, Telefono=@telefono, Informacion=@informacion WHERE IdCliente=@id";
             cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            cmd.Parameters.AddWithValue("@telefono", telefono);
+            cmd.Parameters.AddWithValue("@informacion", informacion);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
             cmd.Connection = Conector.CerrarConexion();
         }
         public void Agregarsaldo(int saldo, int id)

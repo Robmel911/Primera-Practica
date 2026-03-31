@@ -540,11 +540,13 @@ namespace Primera_Practica
             dataGrid_Clientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
         }
-        private void Tablaclientes()
+        private async Task Tablaclientes()
         {
-            dataGrid_Clientes.DataSource = CNcolmado.Mostrartabla_Clientes();
+            
+            dataGrid_Clientes.DataSource = await Task.Run(() => CNcolmado.Mostrartabla_Clientes());
             dataGrid_Clientes.Columns["IdCliente"].Visible = false;
             dataGrid_Clientes.Columns["Activo"].Visible = false;
+            await Tablaclientes();
         }
         private void btnregistrar_Cl_Click(object sender, EventArgs e)
         {
