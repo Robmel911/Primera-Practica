@@ -15,6 +15,9 @@ namespace Primera_Practica
         public Frm_Auditoria()
         {
             InitializeComponent();
+            // TODO: El formulario se adapta al tamaño del panel contenedor
+            this.Dock = DockStyle.Fill;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         // TODO: Cargar datos al abrir el formulario de forma asíncrona
