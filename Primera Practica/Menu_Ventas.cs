@@ -14,6 +14,7 @@ namespace Primera_Practica
     public partial class Menu_Ventas : Form
     {
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Clientes CNclientes = new CN_Clientes();
         decimal totalVenta = 0;
         public Menu_Ventas()
         {
@@ -69,7 +70,7 @@ namespace Primera_Practica
             cmbProductos.DisplayMember = "Nombre";
             cmbProductos.ValueMember = "IdProducto";
 
-            cmbCliente.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbCliente.DataSource = CNclientes.Mostrartabla_Clientes();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "IdCliente";
         }

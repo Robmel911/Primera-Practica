@@ -14,6 +14,7 @@ namespace Primera_Practica
     public partial class Menu_auxiliar : Form
     {
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Clientes CNclientes = new CN_Clientes();
         string ID;
         
         
@@ -75,7 +76,7 @@ namespace Primera_Practica
         #region Registrar saldo
         private void CargarDatosClientes()
         {
-            cmbClientes.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbClientes.DataSource = CNclientes.Mostrartabla_Clientes();
             cmbClientes.DisplayMember = "Nombre";
             cmbClientes.ValueMember = "IdCliente";
             cmbClientes.SelectedIndex = -1;
@@ -94,7 +95,7 @@ namespace Primera_Practica
         }
         private void btnagregarSaldo_Click(object sender, EventArgs e)
         {
-            CNcolmado.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            CNclientes.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
         }
         #endregion
 
