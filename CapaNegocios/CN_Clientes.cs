@@ -20,6 +20,7 @@ namespace CapaNegocios
         public void Registrar_Cliente(string nombre, string telefono, string informacion)
         {
             CDclientes.Registrar_Clientes(nombre, telefono, informacion);
+    
         }
         public void Editar_Cliente(string nombre, string telefono, string informacion, string id)
         {
