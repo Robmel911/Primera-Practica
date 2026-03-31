@@ -15,6 +15,7 @@ namespace Primera_Practica
     public partial class Principal : Form
     {
         private CN_Colmado CNcolmado = new CN_Colmado();
+        private CN_Ventas CNventas = new CN_Ventas();
         private Menu_Ventas menuVentas = new Menu_Ventas();
         private Validaciones validaciones = new Validaciones();
         private Menu_auxiliar menuAuxiliar = new Menu_auxiliar(false);
@@ -44,8 +45,7 @@ namespace Primera_Practica
             Tablaclientes();
             dataGrid_Productos.Columns["IdProducto"].Visible = false;
             dataGrid_Productos.Columns["Activo"].Visible = false;
-            dgvVentasDelDia.Columns["IdVenta"].Visible = false;
-            dgvVentasDelDia.Columns["Estado"].Visible = false;
+            
         }
 
         private void VentanaEmergente(string Mensaje, string titulo)
@@ -122,11 +122,16 @@ namespace Primera_Practica
             dataGrid_Top5.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGrid_Top5.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
-        private void CargarInicio()
+        private async void CargarInicio()
         {
             // Ventas del día
-            DataTable tabla = CNcolmado.ReporteVentas();
+            DataTable tabla = await CNventas.ReporteVentas();
             dgvVentasDelDia.DataSource = tabla;
+
+            if (dgvVentasDelDia.Columns["IdVenta"] != null)
+                dgvVentasDelDia.Columns["IdVenta"].Visible = false;
+            if (dgvVentasDelDia.Columns["Estado"] != null)
+                dgvVentasDelDia.Columns["Estado"].Visible = false;
 
             decimal totalDia = 0;
             foreach (DataRow fila in tabla.Rows)
@@ -134,7 +139,7 @@ namespace Primera_Practica
             lblTotalDia.Text = "Total del día: RD$ " + totalDia.ToString("0.00");
 
             // Top 5
-            dataGrid_Top5.DataSource = CNcolmado.Top5Productos();
+            dataGrid_Top5.DataSource = CNventas.Top5Productos();
         }
 
         private void btnCargarInicio_Click(object sender, EventArgs e)
@@ -668,9 +673,9 @@ namespace Primera_Practica
             menuVentas.ShowDialog();
         }
 
-        private void btnVerHistorial_Click(object sender, EventArgs e)
+        private async void btnVerHistorial_Click(object sender, EventArgs e)
         {
-            dgvHistorialVentas.DataSource = CNcolmado.HistorialVentas();
+            dgvHistorialVentas.DataSource = await CNventas.HistorialVentas();
         }
         private void btnAnularVenta_Click(object sender, EventArgs e)
         {
@@ -698,7 +703,7 @@ namespace Primera_Practica
             if (respuesta == DialogResult.Yes)
             {
                 string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
-                CNcolmado.AnularVenta(idVenta);
+                CNventas.AnularVenta(idVenta);
                 MessageBox.Show("Venta anulada correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnVerHistorial_Click(sender, e); // recargar historial
@@ -732,7 +737,7 @@ namespace Primera_Practica
             }
 
             string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
-            CNcolmado.CompletarVenta(idVenta);
+            CNventas.CompletarVenta(idVenta);
             MessageBox.Show("Venta completada correctamente.", "Éxito",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnVerHistorial_Click(sender, e);
@@ -747,7 +752,7 @@ namespace Primera_Practica
             }
 
             string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
-            dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
+            dgvHistorialVentas.DataSource = CNventas.ObtenerDetalleVenta(idVenta);
         }
 
 

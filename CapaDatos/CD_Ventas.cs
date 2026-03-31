@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace CapaDatos
 {
@@ -86,20 +87,21 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
-        public DataTable HistorialVentas()
+        public async Task<DataTable> HistorialVentas()
         {
             Conexion conexion = new Conexion();
             DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
+            SqlConnection con = conexion.ObtenerConexion();
+            cmd.Connection = con;
             cmd.CommandText = @"SELECT v.IdVenta, 
                         ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
                         v.Fecha, v.MontoTotal, v.Estado
                         FROM Ventas v
                         LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
                         ORDER BY v.Fecha DESC";
-            SqlDataReader leer = cmd.ExecuteReader();
+            SqlDataReader leer = await cmd.ExecuteReaderAsync();
             tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
+            conexion.CerrarConexion();
             return tabla;
         }
 
@@ -148,17 +150,21 @@ namespace CapaDatos
 
             try
             {
+                cmd.Connection = con;
+                cmd.Transaction = transaccion;
                
-                cmd.Connection = conexion.ObtenerConexion();
+                
                 cmd.CommandText = "UPDATE Ventas SET Estado = 'Completada' WHERE IdVenta = @idVenta";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idVenta", idVenta);
                 cmd.ExecuteNonQuery();
-                cmd.Connection = conexion.CerrarConexion();
+                
+                transaccion.Commit();
+                conexion.CerrarConexion();
             }
             catch (Exception ex)
             {
-               
+                transaccion.Rollback();
                 conexion.CerrarConexion();
                 throw new Exception(ex.Message);
             }
@@ -181,11 +187,12 @@ namespace CapaDatos
             cmd.Connection = conexion.CerrarConexion();
             return tabla;
         }
-        public DataTable VentasDelDia()
+        public async Task<DataTable> VentasDelDia()
         {
             Conexion conexion = new Conexion();
             DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
+            SqlConnection con = conexion.ObtenerConexion();
+            cmd.Connection = con;
             cmd.CommandText = @"SELECT v.IdVenta, 
                         ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
                         v.Fecha, v.MontoTotal, v.Estado
@@ -193,9 +200,9 @@ namespace CapaDatos
                         LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
                         WHERE CAST(v.Fecha AS DATE) = CAST(GETDATE() AS DATE)
                         AND v.Estado != 'Anulada'";
-            SqlDataReader leer = cmd.ExecuteReader();
+            SqlDataReader leer = await cmd.ExecuteReaderAsync();
             tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
+            conexion.CerrarConexion();
             return tabla;
         }
         public DataTable Top5Productos()

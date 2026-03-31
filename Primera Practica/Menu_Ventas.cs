@@ -14,6 +14,7 @@ namespace Primera_Practica
     public partial class Menu_Ventas : Form
     {
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Ventas CNventas = new CN_Ventas();
         decimal totalVenta = 0;
         public Menu_Ventas()
         {
@@ -65,11 +66,11 @@ namespace Primera_Practica
  
         private void CargarDatosVenta()
         {
-            cmbProductos.DataSource = CNcolmado.ObtenerProductos_Venta();
+            cmbProductos.DataSource = CNventas.ObtenerProductos_Venta();
             cmbProductos.DisplayMember = "Nombre";
             cmbProductos.ValueMember = "IdProducto";
 
-            cmbCliente.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbCliente.DataSource = CNventas.ObtenerClientes_Venta();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "IdCliente";
         }
@@ -90,7 +91,7 @@ namespace Primera_Practica
             {
                 MessageBox.Show("Producto sin stock disponible.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     nudCantidad.Value = 0;
-                cmbCliente.SelectedIndex = -1;
+                cmbProductos.SelectedIndex = -1;
             }
         }
 
@@ -209,7 +210,7 @@ namespace Primera_Practica
 
             try
             {
-                CNcolmado.RegistrarVenta(idCliente, carrito, totalVenta,estado);
+                CNventas.RegistrarVenta(idCliente, carrito, totalVenta,estado);
                 MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarVenta();
             }
@@ -267,7 +268,7 @@ namespace Primera_Practica
         {
             if (txtBuscarCodigo.Text.Length >= 2)
             {
-                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtBuscarCodigo.Text);
+                cmbProductos.DataSource = CNventas.BuscarProducto(txtBuscarCodigo.Text);
                 cmbProductos.DisplayMember = "Nombre";
                 cmbProductos.ValueMember = "IdProducto";
             }
