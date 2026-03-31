@@ -26,6 +26,9 @@ namespace Primera_Practica
         private string ID;
         private bool RealizarAct = false;
 
+        // TODO: Instancia de auditoría para registrar acciones del sistema
+        private CN_Auditoria auditoria = new CN_Auditoria();
+
         public Principal()
         {
             InitializeComponent();
@@ -35,9 +38,10 @@ namespace Primera_Practica
             EstiloDataGrid_Clientes();
             EstiloDataGrid_HistorialVentas();
             CargarInicio();
-           EstiloDataGrid_VentasDelDia();
+            EstiloDataGrid_VentasDelDia();
             EstiloDataGrid_Top5();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Tablaproductos();
@@ -52,6 +56,7 @@ namespace Primera_Practica
         {
             MessageBox.Show(Mensaje, titulo, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
+
         private bool VentanaConfirmacion()
         {
             RealizarAct = false;
@@ -93,6 +98,7 @@ namespace Primera_Practica
             dgvVentasDelDia.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvVentasDelDia.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
+
         private void EstiloDataGrid_Top5()
         {
             dataGrid_Top5.BackgroundColor = Color.White;
@@ -122,9 +128,9 @@ namespace Primera_Practica
             dataGrid_Top5.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGrid_Top5.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
+
         private void CargarInicio()
         {
-            // Ventas del día
             DataTable tabla = CNcolmado.ReporteVentas();
             dgvVentasDelDia.DataSource = tabla;
 
@@ -133,7 +139,6 @@ namespace Primera_Practica
                 totalDia += Convert.ToDecimal(fila["MontoTotal"]);
             lblTotalDia.Text = "Total del día: RD$ " + totalDia.ToString("0.00");
 
-            // Top 5
             dataGrid_Top5.DataSource = CNcolmado.Top5Productos();
         }
 
@@ -141,18 +146,22 @@ namespace Primera_Practica
         {
             CargarInicio();
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             panelTop5.Visible = true;
             panelVentasdia.Visible = false;
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             panelVentasdia.Visible = true;
             panelTop5.Visible = false;
         }
         #endregion
+
         #region Funcion del panel lateral
+        // TODO: Oculta todos los paneles y muestra el activo
         private void MostrarPanel(Panel panelActivo)
         {
             panelInicio.Visible = false;
@@ -160,6 +169,7 @@ namespace Primera_Practica
             panelVentas.Visible = false;
             panelClientes.Visible = false;
             panelAux_Productos.Visible = false;
+            panelAuditoria.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
@@ -174,6 +184,7 @@ namespace Primera_Practica
 
             btnActivo.BackColor = Color.FromArgb(46, 125, 50);
         }
+
         private void btnInicio_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelInicio);
@@ -192,7 +203,6 @@ namespace Primera_Practica
         {
             MostrarPanel(panelVentas);
             MarcarBotonActivo(btnVentas);
-            
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
@@ -201,6 +211,21 @@ namespace Primera_Practica
             MarcarBotonActivo(btnClientes);
             Tablaclientes();
         }
+
+        // TODO: Abrir módulo de auditoría integrado en el panel principal
+        private void btnAuditoría_Click(object sender, EventArgs e)
+        {
+            MostrarPanel(panelAuditoria);
+            MarcarBotonActivo(btnAuditoría);
+            Frm_Auditoria frm = new Frm_Auditoria();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+            panelAuditoria.Controls.Clear();
+            panelAuditoria.Controls.Add(frm);
+            frm.Show();
+        }
+
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
             menuExpandiendo = true;
@@ -234,11 +259,10 @@ namespace Primera_Practica
                     timerMenu.Stop();
             }
         }
-      
         #endregion
+
         #region Panel Productos
         #region Validaciones productos
-        // Declarar las validaciones con sus constructores
         private ValidacionTexto vNombre = new ValidacionTexto("Nombre", 100, false);
         private ValidacionTexto vMarca = new ValidacionTexto("Marca", 50, false);
         private ValidacionTexto vCodigo = new ValidacionTexto("Código", 10, true);
@@ -255,25 +279,21 @@ namespace Primera_Practica
                 errorProvider1.SetError(textNombreProd, vNombre.MostrarError());
                 valido = false;
             }
-
             if (!vMarca.Validar(textMarcaProd.Text))
             {
                 errorProvider1.SetError(textMarcaProd, vMarca.MostrarError());
                 valido = false;
             }
-
             if (!vCodigo.Validar(TextCodigoProd.Text))
             {
                 errorProvider1.SetError(TextCodigoProd, vCodigo.MostrarError());
                 valido = false;
             }
-
             if (!vPrecio.Validar(textPrecioProd.Text))
             {
                 errorProvider1.SetError(textPrecioProd, vPrecio.MostrarError());
                 valido = false;
             }
-
             if (!vStock.Validar(textStockProd.Text))
             {
                 errorProvider1.SetError(textStockProd, vStock.MostrarError());
@@ -284,31 +304,32 @@ namespace Primera_Practica
                 errorProvider1.SetError(textPrecioProd, "El precio debe ser un número entero válido .");
                 valido = false;
             }
-
             return valido;
         }
         #endregion
+
         private void Tablaproductos()
         {
             dataGrid_Productos.DataSource = CNcolmado.Obtenerdatos_Producto();
             DataCombobox_Productos();
-                VerificarStockBajo();
+            VerificarStockBajo();
         }
+
         private void dataGrid_Productos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewRow fila in dataGrid_Productos.Rows)
             {
                 if (fila.Cells["Stock"] == null) continue;
-
                 int stock = Convert.ToInt32(fila.Cells["Stock"].Value);
                 if (stock <= 5)
                 {
-                    fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 205, 210); // rojo claro
-                    fila.DefaultCellStyle.ForeColor = Color.FromArgb(183, 28, 28);   // rojo oscuro
+                    fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 205, 210);
+                    fila.DefaultCellStyle.ForeColor = Color.FromArgb(183, 28, 28);
                     fila.DefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                 }
             }
         }
+
         private void VerificarStockBajo()
         {
             int count = 0;
@@ -317,13 +338,10 @@ namespace Primera_Practica
                 if (Convert.ToInt32(fila.Cells["Stock"].Value) <= 5)
                     count++;
             }
-
             if (count > 0)
-            {
                 lblAlerta.Text = $"¡Alerta! {count} producto(s) con stock bajo.";
-            }
-                
         }
+
         private void EstiloDataGrid_Productos()
         {
             dataGrid_Productos.BackgroundColor = Color.White;
@@ -352,9 +370,8 @@ namespace Primera_Practica
             dataGrid_Productos.RowTemplate.Height = 35;
             dataGrid_Productos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGrid_Productos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+        }
 
-
-            }
         public void DataCombobox_Productos()
         {
             CN_Colmado TablaProd = new CN_Colmado();
@@ -362,6 +379,7 @@ namespace Primera_Practica
             textMarcaProd.DisplayMember = "Marca";
             textMarcaProd.ValueMember = "Marca";
         }
+
         private void Limpiartextos_Productos()
         {
             textNombreProd.Clear(); textDescProd.Clear(); textMarcaProd.Text = ""; textPrecioProd.Clear(); textStockProd.Text = "0";
@@ -371,7 +389,6 @@ namespace Primera_Practica
         private void btnSalir_Click(object sender, EventArgs e)
         {
             panelAux_Productos.Visible = false;
-
         }
 
         private void btnguardar_Click(object sender, EventArgs e)
@@ -381,7 +398,7 @@ namespace Primera_Practica
                 VentanaEmergente("Por favor, corrige los errores en el formulario.", "Error de validación");
                 return;
             }
-            //Cuando se agrega
+            // TODO: Insertar producto nuevo
             if (Editar == false)
             {
                 try
@@ -392,13 +409,15 @@ namespace Primera_Practica
                         return;
                     }
                     CNcolmado.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
+                    // TODO: Registrar inserción de producto en auditoría de forma asíncrona
+                    _ = auditoria.RegistrarAsync(1, "Insertar", "Productos");
                     VentanaEmergente("Se registro correctamente", "Exito");
                     Tablaproductos();
                     panelAux_Productos.Visible = false;
                 }
                 catch (Exception ex) { MessageBox.Show("No se agrego correctamente porque" + ex); }
             }
-            // Cuando se edita
+            // TODO: Editar producto existente
             else
             {
                 try
@@ -411,8 +430,9 @@ namespace Primera_Practica
                     RealizarAct = VentanaConfirmacion();
                     if (RealizarAct == true)
                     {
-
                         CNcolmado.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
+                        // TODO: Registrar edición de producto en auditoría de forma asíncrona
+                        _ = auditoria.RegistrarAsync(1, "Editar", "Productos");
                         VentanaEmergente("Se edito correctamente", "Exito");
                         Tablaproductos();
                         panelAux_Productos.Visible = false;
@@ -423,14 +443,13 @@ namespace Primera_Practica
                 catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex); }
             }
         }
+
         private void btnagregar_Click(object sender, EventArgs e)
         {
             Editar = false;
             panelAux_Productos.Visible = true;
             label_panelAux.Text = "Agregar Producto";
-            //limpiar todas las text box
             Limpiartextos_Productos();
-
         }
 
         private void btneditar_Click(object sender, EventArgs e)
@@ -447,7 +466,6 @@ namespace Primera_Practica
                 textStockProd.Text = dataGrid_Productos.CurrentRow.Cells["Stock"].Value.ToString();
                 TextCodigoProd.Text = dataGrid_Productos.CurrentRow.Cells["Codigo"].Value.ToString();
                 ID = dataGrid_Productos.CurrentRow.Cells["IdProducto"].Value.ToString();
-
             }
             else { MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); }
         }
@@ -456,16 +474,16 @@ namespace Primera_Practica
         {
             if (dataGrid_Productos.SelectedRows.Count > 0)
             {
-
                 ID = dataGrid_Productos.CurrentRow.Cells["IdProducto"].Value.ToString();
                 RealizarAct = VentanaConfirmacion();
                 if (RealizarAct == true)
                 {
                     CNcolmado.Eliminar_Producto(ID);
+                    // TODO: Registrar eliminación de producto en auditoría de forma asíncrona
+                    _ = auditoria.RegistrarAsync(1, "Eliminar", "Productos");
                     VentanaEmergente("Se elimino correctamente", "Exito");
                     Tablaproductos();
                 }
-
             }
             else { MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); }
         }
@@ -476,9 +494,11 @@ namespace Primera_Practica
             menuAuxiliar.ShowDialog();
         }
         #endregion
+
         #region Panel Clientes
         #region Validaciones clientes
         private ValidacionTexto vNombreCliente = new ValidacionTexto("Nombre", 100, false);
+
         private bool ValidarCamposCliente()
         {
             bool valido = true;
@@ -489,7 +509,6 @@ namespace Primera_Practica
                 errorProvider1.SetError(textNombreCl, vNombreCliente.MostrarError());
                 valido = false;
             }
-
             if (Editar == false)
             {
                 if (CNcolmado.ExisteTelefono(textTelefonoCl.Text))
@@ -506,10 +525,10 @@ namespace Primera_Practica
                     valido = false;
                 }
             }
-
             return valido;
         }
         #endregion
+
         private void EstiloDataGrid_Clientes()
         {
             dataGrid_Clientes.BackgroundColor = Color.White;
@@ -538,14 +557,15 @@ namespace Primera_Practica
             dataGrid_Clientes.RowTemplate.Height = 35;
             dataGrid_Clientes.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGrid_Clientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-
         }
+
         private void Tablaclientes()
         {
             dataGrid_Clientes.DataSource = CNcolmado.Mostrartabla_Clientes();
             dataGrid_Clientes.Columns["IdCliente"].Visible = false;
             dataGrid_Clientes.Columns["Activo"].Visible = false;
         }
+
         private void btnregistrar_Cl_Click(object sender, EventArgs e)
         {
             panelAux_Clientes.Visible = true;
@@ -566,8 +586,8 @@ namespace Primera_Practica
                 ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
             }
             else { VentanaEmergente("Seleccione una fila", "Error"); }
-
         }
+
         private void btnguardar_Cl_Click(object sender, EventArgs e)
         {
             if (!ValidarCamposCliente())
@@ -575,20 +595,21 @@ namespace Primera_Practica
                 VentanaEmergente("Por favor, corrige los errores en el formulario.", "Error de validación");
                 return;
             }
+            // TODO: Registrar cliente nuevo
             if (Editar == false)
             {
                 try
                 {
                     CNcolmado.Registrar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text);
+                    // TODO: Registrar inserción de cliente en auditoría de forma asíncrona
+                    _ = auditoria.RegistrarAsync(1, "Insertar", "Clientes");
                     VentanaEmergente("Se registro correctamente", "Exito");
                     Tablaclientes();
                     panelAux_Clientes.Visible = false;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("No se registro correctamente porque" + ex, "Error");
-                }
+                catch (Exception ex) { MessageBox.Show("No se registro correctamente porque" + ex, "Error"); }
             }
+            // TODO: Editar cliente existente
             else
             {
                 try
@@ -597,6 +618,8 @@ namespace Primera_Practica
                     if (RealizarAct == true)
                     {
                         CNcolmado.Editar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text, ID);
+                        // TODO: Registrar edición de cliente en auditoría de forma asíncrona
+                        _ = auditoria.RegistrarAsync(1, "Editar", "Clientes");
                         MessageBox.Show("El cliente fue editado");
                         Tablaclientes();
                         panelAux_Clientes.Visible = false;
@@ -606,16 +629,17 @@ namespace Primera_Practica
                 }
                 catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex, "Error"); }
             }
-
         }
+
         private void btneliminar_Cl_Click(object sender, EventArgs e)
         {
-
             if (dataGrid_Clientes.SelectedRows.Count > 0)
             {
                 RealizarAct = VentanaConfirmacion();
                 ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
                 CNcolmado.Desactivar_Cliente(ID);
+                // TODO: Registrar eliminación de cliente en auditoría de forma asíncrona
+                _ = auditoria.RegistrarAsync(1, "Eliminar", "Clientes");
                 Tablaclientes();
                 panelAux_Clientes.Visible = false;
             }
@@ -628,6 +652,7 @@ namespace Primera_Practica
             menuAuxiliar.ShowDialog();
         }
         #endregion
+
         #region Panel Ventas
         private void EstiloDataGrid_HistorialVentas()
         {
@@ -659,57 +684,51 @@ namespace Primera_Practica
             dgvHistorialVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
-
         private void btnRegistrar_Venta_Click(object sender, EventArgs e)
         {
-          
             menuVentas.ShowDialog();
+            // TODO: Registrar nueva venta en auditoría de forma asíncrona
+            _ = auditoria.RegistrarAsync(1, "Insertar", "Ventas");
         }
 
         private void btnVerHistorial_Click(object sender, EventArgs e)
         {
             dgvHistorialVentas.DataSource = CNcolmado.HistorialVentas();
         }
+
         private void btnAnularVenta_Click(object sender, EventArgs e)
         {
             if (dgvHistorialVentas.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Selecciona una venta primero.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona una venta primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string estado = dgvHistorialVentas.SelectedRows[0].Cells["Estado"].Value.ToString();
             if (estado == "Anulada")
             {
-                MessageBox.Show("Esta venta ya está anulada.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Esta venta ya está anulada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DialogResult respuesta = MessageBox.Show(
-                "¿Estás seguro que deseas anular esta venta?",
-                "Confirmar anulación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            DialogResult respuesta = MessageBox.Show("¿Estás seguro que deseas anular esta venta?", "Confirmar anulación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (respuesta == DialogResult.Yes)
             {
                 string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
                 CNcolmado.AnularVenta(idVenta);
-                MessageBox.Show("Venta anulada correctamente.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnVerHistorial_Click(sender, e); // recargar historial
+                // TODO: Registrar anulación de venta en auditoría de forma asíncrona
+                _ = auditoria.RegistrarAsync(1, "Anular", "Ventas");
+                MessageBox.Show("Venta anulada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnVerHistorial_Click(sender, e);
             }
         }
-
 
         private void btnAprobarVenta_Click(object sender, EventArgs e)
         {
             if (dgvHistorialVentas.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Selecciona una venta primero.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona una venta primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -717,50 +736,52 @@ namespace Primera_Practica
 
             if (estado == "Completada")
             {
-                MessageBox.Show("Esta venta ya está completada.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Esta venta ya está completada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (estado == "Anulada")
             {
-                MessageBox.Show("No se puede completar una venta anulada.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se puede completar una venta anulada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
             CNcolmado.CompletarVenta(idVenta);
-            MessageBox.Show("Venta completada correctamente.", "Éxito",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // TODO: Registrar aprobación de venta en auditoría de forma asíncrona
+            _ = auditoria.RegistrarAsync(1, "Aprobar", "Ventas");
+            MessageBox.Show("Venta completada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnVerHistorial_Click(sender, e);
         }
+
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
             if (dgvHistorialVentas.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Selecciona una venta primero.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona una venta primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
             dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
         }
-
-
         #endregion
 
-       
-    }
+        private void panelLateral_Paint(object sender, PaintEventArgs e)
+        {
+        }
 
+        private void panelAuditoria_Paint(object sender, PaintEventArgs e)
+        {
+        }
+    }
 }
 
 
-      
 
 
-    
+
+
 
 
 
