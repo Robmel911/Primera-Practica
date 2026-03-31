@@ -32,8 +32,8 @@ namespace CapaDatos
         public void Registrar_Clientes(string nombre, string telefono, string informacion)
         {
             SqlCommand cmd = new SqlCommand();
-            //Linea de productos en la bd
             cmd.Connection = Conector.ObtenerConexion();
+            //Linea de productos en la bd
             cmd.CommandText = "INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES (@nombre, @telefono, @informacion)";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -46,6 +46,7 @@ namespace CapaDatos
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = Conector.ObtenerConexion();
+            //Linea para editar productos a la bd
             cmd.CommandText = "UPDATE Clientes SET Nombre=@nombre, Telefono=@telefono, Informacion=@informacion WHERE IdCliente=@id";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@nombre", nombre);
