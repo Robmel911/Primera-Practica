@@ -44,6 +44,7 @@
     <Compile Include="CD_Clientes.cs" />
     <Compile Include="CD_Productos.cs" />
     <Compile Include="CD_Ventas.cs" />
+    <Compile Include="CD_Usuarios.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
