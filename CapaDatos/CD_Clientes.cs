@@ -14,66 +14,110 @@ namespace CapaDatos
         private Conexion Conector = new Conexion();
 
 
-        SqlCommand cmd = new SqlCommand();
+       
         public DataTable MostrarTabla()
         {
-            Conexion conexion = new Conexion();
-            SqlDataReader Leer;
-            DataTable Tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = $"select *from Clientes where Activo=1";
-            Leer = cmd.ExecuteReader();
-            Tabla.Load(Leer);
-            cmd.Parameters.Clear();
-            cmd.Connection = conexion.CerrarConexion();
-            return Tabla;
+            try
+            {
+                Conexion conexion = new Conexion();
+                SqlDataReader Leer;
+                DataTable Tabla = new DataTable();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = $"select *from Clientes where Activo=1";
+                Leer = cmd.ExecuteReader();
+                Tabla.Load(Leer);
+                cmd.Parameters.Clear();
+                cmd.Connection = conexion.CerrarConexion();
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al mostrar los clientes: " + ex.Message);
+            }
         }
         public void Registrar_Clientes(string nombre, string telefono, string informacion)
         {
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para insertar productos a la bd
-            cmd.CommandText = $"INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES ('{nombre}', '{telefono}', '{informacion}')";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea de productos en la bd
+                cmd.CommandText = "INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES (@nombre, @telefono, @informacion)";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@telefono", telefono);
+                cmd.Parameters.AddWithValue("@informacion", informacion);
+                cmd.ExecuteNonQuery();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar el cliente: " + ex.Message);
+            }
         }
         public void Editar_Clientes(string nombre, string telefono, string informacion, int id)
         {
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Nombre='{nombre}', Telefono='{telefono}', Informacion='{informacion}' WHERE IdCliente={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para editar productos a la bd
+                cmd.CommandText = "UPDATE Clientes SET Nombre=@nombre, Telefono=@telefono, Informacion=@informacion WHERE IdCliente=@id";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@telefono", telefono);
+                cmd.Parameters.AddWithValue("@informacion", informacion);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al editar el cliente: " + ex.Message);
+            } 
         }
         public void Agregarsaldo(int saldo, int id)
         {
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Saldo= Saldo + {saldo} WHERE IdCliente={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para editar productos a la bd
+                cmd.CommandText = $"UPDATE Clientes SET Saldo= Saldo + {saldo} WHERE IdCliente={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar saldo al cliente: " + ex.Message);
+            }
         }
         public void Desactivar_Clientes(int id)
         {
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Activo=0 WHERE IdCliente={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para editar productos a la bd
+                cmd.CommandText = $"UPDATE Clientes SET Activo=0 WHERE IdCliente={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al desactivar el cliente: " + ex.Message);
+            }
         }
         public void Reactivar_Clientes(int id)
         {
+            SqlCommand cmd = new SqlCommand();
             SqlDataReader Leer;
             cmd.Connection = Conector.ObtenerConexion();
             //Linea para editar productos a la bd
@@ -86,6 +130,7 @@ namespace CapaDatos
         public bool ExisteTelefono(string telefono)
         {
             SqlCommand cmd = new SqlCommand();
+           
             cmd.Connection = Conector.ObtenerConexion();
             cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono";
             cmd.Parameters.AddWithValue("@telefono", telefono);

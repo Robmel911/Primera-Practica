@@ -15,6 +15,8 @@ namespace Primera_Practica
     {
         CN_Producto CNproducto = new CN_Producto();
         CN_Colmado CNcolmado = new CN_Colmado();
+        ValidacionNumero validaciones = new ValidacionNumero("Saldo",1,1000);
+       
         string ID;
         
         
@@ -40,6 +42,10 @@ namespace Primera_Practica
 
 
         }
+        private void LimpiarCampos(Label label)
+        {
+            label.Text = "";
+        }
         #region Cargar productos desactivados
         private void CargarDatosProductos()
         {
@@ -54,9 +60,15 @@ namespace Primera_Practica
         // Mostrar info del producto seleccionado
         private void cmbProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbProductos.SelectedItem == null) return;
-
-
+            if (cmbProductos.SelectedIndex == -1)
+            {
+                LimpiarCampos(lblNombreProducto);
+                LimpiarCampos(lblPrecioProducto);
+                LimpiarCampos(lblStockProducto);
+                LimpiarCampos(lblDescripcionProducto);
+                LimpiarCampos(lblCodigoProducto);
+                return;
+            }
             DataRowView fila = (DataRowView)cmbProductos.SelectedItem;
             lblNombreProducto.Text = fila["Nombre"].ToString();
             lblPrecioProducto.Text = "RD$ " + fila["Precio"].ToString();
@@ -85,18 +97,38 @@ namespace Primera_Practica
 
         private void cmbClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbClientes.SelectedItem == null) return;
-
             DataRowView fila = (DataRowView)cmbClientes.SelectedItem;
+            if (cmbClientes.SelectedIndex == -1)
+            {
+                LimpiarCampos(lblNombreCliente);
+                LimpiarCampos(lblTelefonoCliente);
+                LimpiarCampos(lblSaldoCliente);
+                return;
+            }
             lblNombreCliente.Text = fila["Nombre"].ToString();
             lblTelefonoCliente.Text = fila["Telefono"].ToString();
             lblSaldoCliente.Text = "RD$ " + fila["Saldo"].ToString();
             ID = fila["IdCliente"].ToString();
 
+
         }
         private void btnagregarSaldo_Click(object sender, EventArgs e)
         {
-            CNproducto.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            errorProviderAux.Clear();
+            if (!validaciones.Validar(txtSaldo.Text))
+            {
+                errorProviderAux.SetError(txtSaldo, validaciones.MostrarError());
+                return;
+            }
+            if (cmbClientes.SelectedIndex == -1)
+            {
+                errorProviderAux.SetError(cmbClientes, "Debe seleccionar un cliente.");
+                return;
+            }
+            CNcolmado.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            DialogResult salir = MessageBox.Show(@"Saldo agregado exitosamente. r\n\ Quieres seguir en esta ventana","Operacion Existosa",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+            CargarDatosClientes();  
+            if(salir == DialogResult.Yes) this.Close();
         }
         #endregion
 

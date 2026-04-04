@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Panel_activarprod = new System.Windows.Forms.Panel();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.cmbProductos = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Panel_Saldo = new System.Windows.Forms.Panel();
-            this.txtSaldo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnagregarSaldo = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
@@ -54,8 +54,11 @@
             this.lblSaldoCliente = new System.Windows.Forms.Label();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblTelefonoCliente = new System.Windows.Forms.Label();
+            this.txtSaldo = new System.Windows.Forms.MaskedTextBox();
+            this.errorProviderAux = new System.Windows.Forms.ErrorProvider(this.components);
             this.Panel_activarprod.SuspendLayout();
             this.Panel_Saldo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAux)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_activarprod
@@ -236,14 +239,6 @@
             this.Panel_Saldo.Size = new System.Drawing.Size(515, 531);
             this.Panel_Saldo.TabIndex = 15;
             // 
-            // txtSaldo
-            // 
-            this.txtSaldo.ForeColor = System.Drawing.Color.Green;
-            this.txtSaldo.Location = new System.Drawing.Point(177, 397);
-            this.txtSaldo.Name = "txtSaldo";
-            this.txtSaldo.Size = new System.Drawing.Size(100, 26);
-            this.txtSaldo.TabIndex = 23;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -351,13 +346,26 @@
             this.lblTelefonoCliente.TabIndex = 16;
             this.lblTelefonoCliente.Text = "-";
             // 
+            // txtSaldo
+            // 
+            this.txtSaldo.Location = new System.Drawing.Point(171, 400);
+            this.txtSaldo.Mask = "99999";
+            this.txtSaldo.Name = "txtSaldo";
+            this.txtSaldo.Size = new System.Drawing.Size(100, 26);
+            this.txtSaldo.TabIndex = 23;
+            this.txtSaldo.ValidatingType = typeof(int);
+            // 
+            // errorProviderAux
+            // 
+            this.errorProviderAux.ContainerControl = this;
+            // 
             // Menu_auxiliar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 531);
-            this.Controls.Add(this.Panel_activarprod);
             this.Controls.Add(this.Panel_Saldo);
+            this.Controls.Add(this.Panel_activarprod);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
             this.MaximizeBox = false;
@@ -368,6 +376,7 @@
             this.Panel_activarprod.PerformLayout();
             this.Panel_Saldo.ResumeLayout(false);
             this.Panel_Saldo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAux)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,8 +406,9 @@
         private System.Windows.Forms.Label lblSaldoCliente;
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.Label lblTelefonoCliente;
-        private System.Windows.Forms.TextBox txtSaldo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnagregarSaldo;
+        private System.Windows.Forms.MaskedTextBox txtSaldo;
+        private System.Windows.Forms.ErrorProvider errorProviderAux;
     }
 }
