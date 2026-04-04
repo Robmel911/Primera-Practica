@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu_auxiliar));
             this.Panel_activarprod = new System.Windows.Forms.Panel();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@
             this.cmbProductos = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Panel_Saldo = new System.Windows.Forms.Panel();
+            this.txtSaldo = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnagregarSaldo = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.lblSaldoCliente = new System.Windows.Forms.Label();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblTelefonoCliente = new System.Windows.Forms.Label();
-            this.txtSaldo = new System.Windows.Forms.MaskedTextBox();
             this.errorProviderAux = new System.Windows.Forms.ErrorProvider(this.components);
             this.Panel_activarprod.SuspendLayout();
             this.Panel_Saldo.SuspendLayout();
@@ -239,6 +240,15 @@
             this.Panel_Saldo.Size = new System.Drawing.Size(515, 531);
             this.Panel_Saldo.TabIndex = 15;
             // 
+            // txtSaldo
+            // 
+            this.txtSaldo.Location = new System.Drawing.Point(171, 400);
+            this.txtSaldo.Mask = "99999";
+            this.txtSaldo.Name = "txtSaldo";
+            this.txtSaldo.Size = new System.Drawing.Size(100, 26);
+            this.txtSaldo.TabIndex = 23;
+            this.txtSaldo.ValidatingType = typeof(int);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -346,15 +356,6 @@
             this.lblTelefonoCliente.TabIndex = 16;
             this.lblTelefonoCliente.Text = "-";
             // 
-            // txtSaldo
-            // 
-            this.txtSaldo.Location = new System.Drawing.Point(171, 400);
-            this.txtSaldo.Mask = "99999";
-            this.txtSaldo.Name = "txtSaldo";
-            this.txtSaldo.Size = new System.Drawing.Size(100, 26);
-            this.txtSaldo.TabIndex = 23;
-            this.txtSaldo.ValidatingType = typeof(int);
-            // 
             // errorProviderAux
             // 
             this.errorProviderAux.ContainerControl = this;
@@ -366,9 +367,10 @@
             this.ClientSize = new System.Drawing.Size(515, 531);
             this.Controls.Add(this.Panel_Saldo);
             this.Controls.Add(this.Panel_activarprod);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.HelpButton = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Menu_auxiliar";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

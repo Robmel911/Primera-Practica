@@ -19,7 +19,7 @@ namespace Primera_Practica
         private CN_Producto CNproducto = new CN_Producto();
         private Menu_Ventas menuVentas = new Menu_Ventas();
         private Validaciones validaciones = new Validaciones();
-        private Menu_auxiliar menuAuxiliar = new Menu_auxiliar(false);
+        private Menu_auxiliar menuAuxiliar = new Menu_auxiliar("");
         private const int MENU_COLAPSADO = 35;
         private const int MENU_EXPANDIDO = 200;
         private const int VELOCIDAD_ANIM = 30;
@@ -37,7 +37,7 @@ namespace Primera_Practica
             EstiloDataGrid_Clientes();
             EstiloDataGrid_HistorialVentas();
             CargarInicio();
-           EstiloDataGrid_VentasDelDia();
+            EstiloDataGrid_VentasDelDia();
             EstiloDataGrid_Top5();
         }
         private async void Form1_Load(object sender, EventArgs e)
@@ -486,7 +486,7 @@ namespace Primera_Practica
 
         private void btnreactivarProd_Click(object sender, EventArgs e)
         {
-            menuAuxiliar = new Menu_auxiliar(true);
+            menuAuxiliar = new Menu_auxiliar("Productos");
             menuAuxiliar.ShowDialog();
         }
         #endregion
@@ -640,7 +640,7 @@ namespace Primera_Practica
 
         private void btnRegistrarSaldo_Click(object sender, EventArgs e)
         {
-            menuAuxiliar = new Menu_auxiliar(false);
+            menuAuxiliar = new Menu_auxiliar("Clientes");
             menuAuxiliar.ShowDialog();
         }
         #endregion

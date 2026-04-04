@@ -12,9 +12,6 @@ namespace CapaDatos
     public class CD_Clientes
     {
         private Conexion Conector = new Conexion();
-
-
-       
         public DataTable MostrarTabla()
         {
             try
@@ -117,37 +114,57 @@ namespace CapaDatos
         }
         public void Reactivar_Clientes(int id)
         {
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader Leer;
-            cmd.Connection = Conector.ObtenerConexion();
-            //Linea para editar productos a la bd
-            cmd.CommandText = $"UPDATE Clientes SET Activo=1 WHERE IdCliente={id}";
-            cmd.CommandType = CommandType.Text;
-            Leer = cmd.ExecuteReader();
-            cmd.Parameters.Clear();
-            cmd.Connection = Conector.CerrarConexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader Leer;
+                cmd.Connection = Conector.ObtenerConexion();
+                //Linea para editar productos a la bd
+                cmd.CommandText = $"UPDATE Clientes SET Activo=1 WHERE IdCliente={id}";
+                cmd.CommandType = CommandType.Text;
+                Leer = cmd.ExecuteReader();
+                cmd.Parameters.Clear();
+                cmd.Connection = Conector.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public bool ExisteTelefono(string telefono)
         {
-            SqlCommand cmd = new SqlCommand();
-           
-            cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono";
-            cmd.Parameters.AddWithValue("@telefono", telefono);
-            int cantidad = (int)cmd.ExecuteScalar();
-            cmd.Connection = Conector.CerrarConexion();
-            return cantidad > 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono";
+                cmd.Parameters.AddWithValue("@telefono", telefono);
+                int cantidad = (int)cmd.ExecuteScalar();
+                cmd.Connection = Conector.CerrarConexion();
+                return cantidad > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public bool ExisteTelefonoEditar(string telefono, int id)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono AND IdCliente != @id";
-            cmd.Parameters.AddWithValue("@telefono", telefono);
-            cmd.Parameters.AddWithValue("@id", id);
-            int cantidad = (int)cmd.ExecuteScalar();
-            cmd.Connection = Conector.CerrarConexion();
-            return cantidad > 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = Conector.ObtenerConexion();
+                cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono AND IdCliente != @id";
+                cmd.Parameters.AddWithValue("@telefono", telefono);
+                cmd.Parameters.AddWithValue("@id", id);
+                int cantidad = (int)cmd.ExecuteScalar();
+                cmd.Connection = Conector.CerrarConexion();
+                return cantidad > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
