@@ -16,6 +16,7 @@ namespace Primera_Practica
     {
         private CN_Colmado CNcolmado = new CN_Colmado();
         private CN_Clientes CNclientes = new CN_Clientes();
+        private CN_Producto CNproducto = new CN_Producto();
         private Menu_Ventas menuVentas = new Menu_Ventas();
         private Validaciones validaciones = new Validaciones();
         private Menu_auxiliar menuAuxiliar = new Menu_auxiliar(false);
@@ -40,7 +41,19 @@ namespace Primera_Practica
             EstiloDataGrid_Top5();
         }
         private async void Form1_Load(object sender, EventArgs e)
-        {
+        {// Oculta el principal 
+            this.Hide();
+            Login login = new Login();
+            if (login.ShowDialog() != DialogResult.OK)
+            {
+                // Si cierra sin loguearse cierra toda la app
+                Application.Exit();
+                return;
+            }
+            // Login exitoso, muestra el principal
+            this.Show();
+            // Maximiza la ventana
+            this.WindowState = FormWindowState.Maximized;
             Tablaproductos();
             await Tablaclientes();
             dataGrid_Productos.Columns["IdProducto"].Visible = false;
@@ -291,7 +304,7 @@ namespace Primera_Practica
         #endregion
         private void Tablaproductos()
         {
-            dataGrid_Productos.DataSource = CNcolmado.Obtenerdatos_Producto();
+            dataGrid_Productos.DataSource = CNproducto.Obtenerdatos_Producto();
             DataCombobox_Productos();
                 VerificarStockBajo();
         }
@@ -358,7 +371,7 @@ namespace Primera_Practica
             }
         public void DataCombobox_Productos()
         {
-            CN_Colmado TablaProd = new CN_Colmado();
+            CN_Producto TablaProd = new CN_Producto();
             textMarcaProd.DataSource = TablaProd.Obtenermarcas();
             textMarcaProd.DisplayMember = "Marca";
             textMarcaProd.ValueMember = "Marca";
@@ -392,7 +405,7 @@ namespace Primera_Practica
                         VentanaEmergente("El producto ya existe", "Error");
                         return;
                     }
-                    CNcolmado.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
+                    CNproducto.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
                     Tablaproductos();
                     panelAux_Productos.Visible = false;
@@ -413,7 +426,7 @@ namespace Primera_Practica
                     if (RealizarAct == true)
                     {
 
-                        CNcolmado.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
+                        CNproducto.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
                         VentanaEmergente("Se edito correctamente", "Exito");
                         Tablaproductos();
                         panelAux_Productos.Visible = false;
@@ -462,7 +475,7 @@ namespace Primera_Practica
                 RealizarAct = VentanaConfirmacion();
                 if (RealizarAct == true)
                 {
-                    CNcolmado.Eliminar_Producto(ID);
+                    CNproducto.Eliminar_Producto(ID);
                     VentanaEmergente("Se elimino correctamente", "Exito");
                     Tablaproductos();
                 }
