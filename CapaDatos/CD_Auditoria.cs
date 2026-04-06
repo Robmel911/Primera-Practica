@@ -19,7 +19,7 @@ namespace CapaDatos
             cmd.Connection = conexion.ObtenerConexion();
             cmd.CommandText = "InsertarAuditoria";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@UsuarioID", IdUsuario);
+            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
             cmd.Parameters.AddWithValue("@Accion", Accion);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
