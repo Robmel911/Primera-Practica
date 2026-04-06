@@ -84,22 +84,10 @@ namespace Primera_Practica
             this.textNombreCl = new System.Windows.Forms.TextBox();
             this.tituloauxCl = new System.Windows.Forms.Label();
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
+            this.panelAuditoria = new System.Windows.Forms.Panel();
+            this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbltop5 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblAlerta = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblAlerta = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblAlerta = new System.Windows.Forms.Label();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -112,25 +100,25 @@ namespace Primera_Practica
             this.panelAux_Productos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelVentas.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialVentas)).BeginInit();
             this.panelClientes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
             // 
             this.panelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.panelLateral.Size = new System.Drawing.Size(35, 734);
+            this.panelLateral.Controls.Add(this.btnAuditoria);
             this.panelLateral.Controls.Add(this.btnClientes);
             this.panelLateral.Controls.Add(this.btnVentas);
             this.panelLateral.Controls.Add(this.btnProductos);
-            this.panelLateral.Size = new System.Drawing.Size(111, 734);
+            this.panelLateral.Controls.Add(this.btnInicio);
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLateral.Location = new System.Drawing.Point(0, 0);
             this.panelLateral.Name = "panelLateral";
@@ -151,7 +139,7 @@ namespace Primera_Practica
             this.btnAuditoria.ForeColor = System.Drawing.Color.White;
             this.btnAuditoria.Location = new System.Drawing.Point(0, 200);
             this.btnAuditoria.Name = "btnAuditoria";
-            this.btnAuditoria.Size = new System.Drawing.Size(111, 50);
+            this.btnAuditoria.Size = new System.Drawing.Size(58, 50);
             this.btnAuditoria.TabIndex = 4;
             this.btnAuditoria.Text = "👤  Auditoria";
             this.btnAuditoria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,11 +150,11 @@ namespace Primera_Practica
             // 
             this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.btnClientes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClientes.Size = new System.Drawing.Size(35, 50);
+            this.btnClientes.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnClientes.FlatAppearance.BorderSize = 0;
             this.btnClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Size = new System.Drawing.Size(111, 50);
+            this.btnClientes.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Location = new System.Drawing.Point(0, 150);
             this.btnClientes.Name = "btnClientes";
@@ -183,11 +171,11 @@ namespace Primera_Practica
             // 
             this.btnVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.btnVentas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnVentas.Size = new System.Drawing.Size(35, 50);
+            this.btnVentas.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnVentas.FlatAppearance.BorderSize = 0;
             this.btnVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVentas.Size = new System.Drawing.Size(111, 50);
+            this.btnVentas.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnVentas.ForeColor = System.Drawing.Color.White;
             this.btnVentas.Location = new System.Drawing.Point(0, 100);
             this.btnVentas.Name = "btnVentas";
@@ -204,11 +192,11 @@ namespace Primera_Practica
             // 
             this.btnProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProductos.Size = new System.Drawing.Size(35, 50);
+            this.btnProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProductos.Size = new System.Drawing.Size(111, 50);
+            this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Location = new System.Drawing.Point(0, 50);
             this.btnProductos.Name = "btnProductos";
@@ -225,11 +213,11 @@ namespace Primera_Practica
             // 
             this.btnInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInicio.Size = new System.Drawing.Size(35, 50);
+            this.btnInicio.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInicio.FlatAppearance.BorderSize = 0;
             this.btnInicio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInicio.Size = new System.Drawing.Size(111, 50);
+            this.btnInicio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnInicio.ForeColor = System.Drawing.Color.White;
             this.btnInicio.Location = new System.Drawing.Point(0, 0);
             this.btnInicio.Name = "btnInicio";
@@ -250,6 +238,13 @@ namespace Primera_Practica
             this.panelInicio.Controls.Add(this.lbltop5);
             this.panelInicio.Controls.Add(this.button2);
             this.panelInicio.Controls.Add(this.panelTop5);
+            this.panelInicio.Controls.Add(this.button1);
+            this.panelInicio.Controls.Add(this.panelVentasdia);
+            this.panelInicio.Location = new System.Drawing.Point(58, 0);
+            this.panelInicio.Name = "panelInicio";
+            this.panelInicio.Size = new System.Drawing.Size(1222, 734);
+            this.panelInicio.TabIndex = 1;
+            // 
             // lblAlerta
             // 
             this.lblAlerta.AutoSize = true;
@@ -257,7 +252,7 @@ namespace Primera_Practica
             this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
             this.lblAlerta.Location = new System.Drawing.Point(174, 546);
             this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
+            this.lblAlerta.Size = new System.Drawing.Size(63, 15);
             this.lblAlerta.TabIndex = 10;
             this.lblAlerta.Text = "Productos";
             // 
@@ -279,17 +274,9 @@ namespace Primera_Practica
             this.lbltop5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.lbltop5.Location = new System.Drawing.Point(236, 106);
             this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(557, 81);
-            this.lbltop5.TabIndex = 0;
-            this.lbltop5.Text = "Colmado El clasico";
-            // 
             this.lbltop5.Size = new System.Drawing.Size(369, 54);
             this.lbltop5.TabIndex = 0;
             this.lbltop5.Text = "Colmado El clasico";
-            // 
-            this.panelInicio.Name = "panelInicio";
-            this.panelInicio.Size = new System.Drawing.Size(1222, 734);
-            this.panelInicio.TabIndex = 1;
             // 
             // button2
             // 
@@ -386,6 +373,13 @@ namespace Primera_Practica
             this.panelProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.panelProductos.Controls.Add(this.label10);
             this.panelProductos.Controls.Add(this.panel1);
+            this.panelProductos.Controls.Add(this.panelAux_Productos);
+            this.panelProductos.Controls.Add(this.dataGrid_Productos);
+            this.panelProductos.Location = new System.Drawing.Point(58, 0);
+            this.panelProductos.Name = "panelProductos";
+            this.panelProductos.Size = new System.Drawing.Size(1222, 734);
+            this.panelProductos.TabIndex = 2;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -393,17 +387,9 @@ namespace Primera_Practica
             this.label10.ForeColor = System.Drawing.Color.DarkGreen;
             this.label10.Location = new System.Drawing.Point(421, 13);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(214, 54);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Productos";
-            // 
             this.label10.Size = new System.Drawing.Size(148, 37);
             this.label10.TabIndex = 9;
             this.label10.Text = "Productos";
-            // 
-            this.panelProductos.Name = "panelProductos";
-            this.panelProductos.Size = new System.Drawing.Size(1222, 734);
-            this.panelProductos.TabIndex = 2;
             // 
             // panel1
             // 
@@ -686,6 +672,13 @@ namespace Primera_Practica
             // 
             this.panelVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.panelVentas.Controls.Add(this.label12);
+            this.panelVentas.Controls.Add(this.panel3);
+            this.panelVentas.Controls.Add(this.dgvHistorialVentas);
+            this.panelVentas.Location = new System.Drawing.Point(58, 0);
+            this.panelVentas.Name = "panelVentas";
+            this.panelVentas.Size = new System.Drawing.Size(1222, 734);
+            this.panelVentas.TabIndex = 3;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -693,17 +686,9 @@ namespace Primera_Practica
             this.label12.ForeColor = System.Drawing.Color.DarkGreen;
             this.label12.Location = new System.Drawing.Point(473, 19);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(320, 54);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Historial Ventas";
-            // 
             this.label12.Size = new System.Drawing.Size(220, 37);
             this.label12.TabIndex = 10;
             this.label12.Text = "Historial Ventas";
-            // 
-            this.panelVentas.Name = "panelVentas";
-            this.panelVentas.Size = new System.Drawing.Size(1222, 734);
-            this.panelVentas.TabIndex = 3;
             // 
             // panel3
             // 
@@ -820,6 +805,13 @@ namespace Primera_Practica
             this.panelClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.panelClientes.Controls.Add(this.label11);
             this.panelClientes.Controls.Add(this.panel2);
+            this.panelClientes.Controls.Add(this.panelAux_Clientes);
+            this.panelClientes.Controls.Add(this.dataGrid_Clientes);
+            this.panelClientes.Location = new System.Drawing.Point(58, 0);
+            this.panelClientes.Name = "panelClientes";
+            this.panelClientes.Size = new System.Drawing.Size(1222, 734);
+            this.panelClientes.TabIndex = 4;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -827,17 +819,9 @@ namespace Primera_Practica
             this.label11.ForeColor = System.Drawing.Color.DarkGreen;
             this.label11.Location = new System.Drawing.Point(448, 13);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(172, 54);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Clientes";
-            // 
             this.label11.Size = new System.Drawing.Size(119, 37);
             this.label11.TabIndex = 10;
             this.label11.Text = "Clientes";
-            // 
-            this.panelClientes.Name = "panelClientes";
-            this.panelClientes.Size = new System.Drawing.Size(1222, 734);
-            this.panelClientes.TabIndex = 4;
             // 
             // panel2
             // 
@@ -1032,170 +1016,26 @@ namespace Primera_Practica
             this.dataGrid_Clientes.Size = new System.Drawing.Size(896, 545);
             this.dataGrid_Clientes.TabIndex = 0;
             // 
-            // timerMenu
-            // pictureBox1
+            // panelAuditoria
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::Primera_Practica.Properties.Resources.Colmado;
-            this.pictureBox1.Location = new System.Drawing.Point(854, 25);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(247, 209);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.panelAuditoria.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAuditoria.Location = new System.Drawing.Point(0, 0);
+            this.panelAuditoria.Name = "panelAuditoria";
+            this.panelAuditoria.Size = new System.Drawing.Size(1222, 734);
+            this.panelAuditoria.TabIndex = 5;
             // 
-            // lbltop5
+            // dataGridAuditoria
             // 
-            this.lbltop5.AutoSize = true;
-            this.lbltop5.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold);
-            this.lbltop5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.lbltop5.Location = new System.Drawing.Point(236, 106);
-            this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(557, 81);
-            this.lbltop5.TabIndex = 0;
-            this.lbltop5.Text = "Colmado El clasico";
+            this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAuditoria.Location = new System.Drawing.Point(0, 0);
+            this.dataGridAuditoria.Name = "dataGridAuditoria";
+            this.dataGridAuditoria.RowHeadersWidth = 62;
+            this.dataGridAuditoria.Size = new System.Drawing.Size(240, 150);
+            this.dataGridAuditoria.TabIndex = 0;
             // 
-            // label10
+            // errorProvider1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label10.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label10.Location = new System.Drawing.Point(421, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(214, 54);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Productos";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label11.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label11.Location = new System.Drawing.Point(448, 13);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(172, 54);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Clientes";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label12.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label12.Location = new System.Drawing.Point(473, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(320, 54);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Historial Ventas";
-            // 
-            // lblAlerta
-            // 
-            this.lblAlerta.AutoSize = true;
-            this.lblAlerta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblAlerta.Location = new System.Drawing.Point(174, 546);
-            this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
-            this.lblAlerta.TabIndex = 10;
-            this.lblAlerta.Text = "Productos";
-            // 
-            this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(557, 81);
-            this.lbltop5.TabIndex = 0;
-            this.lbltop5.Text = "Colmado El clasico";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label10.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label10.Location = new System.Drawing.Point(421, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(214, 54);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Productos";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label11.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label11.Location = new System.Drawing.Point(448, 13);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(172, 54);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Clientes";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label12.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label12.Location = new System.Drawing.Point(473, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(320, 54);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Historial Ventas";
-            // 
-            // lblAlerta
-            // 
-            this.lblAlerta.AutoSize = true;
-            this.lblAlerta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblAlerta.Location = new System.Drawing.Point(174, 546);
-            this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
-            this.lblAlerta.TabIndex = 10;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            // 
-            this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(557, 81);
-            this.lbltop5.TabIndex = 0;
-            this.lbltop5.Text = "Colmado El clasico";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label10.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label10.Location = new System.Drawing.Point(421, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(214, 54);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Productos";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label11.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label11.Location = new System.Drawing.Point(448, 13);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(172, 54);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Clientes";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label12.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label12.Location = new System.Drawing.Point(473, 19);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(320, 54);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Historial Ventas";
-            // 
-            // lblAlerta
-            // 
-            this.lblAlerta.AutoSize = true;
-            this.lblAlerta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblAlerta.Location = new System.Drawing.Point(174, 546);
-            this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
-            this.lblAlerta.TabIndex = 10;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.errorProvider1.ContainerControl = this;
             // 
             // Principal
             // 
@@ -1243,8 +1083,8 @@ namespace Primera_Practica
             this.panelAux_Clientes.ResumeLayout(false);
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1256,10 +1096,12 @@ namespace Primera_Practica
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnVentas;
         private System.Windows.Forms.Button btnProductos;
+        private System.Windows.Forms.Button btnAuditoria;
         private System.Windows.Forms.Panel panelInicio;
         private System.Windows.Forms.Panel panelProductos;
         private System.Windows.Forms.Panel panelVentas;
         private System.Windows.Forms.Panel panelClientes;
+        private System.Windows.Forms.Panel panelAuditoria;
         private System.Windows.Forms.Timer timerMenu;
         private System.Windows.Forms.DataGridView dataGrid_Productos;
         private System.Windows.Forms.Panel panelAux_Productos;
@@ -1319,8 +1161,6 @@ namespace Primera_Practica
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblAlerta;
-        private System.Windows.Forms.Button btnAuditoria;
-        private System.Windows.Forms.Panel panelAuditoria;
         private System.Windows.Forms.DataGridView dataGridAuditoria;
     }
 }

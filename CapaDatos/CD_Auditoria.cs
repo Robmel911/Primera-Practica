@@ -14,12 +14,12 @@ namespace CapaDatos
         Conexion conexion = new Conexion();
         DataTable tabla = new DataTable();
         SqlDataReader leer;
-        public void Insertar()
+        public void Insertar(int IdUsuario, string Accion)
         {
             cmd.Connection = conexion.ObtenerConexion();
             cmd.CommandText = "InsertarAuditoria";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
+            cmd.Parameters.AddWithValue("@UsuarioID", IdUsuario);
             cmd.Parameters.AddWithValue("@Accion", Accion);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();

@@ -771,6 +771,7 @@ namespace Primera_Practica
         {
             CN_Auditoria auditoria = new CN_Auditoria();
             dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
+
         }
 
         #endregion

@@ -12,9 +12,9 @@ namespace CapaNegocios
     {
         private CD_Auditoria auditoriaCD = new CD_Auditoria();
 
-        public void RegistrarAuditoria(int UsuarioID, string Accion)
+        public void RegistrarAuditoria(int IdUsuario, string Accion)
         {
-            auditoriaCD.Insertar(UsuarioID, Accion);
+            auditoriaCD.Insertar(IdUsuario, Accion);
         }
 
         public DataTable MostrarAuditoria()
