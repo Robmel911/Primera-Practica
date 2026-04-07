@@ -14,7 +14,11 @@ namespace Primera_Practica
     
     public partial class Login : Form
     {
+        private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Usuarios CNUsuarios = new CN_Usuarios();
+        private string IdUsuario = null;
+        
+        
         public Login()
         {
             InitializeComponent();
@@ -46,12 +50,14 @@ namespace Primera_Practica
                 // Si el usuario existe, cierra el formulario con DialogResult.OK
                 if (existe)
                 {
+                    auditoria.RegistrarAuditoria(,"")
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 // Si no existe, muestra un mensaje de error
                 else
                 {
+                    
                     MessageBox.Show("Usuario o contraseña incorrectos.", "Acceso Denegado",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtUsuario.Clear();

@@ -32,5 +32,12 @@ namespace CapaNegocios
             }
         
         }
+
+       
+    }
+    public static class Sesion
+    {
+        public static int IdUsuario { get; set; }
+
     }
 }
