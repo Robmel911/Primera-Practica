@@ -35,7 +35,7 @@ namespace Primera_Practica
             this.lblTotalDia = new System.Windows.Forms.Label();
             this.panelProductos = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelbtns_Productos = new System.Windows.Forms.Panel();
             this.btnreactivarProd = new System.Windows.Forms.Button();
             this.btnagregarProd = new System.Windows.Forms.Button();
             this.btneditarProd = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@ namespace Primera_Practica
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnMostraropciones = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -93,7 +94,7 @@ namespace Primera_Practica
             this.panelVentasdia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasDelDia)).BeginInit();
             this.panelProductos.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelbtns_Productos.SuspendLayout();
             this.panelAux_Productos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Productos)).BeginInit();
@@ -348,8 +349,9 @@ namespace Primera_Practica
             // panelProductos
             // 
             this.panelProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
+            this.panelProductos.Controls.Add(this.btnMostraropciones);
             this.panelProductos.Controls.Add(this.label10);
-            this.panelProductos.Controls.Add(this.panel1);
+            this.panelProductos.Controls.Add(this.panelbtns_Productos);
             this.panelProductos.Controls.Add(this.panelAux_Productos);
             this.panelProductos.Controls.Add(this.dataGrid_Productos);
             this.panelProductos.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -369,18 +371,18 @@ namespace Primera_Practica
             this.label10.TabIndex = 9;
             this.label10.Text = "Productos";
             // 
-            // panel1
+            // panelbtns_Productos
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.panel1.Controls.Add(this.btnreactivarProd);
-            this.panel1.Controls.Add(this.btnagregarProd);
-            this.panel1.Controls.Add(this.btneditarProd);
-            this.panel1.Controls.Add(this.btneliminarProd);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 593);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(987, 141);
-            this.panel1.TabIndex = 8;
+            this.panelbtns_Productos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
+            this.panelbtns_Productos.Controls.Add(this.btnreactivarProd);
+            this.panelbtns_Productos.Controls.Add(this.btnagregarProd);
+            this.panelbtns_Productos.Controls.Add(this.btneditarProd);
+            this.panelbtns_Productos.Controls.Add(this.btneliminarProd);
+            this.panelbtns_Productos.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelbtns_Productos.Location = new System.Drawing.Point(0, 593);
+            this.panelbtns_Productos.Name = "panelbtns_Productos";
+            this.panelbtns_Productos.Size = new System.Drawing.Size(987, 141);
+            this.panelbtns_Productos.TabIndex = 8;
             // 
             // btnreactivarProd
             // 
@@ -389,7 +391,7 @@ namespace Primera_Practica
             this.btnreactivarProd.FlatAppearance.BorderSize = 0;
             this.btnreactivarProd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnreactivarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnreactivarProd.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnreactivarProd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnreactivarProd.ForeColor = System.Drawing.Color.White;
             this.btnreactivarProd.Location = new System.Drawing.Point(687, 0);
             this.btnreactivarProd.Name = "btnreactivarProd";
@@ -406,7 +408,7 @@ namespace Primera_Practica
             this.btnagregarProd.FlatAppearance.BorderSize = 0;
             this.btnagregarProd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btnagregarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnagregarProd.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnagregarProd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnagregarProd.ForeColor = System.Drawing.Color.White;
             this.btnagregarProd.Location = new System.Drawing.Point(464, 0);
             this.btnagregarProd.Name = "btnagregarProd";
@@ -423,7 +425,7 @@ namespace Primera_Practica
             this.btneditarProd.FlatAppearance.BorderSize = 0;
             this.btneditarProd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
             this.btneditarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btneditarProd.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btneditarProd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btneditarProd.ForeColor = System.Drawing.Color.White;
             this.btneditarProd.Location = new System.Drawing.Point(236, 0);
             this.btneditarProd.Name = "btneditarProd";
@@ -440,7 +442,7 @@ namespace Primera_Practica
             this.btneliminarProd.FlatAppearance.BorderSize = 0;
             this.btneliminarProd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(47)))), ((int)(((byte)(47)))));
             this.btneliminarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btneliminarProd.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btneliminarProd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btneliminarProd.ForeColor = System.Drawing.Color.White;
             this.btneliminarProd.Location = new System.Drawing.Point(0, 0);
             this.btneliminarProd.Name = "btneliminarProd";
@@ -1005,6 +1007,19 @@ namespace Primera_Practica
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnMostraropciones
+            // 
+            this.btnMostraropciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnMostraropciones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnMostraropciones.ForeColor = System.Drawing.Color.White;
+            this.btnMostraropciones.Location = new System.Drawing.Point(0, 489);
+            this.btnMostraropciones.Name = "btnMostraropciones";
+            this.btnMostraropciones.Size = new System.Drawing.Size(987, 104);
+            this.btnMostraropciones.TabIndex = 8;
+            this.btnMostraropciones.Text = "Mostrar opciones";
+            this.btnMostraropciones.UseVisualStyleBackColor = false;
+            this.btnMostraropciones.Click += new System.EventHandler(this.btnMostraropciones_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -1012,10 +1027,10 @@ namespace Primera_Practica
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1222, 734);
             this.Controls.Add(this.panelLateral);
-            this.Controls.Add(this.panelInicio);
-            this.Controls.Add(this.panelClientes);
             this.Controls.Add(this.panelVentas);
             this.Controls.Add(this.panelProductos);
+            this.Controls.Add(this.panelInicio);
+            this.Controls.Add(this.panelClientes);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -1035,7 +1050,7 @@ namespace Primera_Practica
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasDelDia)).EndInit();
             this.panelProductos.ResumeLayout(false);
             this.panelProductos.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.panelbtns_Productos.ResumeLayout(false);
             this.panelAux_Productos.ResumeLayout(false);
             this.panelAux_Productos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textStockProd)).EndInit();
@@ -1103,7 +1118,7 @@ namespace Primera_Practica
         private System.Windows.Forms.Button btnAnularVenta;
         private System.Windows.Forms.DataGridView dgvHistorialVentas;
         private System.Windows.Forms.Button btnVerHistorial;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelbtns_Productos;
         private System.Windows.Forms.Button btnreactivarProd;
         private System.Windows.Forms.Button btnRegistrarSaldo;
         private System.Windows.Forms.MaskedTextBox TextCodigoProd;
@@ -1125,5 +1140,6 @@ namespace Primera_Practica
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblAlerta;
+        private System.Windows.Forms.Button btnMostraropciones;
     }
 }

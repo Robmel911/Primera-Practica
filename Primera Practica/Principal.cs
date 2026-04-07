@@ -61,7 +61,24 @@ namespace Primera_Practica
             dgvVentasDelDia.Columns["IdVenta"].Visible = false;
             dgvVentasDelDia.Columns["Estado"].Visible = false;
         }
-
+        private void desactivarbtn(Button btn)
+        {
+            btn.Enabled = false;
+            btn.BackColor = Color.FromArgb(200, 230, 201);
+        }
+        private void activarbtn(Button btn)
+        {
+            btn.Enabled = true;
+            btn.BackColor = Color.FromArgb(27, 94, 32);
+        }
+        private void mostrarbtn(Button btn)
+        {
+            btn.Visible = true;
+        }
+        private void ocultarbtn(Button btn)
+        {
+            btn.Visible = false;
+        }
         private void VentanaEmergente(string Mensaje, string titulo)
         {
             MessageBox.Show(Mensaje, titulo, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -185,7 +202,7 @@ namespace Primera_Practica
             btnProductos.BackColor = Color.Transparent;
             btnVentas.BackColor = Color.Transparent;
             btnClientes.BackColor = Color.Transparent;
-
+            dgvHistorialVentas.DataSource = null;
             btnActivo.BackColor = Color.FromArgb(46, 125, 50);
         }
         private void btnInicio_Click(object sender, EventArgs e)
@@ -200,13 +217,20 @@ namespace Primera_Practica
             MostrarPanel(panelProductos);
             MarcarBotonActivo(btnProductos);
             Tablaproductos();
+            panelbtns_Productos.Visible= false;
+            btnMostraropciones.Visible = true;
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelVentas);
             MarcarBotonActivo(btnVentas);
-            
+            ocultarbtn(btnVerDetalle);
+            ocultarbtn(btnAnularVenta);
+            ocultarbtn(btnAprobarVenta);
+            ocultarbtn(btnRegistrar_venta);
+            activarbtn(btnVerHistorial);
+
         }
 
         private async void btnClientes_Click(object sender, EventArgs e)
@@ -386,6 +410,11 @@ namespace Primera_Practica
         {
             panelAux_Productos.Visible = false;
 
+        }
+        private void btnMostraropciones_Click(object sender, EventArgs e)
+        {
+            panelbtns_Productos.Visible = true;
+            btnMostraropciones.Visible= false;
         }
 
         private void btnguardar_Click(object sender, EventArgs e)
@@ -685,6 +714,12 @@ namespace Primera_Practica
         private void btnVerHistorial_Click(object sender, EventArgs e)
         {
             dgvHistorialVentas.DataSource = CNcolmado.HistorialVentas();
+            mostrarbtn(btnVerDetalle);
+            mostrarbtn(btnAnularVenta);
+            mostrarbtn(btnAprobarVenta);
+            mostrarbtn(btnRegistrar_venta);
+            desactivarbtn(btnVerHistorial);
+            activarbtn(btnVerDetalle);
         }
         private void btnAnularVenta_Click(object sender, EventArgs e)
         {
@@ -753,15 +788,19 @@ namespace Primera_Practica
         }
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            activarbtn(btnVerHistorial);
+            ocultarbtn(btnAnularVenta);
+            ocultarbtn(btnAprobarVenta);
+            ocultarbtn(btnRegistrar_venta);
             if (dgvHistorialVentas.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Selecciona una venta primero.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
-            dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
+                string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
+                dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
+           desactivarbtn(btnVerDetalle);
         }
 
 
