@@ -57,6 +57,25 @@ namespace CapaDatos
                 throw new Exception("Error al obtener rol: " + ex.Message);
             }
         }
+        public async Task<int> ObtenerIdAsync(string usuario)
+        {
+            try
+            {
+                using (SqlConnection sqlCon = await con.ObtenerConexionAsync())
+                {
+                    string query = "SELECT IdUsuario FROM Usuarios WHERE Usuario = @usuario";
+                    SqlCommand cmd = new SqlCommand(query, sqlCon);
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+                    object resultado = await cmd.ExecuteScalarAsync();
+                    return resultado != null ? Convert.ToInt32(resultado) : 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener id: " + ex.Message);
+            }
+        }
+
     }
 }
 

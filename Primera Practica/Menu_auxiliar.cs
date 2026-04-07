@@ -15,6 +15,7 @@ namespace Primera_Practica
     {
         CN_Producto CNproducto = new CN_Producto();
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Auditoria auditoria = new CN_Auditoria();
         string ID;
         
         
@@ -71,6 +72,7 @@ namespace Primera_Practica
         {
             CNproducto.Reactivar_Producto(ID);
             MessageBox.Show("Producto reactivado exitosamente.");
+            auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Reactivar producto - exitoso");
             CargarDatosProductos();
         }
         #endregion
@@ -97,9 +99,14 @@ namespace Primera_Practica
         private void btnagregarSaldo_Click(object sender, EventArgs e)
         {
             CNproducto.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Agregar Saldo - exitoso");
         }
+
         #endregion
 
+        private void Menu_auxiliar_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Primera_Practica
     {
         private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Usuarios CNUsuarios = new CN_Usuarios();
-        private string IdUsuario = null;
+        private string IdUsuario ;
         
         
         public Login()
@@ -46,11 +46,12 @@ namespace Primera_Practica
             // Llama al método de login de forma asíncrona
             try
             {
-                var (existe, rol) = await CNUsuarios.LoginAsync(txtUsuario.Text, txtContrasena.Text);
-                // Si el usuario existe, cierra el formulario con DialogResult.OK
+                var (existe, rol, idUsuario) = await CNUsuarios.LoginAsync(txtUsuario.Text, txtContrasena.Text);
+
                 if (existe)
                 {
-                    auditoria.RegistrarAuditoria(,"")
+                    Sesion.IdUsuario = idUsuario;                            // guardar en sesión global
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, $"{txtUsuario} Ingreso al sistema"); // auditar el ingreso
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

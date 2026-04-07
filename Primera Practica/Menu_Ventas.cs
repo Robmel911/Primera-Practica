@@ -13,6 +13,7 @@ namespace Primera_Practica
 {
     public partial class Menu_Ventas : Form
     {
+        CN_Auditoria auditoria = new CN_Auditoria();
         CN_Colmado CNcolmado = new CN_Colmado();
         decimal totalVenta = 0;
         public Menu_Ventas()
@@ -210,11 +211,13 @@ namespace Primera_Practica
             try
             {
                 CNcolmado.RegistrarVenta(idCliente, carrito, totalVenta,estado);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registar Ventas - exitoso");
                 MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarVenta();
             }
             catch (Exception ex)
             {
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Ventas - Fallido");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
