@@ -11,26 +11,36 @@ namespace CapaNegocios
     {
         private CD_Usuarios CDUsuarios = new CD_Usuarios();
         // Valida el login del usuario y obtiene su rol
-        public async Task<(bool Existe, string Rol)> LoginAsync(string usuario, string contrasena)
+        public async Task<(bool Existe, string Rol, int IdUsuario)> LoginAsync(string usuario, string contrasena)
         {
             try
             {
-                // Valida si el usuario existe
                 bool existe = await CDUsuarios.ValidarUsuarioAsync(usuario, contrasena);
-                // Si existe, obtiene el rol del usuario
                 string rol;
+                int id = 0;
+
                 if (existe)
+                {
                     rol = await CDUsuarios.ObtenerRolAsync(usuario);
+                    id = await CDUsuarios.ObtenerIdAsync(usuario);
+                }
                 else
                     rol = string.Empty;
 
-                return (existe, rol);
+                return (existe, rol, id);
             }
             catch (Exception)
             {
-                return (false, string.Empty);
+                return (false, string.Empty, 0);
             }
-        
         }
+
+
+
+    }
+    public static class Sesion
+    {
+        public static int IdUsuario { get; set; }
+
     }
 }

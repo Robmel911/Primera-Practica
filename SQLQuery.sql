@@ -104,3 +104,52 @@ REFERENCES [dbo].[Clientes] ([IdCliente])
 GO
 ALTER TABLE [dbo].[Ventas] CHECK CONSTRAINT [FK_Venta_Cliente]
 GO
+
+/// Tabla Usuario
+CREATE TABLE [dbo].[Usuarios](
+	[IdUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[Usuario] [varchar](50) NOT NULL,
+	[Contrasena] [varchar](50) NOT NULL,
+	[Rol] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+select * from Usuarios
+
+
+/// Tabla Auditoria
+create table Auditoria
+(
+AuditoriaID int identity(1,1) primary key,
+IdUsuario int  NOT NULL,
+Accion varchar(50),
+Fecha datetime default getdate(),
+CONSTRAINT FK_Auditoria_IdUsuario Foreign key (IdUsuario) references Usuarios(IdUsuario), 
+);
+go
+
+/// Procedimiento para insertar auditoria
+CREATE PROC InsertarAuditoria
+	@IdUsuario int,
+	@Accion varchar(50)
+	as
+	INSERT INTO Auditoria (IdUsuario, Accion)
+	VALUES (@IdUsuario, @Accion)
+	GO
+
+/// Procedimiento para mostrar auditoria
+Create proc MostrarAuditoria
+as
+select  * from Auditoria
+GO
+
+Insert into Usuarios (Usuario, Contrasena, Rol) values ('admin1', '12345', 'Administrador')
+

@@ -14,7 +14,11 @@ namespace Primera_Practica
     
     public partial class Login : Form
     {
+        private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Usuarios CNUsuarios = new CN_Usuarios();
+        private string IdUsuario ;
+        
+        
         public Login()
         {
             InitializeComponent();
@@ -42,16 +46,19 @@ namespace Primera_Practica
             // Llama al método de login de forma asíncrona
             try
             {
-                var (existe, rol) = await CNUsuarios.LoginAsync(txtUsuario.Text, txtContrasena.Text);
-                // Si el usuario existe, cierra el formulario con DialogResult.OK
+                var (existe, rol, idUsuario) = await CNUsuarios.LoginAsync(txtUsuario.Text, txtContrasena.Text);
+
                 if (existe)
                 {
+                    Sesion.IdUsuario = idUsuario;                            // guardar en sesión global
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, $"{txtUsuario} Ingreso al sistema"); // auditar el ingreso
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 // Si no existe, muestra un mensaje de error
                 else
                 {
+                    
                     MessageBox.Show("Usuario o contraseña incorrectos.", "Acceso Denegado",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtUsuario.Clear();

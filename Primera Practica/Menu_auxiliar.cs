@@ -17,6 +17,7 @@ namespace Primera_Practica
         CN_Colmado CNcolmado = new CN_Colmado();
         ValidacionNumero validaciones = new ValidacionNumero("Saldo",1,1000);
        
+        CN_Auditoria auditoria = new CN_Auditoria();
         string ID;
         
         
@@ -92,6 +93,7 @@ namespace Primera_Practica
             }
             CNproducto.Reactivar_Producto(ID);
             MessageBox.Show("Producto reactivado exitosamente.");
+            auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Reactivar producto - exitoso");
             CargarDatosProductos();
         }
         #endregion
@@ -148,8 +150,12 @@ namespace Primera_Practica
             if(salir == DialogResult.Yes) this.Close();
             else if(salir == DialogResult.No) return;
         }
+
         #endregion
 
+        private void Menu_auxiliar_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

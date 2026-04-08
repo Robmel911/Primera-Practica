@@ -14,6 +14,7 @@ namespace Primera_Practica
 {
     public partial class Principal : Form
     {
+        private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Colmado CNcolmado = new CN_Colmado();
         private CN_Clientes CNclientes = new CN_Clientes();
         private CN_Producto CNproducto = new CN_Producto();
@@ -191,6 +192,7 @@ namespace Primera_Practica
             panelVentas.Visible = false;
             panelClientes.Visible = false;
             panelAux_Productos.Visible = false;
+            panelAuditoria.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
@@ -238,6 +240,13 @@ namespace Primera_Practica
             MostrarPanel(panelClientes);
             MarcarBotonActivo(btnClientes);
             await Tablaclientes();
+        }
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            MostrarPanel(panelAuditoria);
+            MarcarBotonActivo(btnAuditoria);
+            TablaAuditoria();
+
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
@@ -436,10 +445,15 @@ namespace Primera_Practica
                     }
                     CNproducto.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Insertar productos - exitoso");
                     Tablaproductos();
                     panelAux_Productos.Visible = false;
                 }
-                catch (Exception ex) { MessageBox.Show("No se agrego correctamente porque" + ex); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Insertar producto - Fallido");
+                    MessageBox.Show("No se agrego correctamente porque" + ex);
+                }
             }
             // Cuando se edita
             else
@@ -457,13 +471,18 @@ namespace Primera_Practica
 
                         CNproducto.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
                         VentanaEmergente("Se edito correctamente", "Exito");
+                        auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar producto - exitoso");
                         Tablaproductos();
                         panelAux_Productos.Visible = false;
                         Editar = false;
                     }
                     else { panelAux_Productos.Visible = false; Editar = false; }
                 }
-                catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar producto - Fallido");
+                    MessageBox.Show("No se edito correctamente porque" + ex); 
+                }
             }
         }
         private void btnagregar_Click(object sender, EventArgs e)
@@ -506,11 +525,16 @@ namespace Primera_Practica
                 {
                     CNproducto.Eliminar_Producto(ID);
                     VentanaEmergente("Se elimino correctamente", "Exito");
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Eliminar producto - exitoso");
                     Tablaproductos();
                 }
 
             }
-            else { MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); }
+            else 
+            { 
+                MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Eliminar producto - Fallido");
+            }
         }
 
         private void btnreactivarProd_Click(object sender, EventArgs e)
@@ -626,11 +650,13 @@ namespace Primera_Practica
                 {
                     CNclientes.Registrar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Cliente - exitoso");
                     await Tablaclientes();
                     panelAux_Clientes.Visible = false;
                 }
                 catch (Exception ex)
                 {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Cliente - Fallido");
                     MessageBox.Show("No se registro correctamente porque" + ex, "Error");
                 }
             }
@@ -643,13 +669,17 @@ namespace Primera_Practica
                     {
                         CNclientes.Editar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text, ID);
                         MessageBox.Show("El cliente fue editado");
-                        await Tablaclientes();
+                        Tablaclientes();
                         panelAux_Clientes.Visible = false;
                         Editar = false;
                     }
                     else { panelAux_Clientes.Visible = false; Editar = false; }
                 }
-                catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex, "Error"); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar Cliente - Fallido");
+                    MessageBox.Show("No se edito correctamente porque" + ex, "Error"); 
+                }
             }
 
         }
@@ -660,11 +690,14 @@ namespace Primera_Practica
             {
                 RealizarAct = VentanaConfirmacion();
                 ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
-                CNclientes.Desactivar_Cliente(ID);
-                await Tablaclientes();
+                CNcolmado.Desactivar_Cliente(ID);
+                Tablaclientes();
                 panelAux_Clientes.Visible = false;
             }
-            else { VentanaEmergente("Seleccione una fila", "Error"); }
+            else 
+            {
+                VentanaEmergente("Seleccione una fila", "Error");
+            }
         }
 
         private void btnRegistrarSaldo_Click(object sender, EventArgs e)
@@ -750,6 +783,7 @@ namespace Primera_Practica
                 CNcolmado.AnularVenta(idVenta);
                 MessageBox.Show("Venta anulada correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Anular Venta - exitoso");
                 btnVerHistorial_Click(sender, e); // recargar historial
             }
         }
@@ -784,6 +818,7 @@ namespace Primera_Practica
             CNcolmado.CompletarVenta(idVenta);
             MessageBox.Show("Venta completada correctamente.", "Éxito",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Completar Venta - exitoso");
             btnVerHistorial_Click(sender, e);
         }
         private void btnVerDetalle_Click(object sender, EventArgs e)
@@ -804,9 +839,18 @@ namespace Primera_Practica
         }
 
 
-        #endregion
 
-       
+        #endregion
+        #region Panel Auditoria
+        private void TablaAuditoria()
+        {
+            
+            CN_Auditoria auditoria = new CN_Auditoria();
+            dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
+
+        }
+
+        #endregion
     }
 
 }
