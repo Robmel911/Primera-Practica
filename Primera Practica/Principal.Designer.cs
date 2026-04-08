@@ -85,9 +85,10 @@ namespace Primera_Practica
             this.tituloauxCl = new System.Windows.Forms.Label();
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.panelAuditoria = new System.Windows.Forms.Panel();
-            this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
+            this.dataGrid1 = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,8 +108,10 @@ namespace Primera_Practica
             this.panel2.SuspendLayout();
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
+            this.panelAuditoria.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
@@ -1018,24 +1021,34 @@ namespace Primera_Practica
             // 
             // panelAuditoria
             // 
+            this.panelAuditoria.Controls.Add(this.dataGridAuditoria);
             this.panelAuditoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAuditoria.Location = new System.Drawing.Point(0, 0);
             this.panelAuditoria.Name = "panelAuditoria";
             this.panelAuditoria.Size = new System.Drawing.Size(1222, 734);
             this.panelAuditoria.TabIndex = 5;
             // 
-            // dataGridAuditoria
+            // dataGrid1
             // 
-            this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridAuditoria.Location = new System.Drawing.Point(0, 0);
-            this.dataGridAuditoria.Name = "dataGridAuditoria";
-            this.dataGridAuditoria.RowHeadersWidth = 62;
-            this.dataGridAuditoria.Size = new System.Drawing.Size(240, 150);
-            this.dataGridAuditoria.TabIndex = 0;
+            this.dataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid1.Location = new System.Drawing.Point(5, 80);
+            this.dataGrid1.Name = "dataGrid1";
+            this.dataGrid1.ReadOnly = true;
+            this.dataGrid1.RowHeadersWidth = 62;
+            this.dataGrid1.Size = new System.Drawing.Size(240, 150);
+            this.dataGrid1.TabIndex = 0;
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // dataGridAuditoria
+            // 
+            this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAuditoria.Location = new System.Drawing.Point(193, 73);
+            this.dataGridAuditoria.Name = "dataGridAuditoria";
+            this.dataGridAuditoria.Size = new System.Drawing.Size(558, 369);
+            this.dataGridAuditoria.TabIndex = 0;
             // 
             // Principal
             // 
@@ -1083,8 +1096,10 @@ namespace Primera_Practica
             this.panelAux_Clientes.ResumeLayout(false);
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
+            this.panelAuditoria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1161,6 +1176,7 @@ namespace Primera_Practica
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblAlerta;
+        private System.Windows.Forms.DataGridView dataGrid1;
         private System.Windows.Forms.DataGridView dataGridAuditoria;
     }
 }

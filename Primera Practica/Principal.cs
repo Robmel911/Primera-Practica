@@ -174,6 +174,7 @@ namespace Primera_Practica
             panelVentas.Visible = false;
             panelClientes.Visible = false;
             panelAux_Productos.Visible = false;
+            panelAuditoria.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
@@ -214,6 +215,13 @@ namespace Primera_Practica
             MostrarPanel(panelClientes);
             MarcarBotonActivo(btnClientes);
             Tablaclientes();
+        }
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            MostrarPanel(panelAuditoria);
+            MarcarBotonActivo(btnAuditoria);
+            TablaAuditoria();
+
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
@@ -796,8 +804,9 @@ namespace Primera_Practica
 
         #endregion
         #region Panel Auditoria
-        private void btnAuditoria_Click(object sender, EventArgs e)
+        private void TablaAuditoria()
         {
+            
             CN_Auditoria auditoria = new CN_Auditoria();
             dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
 
