@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_Auditoria : Conexion
+    public class CD_Auditoria : CD_Base
     {
         SqlCommand cmd = new SqlCommand();
         Conexion conexion = new Conexion();
         DataTable tabla = new DataTable();
-        SqlDataReader leer;
+       
         public void Insertar(int IdUsuario, string Accion)
         {
             cmd.Connection = conexion.ObtenerConexion();
@@ -25,16 +25,9 @@ namespace CapaDatos
             cmd.Parameters.Clear();
         }
 
-        public DataTable MostrarTabla()
+        public override DataTable MostrarT()
         {
-            tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = "MostrarAuditoria";
-            cmd.CommandType = CommandType.StoredProcedure;
-            leer = cmd.ExecuteReader();
-            tabla.Load(leer);
-            conexion.CerrarConexion();
-            return tabla;
+            return MostrarTabla("MostrarAuditoria");
         }
     }
 }

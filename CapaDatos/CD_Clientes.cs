@@ -9,24 +9,15 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_Clientes
+    public class CD_Clientes : CD_Base
     {
         private Conexion Conector = new Conexion();
 
 
         SqlCommand cmd = new SqlCommand();
-        public DataTable MostrarTabla()
+        public override DataTable MostrarT()
         {
-            Conexion conexion = new Conexion();
-            SqlDataReader Leer;
-            DataTable Tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = $"select *from Clientes where Activo=1";
-            Leer = cmd.ExecuteReader();
-            Tabla.Load(Leer);
-            cmd.Parameters.Clear();
-            cmd.Connection = conexion.CerrarConexion();
-            return Tabla;
+            return MostrarTabla("MostrarClientes");
         }
         public void Registrar_Clientes(string nombre, string telefono, string informacion)
         {
