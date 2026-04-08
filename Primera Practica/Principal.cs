@@ -23,7 +23,7 @@ namespace Primera_Practica
         private Menu_auxiliar menuAuxiliar = new Menu_auxiliar("");
         private const int MENU_COLAPSADO = 35;
         private const int MENU_EXPANDIDO = 200;
-        private const int VELOCIDAD_ANIM = 30;
+        private const int VELOCIDAD_ANIM = 80;
         private bool menuExpandiendo = false;
         private bool Editar = false;
         private string ID;
@@ -204,6 +204,7 @@ namespace Primera_Practica
             btnProductos.BackColor = Color.Transparent;
             btnVentas.BackColor = Color.Transparent;
             btnClientes.BackColor = Color.Transparent;
+            btnAuditoria.BackColor = Color.Transparent;
             dgvHistorialVentas.DataSource = null;
             btnActivo.BackColor = Color.FromArgb(46, 125, 50);
         }

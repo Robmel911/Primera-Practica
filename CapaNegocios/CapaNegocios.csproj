@@ -41,11 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="CN_Clientes.cs" />
-=======
     <Compile Include="CN_Auditoria.cs" />
->>>>>>> jevenssen
     <Compile Include="CN_Colmado.cs" />
     <Compile Include="CN_Usuarios.cs" />
     <Compile Include="CN_Producto.cs" />

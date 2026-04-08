@@ -35,6 +35,7 @@ namespace Primera_Practica
             this.dgvVentasDelDia = new System.Windows.Forms.DataGridView();
             this.lblTotalDia = new System.Windows.Forms.Label();
             this.panelProductos = new System.Windows.Forms.Panel();
+            this.btnMostraropciones = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.panelbtns_Productos = new System.Windows.Forms.Panel();
             this.btnreactivarProd = new System.Windows.Forms.Button();
@@ -85,11 +86,10 @@ namespace Primera_Practica
             this.tituloauxCl = new System.Windows.Forms.Label();
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.panelAuditoria = new System.Windows.Forms.Panel();
+            this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
             this.dataGrid1 = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnMostraropciones = new System.Windows.Forms.Button();
-            this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,9 +110,9 @@ namespace Primera_Practica
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             this.panelAuditoria.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLateral
@@ -126,7 +126,7 @@ namespace Primera_Practica
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLateral.Location = new System.Drawing.Point(0, 0);
             this.panelLateral.Name = "panelLateral";
-            this.panelLateral.Size = new System.Drawing.Size(58, 734);
+            this.panelLateral.Size = new System.Drawing.Size(35, 733);
             this.panelLateral.TabIndex = 0;
             this.panelLateral.MouseEnter += new System.EventHandler(this.panelLateral_MouseEnter);
             this.panelLateral.MouseLeave += new System.EventHandler(this.panelLateral_MouseLeave);
@@ -143,9 +143,9 @@ namespace Primera_Practica
             this.btnAuditoria.ForeColor = System.Drawing.Color.White;
             this.btnAuditoria.Location = new System.Drawing.Point(0, 200);
             this.btnAuditoria.Name = "btnAuditoria";
-            this.btnAuditoria.Size = new System.Drawing.Size(58, 50);
+            this.btnAuditoria.Size = new System.Drawing.Size(35, 50);
             this.btnAuditoria.TabIndex = 4;
-            this.btnAuditoria.Text = "👤  Auditoria";
+            this.btnAuditoria.Text = "📄  Auditoria";
             this.btnAuditoria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAuditoria.UseVisualStyleBackColor = false;
             this.btnAuditoria.Click += new System.EventHandler(this.btnAuditoria_Click);
@@ -162,7 +162,7 @@ namespace Primera_Practica
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Location = new System.Drawing.Point(0, 150);
             this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(58, 50);
+            this.btnClientes.Size = new System.Drawing.Size(35, 50);
             this.btnClientes.TabIndex = 3;
             this.btnClientes.Text = "👤  Clientes";
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -183,9 +183,9 @@ namespace Primera_Practica
             this.btnVentas.ForeColor = System.Drawing.Color.White;
             this.btnVentas.Location = new System.Drawing.Point(0, 100);
             this.btnVentas.Name = "btnVentas";
-            this.btnVentas.Size = new System.Drawing.Size(58, 50);
+            this.btnVentas.Size = new System.Drawing.Size(35, 50);
             this.btnVentas.TabIndex = 2;
-            this.btnVentas.Text = "🧾  Ventas";
+            this.btnVentas.Text = "🛒  Ventas";
             this.btnVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVentas.UseVisualStyleBackColor = false;
             this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
@@ -204,7 +204,7 @@ namespace Primera_Practica
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Location = new System.Drawing.Point(0, 50);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(58, 50);
+            this.btnProductos.Size = new System.Drawing.Size(35, 50);
             this.btnProductos.TabIndex = 1;
             this.btnProductos.Text = "📦  Productos";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -225,7 +225,7 @@ namespace Primera_Practica
             this.btnInicio.ForeColor = System.Drawing.Color.White;
             this.btnInicio.Location = new System.Drawing.Point(0, 0);
             this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(58, 50);
+            this.btnInicio.Size = new System.Drawing.Size(35, 50);
             this.btnInicio.TabIndex = 0;
             this.btnInicio.Text = "🏠  Inicio";
             this.btnInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -244,9 +244,10 @@ namespace Primera_Practica
             this.panelInicio.Controls.Add(this.panelTop5);
             this.panelInicio.Controls.Add(this.button1);
             this.panelInicio.Controls.Add(this.panelVentasdia);
-            this.panelInicio.Location = new System.Drawing.Point(58, 0);
+            this.panelInicio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelInicio.Location = new System.Drawing.Point(0, 0);
             this.panelInicio.Name = "panelInicio";
-            this.panelInicio.Size = new System.Drawing.Size(1222, 734);
+            this.panelInicio.Size = new System.Drawing.Size(1280, 733);
             this.panelInicio.TabIndex = 1;
             // 
             // lblAlerta
@@ -256,7 +257,7 @@ namespace Primera_Practica
             this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
             this.lblAlerta.Location = new System.Drawing.Point(174, 546);
             this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(63, 15);
+            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
             this.lblAlerta.TabIndex = 10;
             this.lblAlerta.Text = "Productos";
             // 
@@ -278,7 +279,7 @@ namespace Primera_Practica
             this.lbltop5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.lbltop5.Location = new System.Drawing.Point(236, 106);
             this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(369, 54);
+            this.lbltop5.Size = new System.Drawing.Size(557, 81);
             this.lbltop5.TabIndex = 0;
             this.lbltop5.Text = "Colmado El clasico";
             // 
@@ -368,7 +369,7 @@ namespace Primera_Practica
             this.lblTotalDia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.lblTotalDia.Location = new System.Drawing.Point(48, 372);
             this.lblTotalDia.Name = "lblTotalDia";
-            this.lblTotalDia.Size = new System.Drawing.Size(246, 30);
+            this.lblTotalDia.Size = new System.Drawing.Size(357, 45);
             this.lblTotalDia.TabIndex = 0;
             this.lblTotalDia.Text = "Total del día: RD$ 0.00";
             // 
@@ -380,10 +381,24 @@ namespace Primera_Practica
             this.panelProductos.Controls.Add(this.panelbtns_Productos);
             this.panelProductos.Controls.Add(this.panelAux_Productos);
             this.panelProductos.Controls.Add(this.dataGrid_Productos);
-            this.panelProductos.Location = new System.Drawing.Point(58, 0);
+            this.panelProductos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelProductos.Location = new System.Drawing.Point(0, 0);
             this.panelProductos.Name = "panelProductos";
-            this.panelProductos.Size = new System.Drawing.Size(1222, 734);
+            this.panelProductos.Size = new System.Drawing.Size(1280, 733);
             this.panelProductos.TabIndex = 2;
+            // 
+            // btnMostraropciones
+            // 
+            this.btnMostraropciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnMostraropciones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnMostraropciones.ForeColor = System.Drawing.Color.White;
+            this.btnMostraropciones.Location = new System.Drawing.Point(0, 488);
+            this.btnMostraropciones.Name = "btnMostraropciones";
+            this.btnMostraropciones.Size = new System.Drawing.Size(1045, 104);
+            this.btnMostraropciones.TabIndex = 8;
+            this.btnMostraropciones.Text = "Mostrar opciones";
+            this.btnMostraropciones.UseVisualStyleBackColor = false;
+            this.btnMostraropciones.Click += new System.EventHandler(this.btnMostraropciones_Click);
             // 
             // label10
             // 
@@ -392,7 +407,7 @@ namespace Primera_Practica
             this.label10.ForeColor = System.Drawing.Color.DarkGreen;
             this.label10.Location = new System.Drawing.Point(421, 13);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(148, 37);
+            this.label10.Size = new System.Drawing.Size(214, 54);
             this.label10.TabIndex = 9;
             this.label10.Text = "Productos";
             // 
@@ -404,9 +419,9 @@ namespace Primera_Practica
             this.panelbtns_Productos.Controls.Add(this.btneditarProd);
             this.panelbtns_Productos.Controls.Add(this.btneliminarProd);
             this.panelbtns_Productos.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelbtns_Productos.Location = new System.Drawing.Point(0, 593);
+            this.panelbtns_Productos.Location = new System.Drawing.Point(0, 592);
             this.panelbtns_Productos.Name = "panelbtns_Productos";
-            this.panelbtns_Productos.Size = new System.Drawing.Size(987, 141);
+            this.panelbtns_Productos.Size = new System.Drawing.Size(1045, 141);
             this.panelbtns_Productos.TabIndex = 8;
             // 
             // btnreactivarProd
@@ -496,9 +511,9 @@ namespace Primera_Practica
             this.panelAux_Productos.Controls.Add(this.btnguardarProd);
             this.panelAux_Productos.Controls.Add(this.label_panelAux);
             this.panelAux_Productos.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAux_Productos.Location = new System.Drawing.Point(987, 0);
+            this.panelAux_Productos.Location = new System.Drawing.Point(1045, 0);
             this.panelAux_Productos.Name = "panelAux_Productos";
-            this.panelAux_Productos.Size = new System.Drawing.Size(235, 734);
+            this.panelAux_Productos.Size = new System.Drawing.Size(235, 733);
             this.panelAux_Productos.TabIndex = 7;
             // 
             // TextCodigoProd
@@ -506,7 +521,7 @@ namespace Primera_Practica
             this.TextCodigoProd.Location = new System.Drawing.Point(27, 569);
             this.TextCodigoProd.Mask = "aa-000";
             this.TextCodigoProd.Name = "TextCodigoProd";
-            this.TextCodigoProd.Size = new System.Drawing.Size(176, 23);
+            this.TextCodigoProd.Size = new System.Drawing.Size(176, 31);
             this.TextCodigoProd.TabIndex = 16;
             // 
             // label1
@@ -516,7 +531,7 @@ namespace Primera_Practica
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label1.Location = new System.Drawing.Point(23, 546);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
+            this.label1.Size = new System.Drawing.Size(72, 25);
             this.label1.TabIndex = 15;
             this.label1.Text = "Codigo";
             // 
@@ -542,7 +557,7 @@ namespace Primera_Practica
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label6.Location = new System.Drawing.Point(23, 440);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
+            this.label6.Size = new System.Drawing.Size(88, 25);
             this.label6.TabIndex = 12;
             this.label6.Text = "Cantidad";
             // 
@@ -553,7 +568,7 @@ namespace Primera_Practica
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label5.Location = new System.Drawing.Point(19, 340);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 15);
+            this.label5.Size = new System.Drawing.Size(65, 25);
             this.label5.TabIndex = 11;
             this.label5.Text = "Precio";
             // 
@@ -564,7 +579,7 @@ namespace Primera_Practica
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label4.Location = new System.Drawing.Point(19, 249);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 15);
+            this.label4.Size = new System.Drawing.Size(65, 25);
             this.label4.TabIndex = 10;
             this.label4.Text = "Marca";
             // 
@@ -575,7 +590,7 @@ namespace Primera_Practica
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label3.Location = new System.Drawing.Point(23, 151);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 15);
+            this.label3.Size = new System.Drawing.Size(111, 25);
             this.label3.TabIndex = 9;
             this.label3.Text = "Descripción";
             // 
@@ -586,7 +601,7 @@ namespace Primera_Practica
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label2.Location = new System.Drawing.Point(23, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 15);
+            this.label2.Size = new System.Drawing.Size(81, 25);
             this.label2.TabIndex = 8;
             this.label2.Text = "Nombre";
             // 
@@ -599,7 +614,7 @@ namespace Primera_Practica
             0,
             0});
             this.textStockProd.Name = "textStockProd";
-            this.textStockProd.Size = new System.Drawing.Size(176, 23);
+            this.textStockProd.Size = new System.Drawing.Size(176, 31);
             this.textStockProd.TabIndex = 7;
             // 
             // textMarcaProd
@@ -607,28 +622,28 @@ namespace Primera_Practica
             this.textMarcaProd.FormattingEnabled = true;
             this.textMarcaProd.Location = new System.Drawing.Point(23, 272);
             this.textMarcaProd.Name = "textMarcaProd";
-            this.textMarcaProd.Size = new System.Drawing.Size(176, 23);
+            this.textMarcaProd.Size = new System.Drawing.Size(176, 33);
             this.textMarcaProd.TabIndex = 6;
             // 
             // textPrecioProd
             // 
             this.textPrecioProd.Location = new System.Drawing.Point(23, 363);
             this.textPrecioProd.Name = "textPrecioProd";
-            this.textPrecioProd.Size = new System.Drawing.Size(176, 23);
+            this.textPrecioProd.Size = new System.Drawing.Size(176, 31);
             this.textPrecioProd.TabIndex = 5;
             // 
             // textDescProd
             // 
             this.textDescProd.Location = new System.Drawing.Point(23, 174);
             this.textDescProd.Name = "textDescProd";
-            this.textDescProd.Size = new System.Drawing.Size(176, 23);
+            this.textDescProd.Size = new System.Drawing.Size(176, 31);
             this.textDescProd.TabIndex = 3;
             // 
             // textNombreProd
             // 
             this.textNombreProd.Location = new System.Drawing.Point(23, 80);
             this.textNombreProd.Name = "textNombreProd";
-            this.textNombreProd.Size = new System.Drawing.Size(176, 23);
+            this.textNombreProd.Size = new System.Drawing.Size(176, 31);
             this.textNombreProd.TabIndex = 2;
             // 
             // btnguardarProd
@@ -640,7 +655,7 @@ namespace Primera_Practica
             this.btnguardarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnguardarProd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnguardarProd.ForeColor = System.Drawing.Color.White;
-            this.btnguardarProd.Location = new System.Drawing.Point(0, 684);
+            this.btnguardarProd.Location = new System.Drawing.Point(0, 683);
             this.btnguardarProd.Name = "btnguardarProd";
             this.btnguardarProd.Size = new System.Drawing.Size(235, 50);
             this.btnguardarProd.TabIndex = 1;
@@ -655,7 +670,7 @@ namespace Primera_Practica
             this.label_panelAux.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label_panelAux.Location = new System.Drawing.Point(64, 13);
             this.label_panelAux.Name = "label_panelAux";
-            this.label_panelAux.Size = new System.Drawing.Size(55, 21);
+            this.label_panelAux.Size = new System.Drawing.Size(81, 32);
             this.label_panelAux.TabIndex = 0;
             this.label_panelAux.Text = "Titulo";
             // 
@@ -679,9 +694,10 @@ namespace Primera_Practica
             this.panelVentas.Controls.Add(this.label12);
             this.panelVentas.Controls.Add(this.panel3);
             this.panelVentas.Controls.Add(this.dgvHistorialVentas);
-            this.panelVentas.Location = new System.Drawing.Point(58, 0);
+            this.panelVentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelVentas.Location = new System.Drawing.Point(35, 0);
             this.panelVentas.Name = "panelVentas";
-            this.panelVentas.Size = new System.Drawing.Size(1222, 734);
+            this.panelVentas.Size = new System.Drawing.Size(1245, 733);
             this.panelVentas.TabIndex = 3;
             // 
             // label12
@@ -689,9 +705,9 @@ namespace Primera_Practica
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.label12.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label12.Location = new System.Drawing.Point(473, 19);
+            this.label12.Location = new System.Drawing.Point(473, 6);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(220, 37);
+            this.label12.Size = new System.Drawing.Size(320, 54);
             this.label12.TabIndex = 10;
             this.label12.Text = "Historial Ventas";
             // 
@@ -703,9 +719,9 @@ namespace Primera_Practica
             this.panel3.Controls.Add(this.btnAprobarVenta);
             this.panel3.Controls.Add(this.btnVerHistorial);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 593);
+            this.panel3.Location = new System.Drawing.Point(0, 573);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1222, 141);
+            this.panel3.Size = new System.Drawing.Size(1245, 160);
             this.panel3.TabIndex = 6;
             // 
             // btnRegistrar_venta
@@ -719,7 +735,7 @@ namespace Primera_Practica
             this.btnRegistrar_venta.ForeColor = System.Drawing.Color.White;
             this.btnRegistrar_venta.Location = new System.Drawing.Point(876, 0);
             this.btnRegistrar_venta.Name = "btnRegistrar_venta";
-            this.btnRegistrar_venta.Size = new System.Drawing.Size(300, 141);
+            this.btnRegistrar_venta.Size = new System.Drawing.Size(300, 160);
             this.btnRegistrar_venta.TabIndex = 0;
             this.btnRegistrar_venta.Text = "Realizar Venta";
             this.btnRegistrar_venta.UseVisualStyleBackColor = false;
@@ -736,7 +752,7 @@ namespace Primera_Practica
             this.btnVerDetalle.ForeColor = System.Drawing.Color.White;
             this.btnVerDetalle.Location = new System.Drawing.Point(635, 0);
             this.btnVerDetalle.Name = "btnVerDetalle";
-            this.btnVerDetalle.Size = new System.Drawing.Size(241, 141);
+            this.btnVerDetalle.Size = new System.Drawing.Size(241, 160);
             this.btnVerDetalle.TabIndex = 5;
             this.btnVerDetalle.Text = "Mostrar venta";
             this.btnVerDetalle.UseVisualStyleBackColor = false;
@@ -753,7 +769,7 @@ namespace Primera_Practica
             this.btnAnularVenta.ForeColor = System.Drawing.Color.White;
             this.btnAnularVenta.Location = new System.Drawing.Point(413, 0);
             this.btnAnularVenta.Name = "btnAnularVenta";
-            this.btnAnularVenta.Size = new System.Drawing.Size(222, 141);
+            this.btnAnularVenta.Size = new System.Drawing.Size(222, 160);
             this.btnAnularVenta.TabIndex = 2;
             this.btnAnularVenta.Text = "Anular venta";
             this.btnAnularVenta.UseVisualStyleBackColor = false;
@@ -770,7 +786,7 @@ namespace Primera_Practica
             this.btnAprobarVenta.ForeColor = System.Drawing.Color.White;
             this.btnAprobarVenta.Location = new System.Drawing.Point(208, 0);
             this.btnAprobarVenta.Name = "btnAprobarVenta";
-            this.btnAprobarVenta.Size = new System.Drawing.Size(205, 141);
+            this.btnAprobarVenta.Size = new System.Drawing.Size(205, 160);
             this.btnAprobarVenta.TabIndex = 4;
             this.btnAprobarVenta.Text = "AprobarVenta";
             this.btnAprobarVenta.UseVisualStyleBackColor = false;
@@ -787,7 +803,7 @@ namespace Primera_Practica
             this.btnVerHistorial.ForeColor = System.Drawing.Color.White;
             this.btnVerHistorial.Location = new System.Drawing.Point(0, 0);
             this.btnVerHistorial.Name = "btnVerHistorial";
-            this.btnVerHistorial.Size = new System.Drawing.Size(208, 141);
+            this.btnVerHistorial.Size = new System.Drawing.Size(208, 160);
             this.btnVerHistorial.TabIndex = 3;
             this.btnVerHistorial.Text = "Mostrar historial";
             this.btnVerHistorial.UseVisualStyleBackColor = false;
@@ -798,7 +814,7 @@ namespace Primera_Practica
             this.dgvHistorialVentas.AllowUserToAddRows = false;
             this.dgvHistorialVentas.AllowUserToDeleteRows = false;
             this.dgvHistorialVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorialVentas.Location = new System.Drawing.Point(39, 91);
+            this.dgvHistorialVentas.Location = new System.Drawing.Point(39, 70);
             this.dgvHistorialVentas.Name = "dgvHistorialVentas";
             this.dgvHistorialVentas.RowHeadersWidth = 62;
             this.dgvHistorialVentas.RowTemplate.Height = 28;
@@ -812,9 +828,10 @@ namespace Primera_Practica
             this.panelClientes.Controls.Add(this.panel2);
             this.panelClientes.Controls.Add(this.panelAux_Clientes);
             this.panelClientes.Controls.Add(this.dataGrid_Clientes);
-            this.panelClientes.Location = new System.Drawing.Point(58, 0);
+            this.panelClientes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelClientes.Location = new System.Drawing.Point(0, 0);
             this.panelClientes.Name = "panelClientes";
-            this.panelClientes.Size = new System.Drawing.Size(1222, 734);
+            this.panelClientes.Size = new System.Drawing.Size(1280, 733);
             this.panelClientes.TabIndex = 4;
             // 
             // label11
@@ -824,7 +841,7 @@ namespace Primera_Practica
             this.label11.ForeColor = System.Drawing.Color.DarkGreen;
             this.label11.Location = new System.Drawing.Point(448, 13);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(119, 37);
+            this.label11.Size = new System.Drawing.Size(172, 54);
             this.label11.TabIndex = 10;
             this.label11.Text = "Clientes";
             // 
@@ -835,9 +852,9 @@ namespace Primera_Practica
             this.panel2.Controls.Add(this.btneliminar_Cl);
             this.panel2.Controls.Add(this.btneditar_Cl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 557);
+            this.panel2.Location = new System.Drawing.Point(0, 556);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(987, 177);
+            this.panel2.Size = new System.Drawing.Size(1045, 177);
             this.panel2.TabIndex = 6;
             // 
             // btnRegistrarSaldo
@@ -920,9 +937,9 @@ namespace Primera_Practica
             this.panelAux_Clientes.Controls.Add(this.textNombreCl);
             this.panelAux_Clientes.Controls.Add(this.tituloauxCl);
             this.panelAux_Clientes.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelAux_Clientes.Location = new System.Drawing.Point(987, 0);
+            this.panelAux_Clientes.Location = new System.Drawing.Point(1045, 0);
             this.panelAux_Clientes.Name = "panelAux_Clientes";
-            this.panelAux_Clientes.Size = new System.Drawing.Size(235, 734);
+            this.panelAux_Clientes.Size = new System.Drawing.Size(235, 733);
             this.panelAux_Clientes.TabIndex = 1;
             this.panelAux_Clientes.Visible = false;
             // 
@@ -935,7 +952,7 @@ namespace Primera_Practica
             this.btnguardar_Cl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnguardar_Cl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnguardar_Cl.ForeColor = System.Drawing.Color.White;
-            this.btnguardar_Cl.Location = new System.Drawing.Point(0, 546);
+            this.btnguardar_Cl.Location = new System.Drawing.Point(0, 545);
             this.btnguardar_Cl.Name = "btnguardar_Cl";
             this.btnguardar_Cl.Size = new System.Drawing.Size(235, 188);
             this.btnguardar_Cl.TabIndex = 7;
@@ -950,7 +967,7 @@ namespace Primera_Practica
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label9.Location = new System.Drawing.Point(22, 168);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 15);
+            this.label9.Size = new System.Drawing.Size(116, 25);
             this.label9.TabIndex = 6;
             this.label9.Text = "Informacion";
             // 
@@ -961,7 +978,7 @@ namespace Primera_Practica
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label8.Location = new System.Drawing.Point(22, 112);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 15);
+            this.label8.Size = new System.Drawing.Size(86, 25);
             this.label8.TabIndex = 5;
             this.label8.Text = "Telefono";
             // 
@@ -972,7 +989,7 @@ namespace Primera_Practica
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.label7.Location = new System.Drawing.Point(22, 48);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 15);
+            this.label7.Size = new System.Drawing.Size(81, 25);
             this.label7.TabIndex = 4;
             this.label7.Text = "Nombre";
             // 
@@ -990,14 +1007,14 @@ namespace Primera_Practica
             this.textTelefonoCl.Location = new System.Drawing.Point(22, 128);
             this.textTelefonoCl.Mask = "000-000-0000";
             this.textTelefonoCl.Name = "textTelefonoCl";
-            this.textTelefonoCl.Size = new System.Drawing.Size(114, 23);
+            this.textTelefonoCl.Size = new System.Drawing.Size(114, 31);
             this.textTelefonoCl.TabIndex = 2;
             // 
             // textNombreCl
             // 
             this.textNombreCl.Location = new System.Drawing.Point(22, 67);
             this.textNombreCl.Name = "textNombreCl";
-            this.textNombreCl.Size = new System.Drawing.Size(177, 23);
+            this.textNombreCl.Size = new System.Drawing.Size(177, 31);
             this.textNombreCl.TabIndex = 1;
             // 
             // tituloauxCl
@@ -1007,7 +1024,7 @@ namespace Primera_Practica
             this.tituloauxCl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             this.tituloauxCl.Location = new System.Drawing.Point(64, 13);
             this.tituloauxCl.Name = "tituloauxCl";
-            this.tituloauxCl.Size = new System.Drawing.Size(57, 21);
+            this.tituloauxCl.Size = new System.Drawing.Size(83, 32);
             this.tituloauxCl.TabIndex = 0;
             this.tituloauxCl.Text = "label1";
             // 
@@ -1027,8 +1044,17 @@ namespace Primera_Practica
             this.panelAuditoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAuditoria.Location = new System.Drawing.Point(0, 0);
             this.panelAuditoria.Name = "panelAuditoria";
-            this.panelAuditoria.Size = new System.Drawing.Size(1222, 734);
+            this.panelAuditoria.Size = new System.Drawing.Size(1280, 733);
             this.panelAuditoria.TabIndex = 5;
+            // 
+            // dataGridAuditoria
+            // 
+            this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAuditoria.Location = new System.Drawing.Point(193, 73);
+            this.dataGridAuditoria.Name = "dataGridAuditoria";
+            this.dataGridAuditoria.RowHeadersWidth = 62;
+            this.dataGridAuditoria.Size = new System.Drawing.Size(558, 369);
+            this.dataGridAuditoria.TabIndex = 0;
             // 
             // dataGrid1
             // 
@@ -1040,39 +1066,22 @@ namespace Primera_Practica
             this.dataGrid1.Size = new System.Drawing.Size(240, 150);
             this.dataGrid1.TabIndex = 0;
             // 
+            // timerMenu
+            // 
+            this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // btnMostraropciones
-            // 
-            this.btnMostraropciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.btnMostraropciones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnMostraropciones.ForeColor = System.Drawing.Color.White;
-            this.btnMostraropciones.Location = new System.Drawing.Point(0, 489);
-            this.btnMostraropciones.Name = "btnMostraropciones";
-            this.btnMostraropciones.Size = new System.Drawing.Size(987, 104);
-            this.btnMostraropciones.TabIndex = 8;
-            this.btnMostraropciones.Text = "Mostrar opciones";
-            this.btnMostraropciones.UseVisualStyleBackColor = false;
-            this.btnMostraropciones.Click += new System.EventHandler(this.btnMostraropciones_Click);
-            // 
-            // dataGridAuditoria
-            // 
-            this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridAuditoria.Location = new System.Drawing.Point(193, 73);
-            this.dataGridAuditoria.Name = "dataGridAuditoria";
-            this.dataGridAuditoria.Size = new System.Drawing.Size(558, 369);
-            this.dataGridAuditoria.TabIndex = 0;
-            // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1222, 734);
-            this.Controls.Add(this.panelLateral);
+            this.ClientSize = new System.Drawing.Size(1280, 733);
             this.Controls.Add(this.panelVentas);
+            this.Controls.Add(this.panelLateral);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelAuditoria);
             this.Controls.Add(this.panelInicio);
@@ -1112,9 +1121,9 @@ namespace Primera_Practica
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             this.panelAuditoria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
             this.ResumeLayout(false);
 
         }
