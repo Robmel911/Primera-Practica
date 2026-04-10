@@ -17,6 +17,11 @@ namespace CapaNegocios
         {
             return CDclientes.MostrarTabla("MostrarClientes");
         }
+        // TODO: ObtenerClientesDesactivados - Sin parámetros, llama al SP MostrarClientesDesactivados vía la capa de datos y retorna DataTable con todos los clientes desactivados
+        public DataTable ObtenerClientesDesactivados()
+        {
+            return CDclientes.MostrarClientesDesactivados();
+        }
 
         // TODO: Registrar_Cliente - Recibe nombre, telefono e informacion, los envía a la capa de datos para insertar el nuevo cliente en la BD
         public void Registrar_Cliente(string nombre, string telefono, string informacion)
@@ -59,5 +64,7 @@ namespace CapaNegocios
         {
             return CDclientes.ExisteTelefonoEditar(telefono, Convert.ToInt32(id));
         }
+
+       
     }
 }

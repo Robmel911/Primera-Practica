@@ -31,5 +31,10 @@ namespace CapaDatos
         {
             return MostrarTabla("MostrarAuditoria");
         }
+        // TODO: MostrarAuditoriaDetalle - Sin parámetros, llama al SP MostrarAuditoriaDetalle y retorna DataTable con todos los registros de auditoría detallados del sistema
+        public DataTable Mostrarauditoriadetalle()
+        {
+            return MostrarTabla("MostrarAuditoriaDetalle");
+        }
     }
 }

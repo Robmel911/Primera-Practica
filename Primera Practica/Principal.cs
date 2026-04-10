@@ -19,9 +19,11 @@ namespace Primera_Practica
         private CN_Colmado CNcolmado = new CN_Colmado();
         private CN_Clientes CNclientes = new CN_Clientes();
         private CN_Producto CNproducto = new CN_Producto();
+        private CN_Usuarios CNusuarios = new CN_Usuarios();
         private Menu_Ventas menuVentas = new Menu_Ventas();
         private Validaciones validaciones = new Validaciones();
         private Menu_auxiliar menuAuxiliar = new Menu_auxiliar("");
+        private Creditos creditos = new Creditos();
         private const int MENU_COLAPSADO = 35;
         private const int MENU_EXPANDIDO = 200;
         private const int VELOCIDAD_ANIM = 80;
@@ -29,6 +31,7 @@ namespace Primera_Practica
         private bool Editar = false;
         private string ID;
         private bool RealizarAct = false;
+        private string rol;
 
         public Principal()
         {
@@ -57,6 +60,7 @@ namespace Primera_Practica
             this.Show();
             // Maximiza la ventana
             this.WindowState = FormWindowState.Maximized;
+            rol = login.RolUsuario;
             Tablaproductos();
             await Tablaclientes();
             dataGrid_Productos.Columns["IdProducto"].Visible = false;
@@ -64,6 +68,7 @@ namespace Primera_Practica
             dgvVentasDelDia.Columns["IdVenta"].Visible = false;
             dgvVentasDelDia.Columns["Estado"].Visible = false;
         }
+        #region Funciones comunes
         private void desactivarbtn(Button btn)
         {
             btn.Enabled = false;
@@ -96,8 +101,9 @@ namespace Primera_Practica
             }
             else return false;
         }
-
+        #endregion
         #region Panel Inicio
+        //todo: Refactorizar el código de estilo de los DataGridView para evitar repetición. Crear una función genérica que reciba el DataGridView a estilizar y aplique el mismo formato a todos. Esto hará que el código sea más limpio y fácil de mantener.
         private void EstiloDataGrid_VentasDelDia()
         {
             dgvVentasDelDia.BackgroundColor = Color.White;
@@ -187,6 +193,7 @@ namespace Primera_Practica
         }
         #endregion
         #region Funcion del panel lateral
+        //todo: Refactorizar el código de los botones del menú lateral para evitar repetición. Crear una función genérica que reciba el panel a mostrar y el botón a marcar como activo, y que se encargue de ocultar los demás paneles y resetear el estilo de los botones. Esto hará que el código sea más limpio y fácil de mantener.
         private void MostrarPanel(Panel panelActivo)
         {
             panelInicio.Visible = false;
@@ -194,29 +201,32 @@ namespace Primera_Practica
             panelVentas.Visible = false;
             panelClientes.Visible = false;
             panelAux_Productos.Visible = false;
-            panelAuditoria.Visible = false;
+            panelRegistros.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
         }
-
+        //todo: Agregar un efecto visual (cambio de color o icono) en el botón del menú lateral correspondiente al panel activo para mejorar la navegación y la experiencia del usuario.
         private void MarcarBotonActivo(Button btnActivo)
         {
             btnInicio.BackColor = Color.Transparent;
             btnProductos.BackColor = Color.Transparent;
             btnVentas.BackColor = Color.Transparent;
             btnClientes.BackColor = Color.Transparent;
-            btnAuditoria.BackColor = Color.Transparent;
+            btnRegistro.BackColor = Color.Transparent;
+            btnCerrarSesion.BackColor = Color.Transparent;
+            btnAcercade.BackColor = Color.Transparent;
             dgvHistorialVentas.DataSource = null;
             btnActivo.BackColor = Color.FromArgb(46, 125, 50);
         }
+        //todo: En el panel de inicio, agregar un botón o función que permita actualizar los datos mostrados (ventas del día y top 5) sin necesidad de recargar toda la aplicación. Esto mejorará la experiencia del usuario al mantener la información actualizada en tiempo real.
         private void btnInicio_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelInicio);
             MarcarBotonActivo(btnInicio);
             CargarInicio();
         }
-
+        //todo: En el módulo de productos, agregar una función de búsqueda en tiempo real que permita filtrar los productos por nombre o código a medida que el usuario escribe en un cuadro de búsqueda. Esto mejorará la usabilidad y facilitará la gestión del inventario.
         private void btnProductos_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelProductos);
@@ -225,7 +235,7 @@ namespace Primera_Practica
             panelbtns_Productos.Visible= false;
             btnMostraropciones.Visible = true;
         }
-
+        //todo: En el módulo de ventas, agregar una función de búsqueda o filtro que permita al usuario encontrar rápidamente una venta específica por cliente, fecha o monto. Esto facilitará la gestión de ventas y la atención al cliente.
         private void btnVentas_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelVentas);
@@ -242,15 +252,52 @@ namespace Primera_Practica
         {
             MostrarPanel(panelClientes);
             MarcarBotonActivo(btnClientes);
+            ocultarbtn(btnReacCliente);
             await Tablaclientes();
         }
+        //todo: En el panel de auditoría, mostrar un resumen visual (gráficos o indicadores) de las acciones más comunes realizadas por los usuarios, además del registro detallado. Esto ayudará a identificar patrones de uso y posibles anomalías de forma rápida.
         private void btnAuditoria_Click(object sender, EventArgs e)
         {
-            MostrarPanel(panelAuditoria);
-            MarcarBotonActivo(btnAuditoria);
+            MostrarPanel(panelRegistros);
+            MarcarBotonActivo(btnRegistro);
             activarbtn(btnMostrarReg);
-            panelReg.Visible = false;
+            panelReg.Visible = false; 
+            if (rol == "Cajero")
+            {
+                btnModusuario.Visible = false;
+                btnAgrusuario.Visible = false;
+            }
 
+        }
+        //Todo: Al cerrar sesión, limpiar toda la información sensible de la sesión anterior y mostrar el formulario de login nuevamente. Si el login se cancela, cerrar toda la aplicación.
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            MarcarBotonActivo(btnCerrarSesion);
+            if (MessageBox.Show("¿Está seguro de cerrar sesión?", "Cerrar Sesión",
+        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide();
+                Login login = new Login();
+
+                if (login.ShowDialog() != DialogResult.OK)
+                {
+                    Application.Exit();
+                    return;
+                }
+
+                // Actualizar rol con el nuevo usuario
+                rol = login.RolUsuario;
+            
+                this.Show();
+                MarcarBotonActivo(btnInicio);
+                btnInicio.PerformClick(); // Simula clic para cargar el panel de inicio
+            }
+        }
+        private void btnAcercade_Click(object sender, EventArgs e)
+        {
+            MarcarBotonActivo(btnAcercade);
+            creditos.ShowDialog(); 
+            
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
@@ -344,6 +391,34 @@ namespace Primera_Practica
             dataGrid_Productos.DataSource = CNproducto.Obtenerdatos_Producto();
             DataCombobox_Productos();
                 VerificarStockBajo();
+        }
+        private void TablaProductosDesactivados()
+        {
+            dataGrid_Productos.DataSource = CNproducto.ObtenerProductosdesactivados();
+            DataCombobox_Productos();
+        }
+        private void chkverProddesac_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkverProddesac.Checked)
+            {
+                TablaProductosDesactivados();
+                mostrarbtn(btnMostraropciones);
+                panelbtns_Productos.Visible = false;
+                ocultarbtn(btneliminarProd);
+                ocultarbtn(btneditarProd);
+                ocultarbtn(btnagregarProd);
+                panelAux_Productos.Visible = false;
+                Limpiartextos_Productos();
+            }
+            else
+            {
+                Tablaproductos();
+                btnMostraropciones.Visible = true;
+                panelbtns_Productos.Visible = false;
+                mostrarbtn(btneliminarProd);
+                mostrarbtn(btneditarProd);
+                mostrarbtn(btnagregarProd);
+            }
         }
         private void dataGrid_Productos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -673,7 +748,7 @@ namespace Primera_Practica
                     {
                         CNclientes.Editar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text, ID);
                         MessageBox.Show("El cliente fue editado");
-                        Tablaclientes();
+                        await Tablaclientes();
                         panelAux_Clientes.Visible = false;
                         Editar = false;
                     }
@@ -694,7 +769,7 @@ namespace Primera_Practica
             {
                 RealizarAct = VentanaConfirmacion();
                 ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
-                CNcolmado.Desactivar_Cliente(ID);
+                CNclientes.Desactivar_Cliente(ID);
                 Tablaclientes();
                 panelAux_Clientes.Visible = false;
             }
@@ -709,8 +784,46 @@ namespace Primera_Practica
             menuAuxiliar = new Menu_auxiliar("Clientes");
             menuAuxiliar.ShowDialog();
         }
+        private async void chkClientesdesactivados_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkClientesdesactivados.Checked)
+            {
+                dataGrid_Clientes.DataSource = CNclientes.ObtenerClientesDesactivados();
+                ocultarbtn(btnRegistrarSaldo);
+                ocultarbtn(btneditar_Cl);
+                ocultarbtn(btneliminar_Cl);
+                ocultarbtn(btnregistrar_Cl);
+                panelAux_Clientes.Visible = false;
+                mostrarbtn(btnReacCliente);
+            }
+            else
+            {
+                await Tablaclientes();
+                mostrarbtn(btnRegistrarSaldo);
+                mostrarbtn(btneditar_Cl);
+                mostrarbtn(btneliminar_Cl);
+                mostrarbtn(btnregistrar_Cl);
+            }
+
+        }
+        private void btnReacCliente_Click(object sender, EventArgs e)
+        {
+            RealizarAct = VentanaConfirmacion();
+            if (RealizarAct == true)
+            {
+                if (dataGrid_Clientes.SelectedRows.Count > 0)
+                {
+                    ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
+                    CNclientes.Reactivar_Cliente(ID);
+                    VentanaEmergente("Cliente reactivado correctamente", "Éxito");
+                    chkClientesdesactivados.Checked = false;
+                }
+                else { VentanaEmergente("Seleccione una fila", "Error"); }
+            }
+        }
         #endregion
         #region Panel Ventas
+        //todo: En el panel de ventas, agregar una función de búsqueda o filtro que permita al usuario encontrar rápidamente una venta específica por cliente, fecha o monto. Esto facilitará la gestión de ventas y la atención al cliente.
         private void EstiloDataGrid_HistorialVentas()
         {
             dgvHistorialVentas.BackgroundColor = Color.White;
@@ -845,36 +958,205 @@ namespace Primera_Practica
 
 
         #endregion
-        #region Panel Auditoria
+        #region Panel Registros
+        #region Estilo y validaciones usuarios
+        ValidacionTexto vNombreusuario = new ValidacionTexto("Nombre de usuario", 20, true);
+        ValidacionTexto vContrausuario = new ValidacionTexto("Contraseña", 20, true);
+        private void EstiloDataGrid_Auditoria()
+        {
+            dataGridAuditoria.BackgroundColor = Color.White;
+            dataGridAuditoria.BorderStyle = BorderStyle.None;
+            dataGridAuditoria.RowHeadersVisible = false;
+            dataGridAuditoria.AllowUserToAddRows = false;
+            dataGridAuditoria.AllowUserToResizeRows = false;
+            dataGridAuditoria.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridAuditoria.ReadOnly = true;
+            dataGridAuditoria.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(27, 94, 32);
+            dataGridAuditoria.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridAuditoria.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridAuditoria.ColumnHeadersDefaultCellStyle.Padding = new Padding(5);
+            dataGridAuditoria.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridAuditoria.ColumnHeadersHeight = 40;
+            dataGridAuditoria.EnableHeadersVisualStyles = false;
+            dataGridAuditoria.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dataGridAuditoria.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGridAuditoria.DefaultCellStyle.BackColor = Color.White;
+            dataGridAuditoria.DefaultCellStyle.Padding = new Padding(5);
+            dataGridAuditoria.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 125, 50);
+            dataGridAuditoria.DefaultCellStyle.SelectionForeColor = Color.White;
+            dataGridAuditoria.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
+            dataGridAuditoria.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridAuditoria.GridColor = Color.FromArgb(200, 230, 201);
+            dataGridAuditoria.RowTemplate.Height = 35;
+            dataGridAuditoria.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dataGridAuditoria.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+        }
+        #endregion
         private void TablaAuditoria()
         {
             
             CN_Auditoria auditoria = new CN_Auditoria();
             dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
+            EstiloDataGrid_Auditoria();
 
+        }
+        private void CargarComboUsuarios()
+        {
+            DataTable tabla = CNusuarios.MostrarUsuario();
+            cmbUsuarios.DataSource = tabla;
+            cmbUsuarios.DisplayMember = "Usuario";
+            cmbUsuarios.ValueMember = "IdUsuario";
+            cmbUsuarios.SelectedIndex = -1;
+        }
+        private void cmbUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbUsuarios.SelectedIndex == -1)
+            {
+                txtNombreusuario.Clear();
+                txtContrausuario.Clear();
+                cmbTipousuario.SelectedIndex = -1;
+                return;
+            }
+
+            DataRowView fila = (DataRowView)cmbUsuarios.SelectedItem;
+            txtNombreusuario.Text = fila["Usuario"].ToString();
+            txtContrausuario.Text = fila["Contrasena"].ToString();
+            cmbTipousuario.SelectedItem = fila["Rol"].ToString();
         }
         private void btnMostrarReg_Click(object sender, EventArgs e)
         {
             panelReg.Visible = true;   
             desactivarbtn(btnMostrarReg);
             TablaAuditoria();
+            pictureBoxLogoReg.Visible = true;
         }
 
         private void btnModusuario_Click(object sender, EventArgs e)
         {
-
+            Editar = true;
+            panelAuxUsuario.Visible = true;
+            lbltituloAuxusuario.Text = "Modificar Usuario";
+            lblseleccionusuario.Visible = true;
+            cmbUsuarios.Visible = true;
+            cmbUsuarios.SelectedIndex = -1;
+            CargarComboUsuarios();
+            txtNombreusuario.Location = new Point(30, 170);
+            txtContrausuario.Location = new Point(30, 220);
+            lblNombreusuario.Location = new Point(30, 150);
+            lblContrausuario.Location = new Point(30, 200);
         }
 
         private void btnAgrusurio_Click(object sender, EventArgs e)
         {
+            
+            txtContrausuario.Clear();
+            txtNombreusuario.Clear();
+            panelAuxUsuario.Visible = true;
+            lbltituloAuxusuario.Text = "Registrar Usuario";
+            lblseleccionusuario.Visible = false;
+            cmbUsuarios.Visible = false;
+            cmbTipousuario.SelectedIndex = -1;
+            txtNombreusuario.Location = new Point(30, 80);
+            txtContrausuario.Location = new Point(30, 130);
+            lblNombreusuario.Location = new Point(30, 60);
+            lblContrausuario.Location = new Point(30, 110);
 
         }
+
+        private void btnguardarUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errorProvider1.Clear();
+                if (!vNombreusuario.Validar(txtNombreusuario.Text))
+                    {
+                        errorProvider1.SetError(txtNombreusuario, vNombreusuario.MostrarError());
+                        return;
+                }
+                if (!vContrausuario.Validar(txtContrausuario.Text))
+                {
+                    errorProvider1.SetError(txtContrausuario, vContrausuario.MostrarError());
+                    return;
+                }
+                if (Editar == true)
+                {
+                    if (cmbUsuarios.SelectedIndex == -1)
+                    {errorProvider1.SetError(cmbUsuarios, "Seleccione un usuario para modificar.");
+                        return;
+                    }
+                    RealizarAct = VentanaConfirmacion();
+                    if (RealizarAct == false)
+                    {
+                        
+                        return;
+                    }
+                    else
+                    {
+                        DataRowView fila = (DataRowView)cmbUsuarios.SelectedItem;
+                        string idUsuario = fila["IdUsuario"].ToString();
+                        CNusuarios.EditarUsuario(txtNombreusuario.Text,
+                                                txtContrausuario.Text,
+                                                cmbTipousuario.SelectedItem.ToString(), idUsuario);
+                        MessageBox.Show("Usuario modificado correctamente.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        RealizarAct = false;
+                    }
+                }
+                else
+                {
+                    if (cmbTipousuario.SelectedIndex == -1)
+                    {
+                        errorProvider1.SetError(cmbTipousuario, "Seleccione un tipo de usuario.");
+                        return;
+                    }
+                    CNusuarios.InsertarUsuario(txtNombreusuario.Text,
+                                        txtContrausuario.Text,
+                                        cmbTipousuario.SelectedItem.ToString());
+                    MessageBox.Show("Usuario registrado correctamente.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+
+                panelAuxUsuario.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSalirpnlUsuario_Click(object sender, EventArgs e)
+        {
+            panelAuxUsuario.Visible = false;
+            txtContrausuario.Clear();
+            txtNombreusuario.Clear();
+        }
+
+        private void chkAuditoriadetalle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuditoriadetalle.Checked)
+            {
+                dataGridAuditoria.DataSource = auditoria.MostrarAuditoriaDetalle();
+                EstiloDataGrid_Auditoria();
+            }
+            else
+            {
+                TablaAuditoria();
+            }
+        }
+
+
+
+
+
         #endregion
 
-
+      
+    }
     }
 
-}
+
 
 
       

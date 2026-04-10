@@ -17,6 +17,8 @@ namespace Primera_Practica
     {
         CN_Auditoria auditoria = new CN_Auditoria();
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Clientes CNcliente = new CN_Clientes();
+        CN_Producto CNproducto = new CN_Producto();
         decimal totalVenta = 0;
         public Menu_Ventas()
         {
@@ -72,7 +74,7 @@ namespace Primera_Practica
             cmbProductos.DisplayMember = "Nombre";
             cmbProductos.ValueMember = "IdProducto";
 
-            cmbCliente.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbCliente.DataSource = CNcliente.Mostrartabla_Clientes();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "IdCliente";
         }
@@ -270,9 +272,9 @@ namespace Primera_Practica
         }
         private void txtBuscarCodigo_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscarCodigo.Text.Length >= 2)
+            if (txtcodigo.Text.Length >= 2)
             {
-                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtBuscarCodigo.Text);
+                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtcodigo.Text);
                 cmbProductos.DisplayMember = "Nombre";
                 cmbProductos.ValueMember = "IdProducto";
             }

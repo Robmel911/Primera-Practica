@@ -166,6 +166,17 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
-
+        public DataTable MostrarClientesDesactivados()
+        {
+            try
+            {
+                return MostrarTablaDesactivada("MostrarClientesDesactivados");
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se puedo obtener los clientes desactivados: " + ex.Message);
+            }
+        }
     }
+
 }

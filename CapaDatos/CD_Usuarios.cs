@@ -86,7 +86,7 @@ namespace CapaDatos
         // TODO: MostrarT - Sin parámetros, llama al SP MostrarUsuario y retorna DataTable con todos los usuarios registrados
         public override DataTable MostrarT()
         {
-            return MostrarTabla("MostrarUsuario");
+            return MostrarTabla("MostrarUsuarios");
         }
 
         // TODO: Insertar - Recibe Usuario, Contraseña y Rol, llama al SP InsertarUsuario para guardar el nuevo usuario en la BD
@@ -103,14 +103,15 @@ namespace CapaDatos
         }
 
         // TODO: EditarUsuario - Recibe Usuario, Rol e IdUsuario, llama al SP EditarUsuario para actualizar los datos del usuario en la BD
-        public virtual void EditarUsuario(string Usuario, string Rol, int IdUsuario)
+        public virtual void EditarUsuario(string Usuario, string Contrasena, string Rol, int IdUsuario)
         {
             cmd.Connection = con.ObtenerConexion();
             cmd.CommandText = "EditarUsuario";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Usuario", Usuario);
-            cmd.Parameters.AddWithValue("@Rol", Rol);
             cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+            cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
+            cmd.Parameters.AddWithValue("@Rol", Rol);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }

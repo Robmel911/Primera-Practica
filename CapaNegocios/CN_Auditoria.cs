@@ -25,5 +25,12 @@ namespace CapaNegocios
             tabla = auditoriaCD.MostrarT();
             return tabla;
         }
+        // TODO: MostrarAuditoriaDetalle - Sin parámetros, obtiene todos los registros de auditoría detallados desde la capa de datos y retorna DataTable
+        public DataTable MostrarAuditoriaDetalle()
+        {
+            DataTable tabla = new DataTable();
+            tabla = auditoriaCD.Mostrarauditoriadetalle();
+            return tabla;
+        }
     }
 }

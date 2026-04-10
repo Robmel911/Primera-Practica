@@ -52,9 +52,9 @@ namespace CapaNegocios
         }
 
         // TODO: EditarUsuario - Recibe Usuario, rol e IdUsuario como string, convierte IdUsuario a int y envía los datos a la capa de datos para actualizar
-        public void EditarUsuario(string Usuario, string rol, string IdUsuario)
+        public void EditarUsuario(string Usuario, string Contrasena, string Rol, string IdUsuario)
         {
-            CDUsuarios.EditarUsuario(Usuario, rol, Convert.ToInt32(IdUsuario));
+            CDUsuarios.EditarUsuario(Usuario, Contrasena, Rol, Convert.ToInt32(IdUsuario));
         }
 
         // TODO: EliminarUsuario - Recibe IdUsuario como int y lo envía a la capa de datos para eliminar el registro del usuario en la BD
