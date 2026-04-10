@@ -128,10 +128,14 @@ namespace CapaNegocios
 
             return partes[1].Length <= decimales;
         }
+       
+        
+       
 
         // Validar
         public override bool Validar(string valor)
         {
+            if (string.IsNullOrWhiteSpace(valor)) return false;
             double numero;
             if (!double.TryParse(valor, out numero)) return false;
             if (numero < valorMinimo) return false;

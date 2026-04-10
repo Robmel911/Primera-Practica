@@ -14,7 +14,7 @@ namespace CapaNegocios
         public DataTable Obtenerdatos_Producto()
         {
             DataTable tabla = new DataTable();
-            tabla = CDproductos.ObtenerProductos();
+            tabla = CDproductos.MostrarT();
             return tabla;
         }
         public DataTable Obtenermarcas()

@@ -9,50 +9,28 @@ using System.Runtime.ConstrainedExecution;
 
 namespace CapaDatos
 {
-    public class CD_Productos
+    public class CD_Productos : CD_Base
     {
         private Conexion Conector = new Conexion();
 
-    
-        public DataTable ObtenerProductos()
+
+        public override DataTable MostrarT()
         {
             try
             {
-                SqlCommand cmd = new SqlCommand();
-                Conexion conexion = new Conexion();
-                SqlDataReader Leer;
-                DataTable Tabla = new DataTable();
-                cmd.Connection = conexion.ObtenerConexion();
-                cmd.CommandText = "select *from Productos where Activo=1";
-                Leer = cmd.ExecuteReader();
-                Tabla.Load(Leer);
-                cmd.Parameters.Clear();
-                cmd.Connection = conexion.CerrarConexion();
-                return Tabla;
-
+                return MostrarTabla("MostrarProductosActivos");
             }
             catch (SqlException ex)
             {
-                throw new Exception ("No se puedo obtener los productos: " + ex.Message); 
+              throw new Exception ("No se puedo obtener los productos: " + ex.Message); 
             }
-
-            
         }
+
         public DataTable ObtenerProductosDesactivados()
         {
             try
             {
-                Conexion conexion = new Conexion();
-                SqlDataReader Leer;
-                DataTable Tabla = new DataTable();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conexion.ObtenerConexion();
-                cmd.CommandText = "select *from Productos where Activo=0";
-                Leer = cmd.ExecuteReader();
-                Tabla.Load(Leer);
-                cmd.Parameters.Clear();
-                cmd.Connection = conexion.CerrarConexion();
-                return Tabla;
+                return MostrarTablaDesactivada("MostrarProductosDESACTIVADOS");
 
             }
             catch (SqlException ex)

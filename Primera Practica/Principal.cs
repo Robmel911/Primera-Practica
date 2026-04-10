@@ -14,13 +14,16 @@ namespace Primera_Practica
 {
     public partial class Principal : Form
     {
+        private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Colmado CNcolmado = new CN_Colmado();
+        private CN_Clientes CNclientes = new CN_Clientes();
+        private CN_Producto CNproducto = new CN_Producto();
         private Menu_Ventas menuVentas = new Menu_Ventas();
         private Validaciones validaciones = new Validaciones();
-        private Menu_auxiliar menuAuxiliar = new Menu_auxiliar(false);
+        private Menu_auxiliar menuAuxiliar = new Menu_auxiliar("");
         private const int MENU_COLAPSADO = 35;
         private const int MENU_EXPANDIDO = 200;
-        private const int VELOCIDAD_ANIM = 30;
+        private const int VELOCIDAD_ANIM = 80;
         private bool menuExpandiendo = false;
         private bool Editar = false;
         private string ID;
@@ -35,12 +38,11 @@ namespace Primera_Practica
             EstiloDataGrid_Clientes();
             EstiloDataGrid_HistorialVentas();
             CargarInicio();
-           EstiloDataGrid_VentasDelDia();
+            EstiloDataGrid_VentasDelDia();
             EstiloDataGrid_Top5();
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Oculta el principal 
+        private async void Form1_Load(object sender, EventArgs e)
+        {// Oculta el principal 
             this.Hide();
             Login login = new Login();
             if (login.ShowDialog() != DialogResult.OK)
@@ -52,15 +54,32 @@ namespace Primera_Practica
             // Login exitoso, muestra el principal
             this.Show();
             // Maximiza la ventana
-            this.WindowState= FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
             Tablaproductos();
-            Tablaclientes();
+            await Tablaclientes();
             dataGrid_Productos.Columns["IdProducto"].Visible = false;
             dataGrid_Productos.Columns["Activo"].Visible = false;
             dgvVentasDelDia.Columns["IdVenta"].Visible = false;
             dgvVentasDelDia.Columns["Estado"].Visible = false;
         }
-
+        private void desactivarbtn(Button btn)
+        {
+            btn.Enabled = false;
+            btn.BackColor = Color.FromArgb(200, 230, 201);
+        }
+        private void activarbtn(Button btn)
+        {
+            btn.Enabled = true;
+            btn.BackColor = Color.FromArgb(27, 94, 32);
+        }
+        private void mostrarbtn(Button btn)
+        {
+            btn.Visible = true;
+        }
+        private void ocultarbtn(Button btn)
+        {
+            btn.Visible = false;
+        }
         private void VentanaEmergente(string Mensaje, string titulo)
         {
             MessageBox.Show(Mensaje, titulo, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -173,6 +192,7 @@ namespace Primera_Practica
             panelVentas.Visible = false;
             panelClientes.Visible = false;
             panelAux_Productos.Visible = false;
+            panelAuditoria.Visible = false;
 
             panelActivo.Visible = true;
             panelActivo.BringToFront();
@@ -184,7 +204,8 @@ namespace Primera_Practica
             btnProductos.BackColor = Color.Transparent;
             btnVentas.BackColor = Color.Transparent;
             btnClientes.BackColor = Color.Transparent;
-
+            btnAuditoria.BackColor = Color.Transparent;
+            dgvHistorialVentas.DataSource = null;
             btnActivo.BackColor = Color.FromArgb(46, 125, 50);
         }
         private void btnInicio_Click(object sender, EventArgs e)
@@ -199,20 +220,34 @@ namespace Primera_Practica
             MostrarPanel(panelProductos);
             MarcarBotonActivo(btnProductos);
             Tablaproductos();
+            panelbtns_Productos.Visible= false;
+            btnMostraropciones.Visible = true;
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelVentas);
             MarcarBotonActivo(btnVentas);
-            
+            ocultarbtn(btnVerDetalle);
+            ocultarbtn(btnAnularVenta);
+            ocultarbtn(btnAprobarVenta);
+            ocultarbtn(btnRegistrar_venta);
+            activarbtn(btnVerHistorial);
+
         }
 
-        private void btnClientes_Click(object sender, EventArgs e)
+        private async void btnClientes_Click(object sender, EventArgs e)
         {
             MostrarPanel(panelClientes);
             MarcarBotonActivo(btnClientes);
-            Tablaclientes();
+            await Tablaclientes();
+        }
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            MostrarPanel(panelAuditoria);
+            MarcarBotonActivo(btnAuditoria);
+            TablaAuditoria();
+
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
         {
@@ -301,8 +336,6 @@ namespace Primera_Practica
             return valido;
         }
         #endregion
-
-        CN_Producto CNproducto = new CN_Producto();
         private void Tablaproductos()
         {
             dataGrid_Productos.DataSource = CNproducto.Obtenerdatos_Producto();
@@ -388,6 +421,11 @@ namespace Primera_Practica
             panelAux_Productos.Visible = false;
 
         }
+        private void btnMostraropciones_Click(object sender, EventArgs e)
+        {
+            panelbtns_Productos.Visible = true;
+            btnMostraropciones.Visible= false;
+        }
 
         private void btnguardar_Click(object sender, EventArgs e)
         {
@@ -408,10 +446,15 @@ namespace Primera_Practica
                     }
                     CNproducto.Insertar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, TextCodigoProd.Text, textStockProd.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Insertar productos - exitoso");
                     Tablaproductos();
                     panelAux_Productos.Visible = false;
                 }
-                catch (Exception ex) { MessageBox.Show("No se agrego correctamente porque" + ex); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Insertar producto - Fallido");
+                    MessageBox.Show("No se agrego correctamente porque" + ex);
+                }
             }
             // Cuando se edita
             else
@@ -429,13 +472,18 @@ namespace Primera_Practica
 
                         CNproducto.Editar_producto(textNombreProd.Text, textDescProd.Text, textMarcaProd.Text, textPrecioProd.Text, textStockProd.Text, TextCodigoProd.Text, ID);
                         VentanaEmergente("Se edito correctamente", "Exito");
+                        auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar producto - exitoso");
                         Tablaproductos();
                         panelAux_Productos.Visible = false;
                         Editar = false;
                     }
                     else { panelAux_Productos.Visible = false; Editar = false; }
                 }
-                catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar producto - Fallido");
+                    MessageBox.Show("No se edito correctamente porque" + ex); 
+                }
             }
         }
         private void btnagregar_Click(object sender, EventArgs e)
@@ -478,16 +526,21 @@ namespace Primera_Practica
                 {
                     CNproducto.Eliminar_Producto(ID);
                     VentanaEmergente("Se elimino correctamente", "Exito");
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Eliminar producto - exitoso");
                     Tablaproductos();
                 }
 
             }
-            else { MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); }
+            else 
+            { 
+                MessageBox.Show("Seleccione una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Eliminar producto - Fallido");
+            }
         }
 
         private void btnreactivarProd_Click(object sender, EventArgs e)
         {
-            menuAuxiliar = new Menu_auxiliar(true);
+            menuAuxiliar = new Menu_auxiliar("Productos");
             menuAuxiliar.ShowDialog();
         }
         #endregion
@@ -507,7 +560,7 @@ namespace Primera_Practica
 
             if (Editar == false)
             {
-                if (CNcolmado.ExisteTelefono(textTelefonoCl.Text))
+                if (CNclientes.ExisteTelefono(textTelefonoCl.Text))
                 {
                     errorProvider1.SetError(textTelefonoCl, "Ya existe un cliente con ese teléfono.");
                     valido = false;
@@ -515,7 +568,7 @@ namespace Primera_Practica
             }
             else
             {
-                if (CNcolmado.ExisteTelefonoEditar(textTelefonoCl.Text, ID))
+                if (CNclientes.ExisteTelefonoEditar(textTelefonoCl.Text, ID))
                 {
                     errorProvider1.SetError(textTelefonoCl, "Ya existe un cliente con ese teléfono.");
                     valido = false;
@@ -555,11 +608,13 @@ namespace Primera_Practica
             dataGrid_Clientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
         }
-        private void Tablaclientes()
+        private async Task Tablaclientes()
         {
-            dataGrid_Clientes.DataSource = CNcolmado.Mostrartabla_Clientes();
+            
+            dataGrid_Clientes.DataSource = await Task.Run(() => CNclientes.Mostrartabla_Clientes());
             dataGrid_Clientes.Columns["IdCliente"].Visible = false;
             dataGrid_Clientes.Columns["Activo"].Visible = false;
+            
         }
         private void btnregistrar_Cl_Click(object sender, EventArgs e)
         {
@@ -583,7 +638,7 @@ namespace Primera_Practica
             else { VentanaEmergente("Seleccione una fila", "Error"); }
 
         }
-        private void btnguardar_Cl_Click(object sender, EventArgs e)
+        private async void btnguardar_Cl_Click(object sender, EventArgs e)
         {
             if (!ValidarCamposCliente())
             {
@@ -594,13 +649,15 @@ namespace Primera_Practica
             {
                 try
                 {
-                    CNcolmado.Registrar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text);
+                    CNclientes.Registrar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text);
                     VentanaEmergente("Se registro correctamente", "Exito");
-                    Tablaclientes();
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Cliente - exitoso");
+                    await Tablaclientes();
                     panelAux_Clientes.Visible = false;
                 }
                 catch (Exception ex)
                 {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Cliente - Fallido");
                     MessageBox.Show("No se registro correctamente porque" + ex, "Error");
                 }
             }
@@ -611,7 +668,7 @@ namespace Primera_Practica
                     RealizarAct = VentanaConfirmacion();
                     if (RealizarAct == true)
                     {
-                        CNcolmado.Editar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text, ID);
+                        CNclientes.Editar_Cliente(textNombreCl.Text, textTelefonoCl.Text, textInfoCl.Text, ID);
                         MessageBox.Show("El cliente fue editado");
                         Tablaclientes();
                         panelAux_Clientes.Visible = false;
@@ -619,11 +676,15 @@ namespace Primera_Practica
                     }
                     else { panelAux_Clientes.Visible = false; Editar = false; }
                 }
-                catch (Exception ex) { MessageBox.Show("No se edito correctamente porque" + ex, "Error"); }
+                catch (Exception ex) 
+                {
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Editar Cliente - Fallido");
+                    MessageBox.Show("No se edito correctamente porque" + ex, "Error"); 
+                }
             }
 
         }
-        private void btneliminar_Cl_Click(object sender, EventArgs e)
+        private async void btneliminar_Cl_Click(object sender, EventArgs e)
         {
 
             if (dataGrid_Clientes.SelectedRows.Count > 0)
@@ -634,12 +695,15 @@ namespace Primera_Practica
                 Tablaclientes();
                 panelAux_Clientes.Visible = false;
             }
-            else { VentanaEmergente("Seleccione una fila", "Error"); }
+            else 
+            {
+                VentanaEmergente("Seleccione una fila", "Error");
+            }
         }
 
         private void btnRegistrarSaldo_Click(object sender, EventArgs e)
         {
-            menuAuxiliar = new Menu_auxiliar(false);
+            menuAuxiliar = new Menu_auxiliar("Clientes");
             menuAuxiliar.ShowDialog();
         }
         #endregion
@@ -684,6 +748,12 @@ namespace Primera_Practica
         private void btnVerHistorial_Click(object sender, EventArgs e)
         {
             dgvHistorialVentas.DataSource = CNcolmado.HistorialVentas();
+            mostrarbtn(btnVerDetalle);
+            mostrarbtn(btnAnularVenta);
+            mostrarbtn(btnAprobarVenta);
+            mostrarbtn(btnRegistrar_venta);
+            desactivarbtn(btnVerHistorial);
+            activarbtn(btnVerDetalle);
         }
         private void btnAnularVenta_Click(object sender, EventArgs e)
         {
@@ -714,6 +784,7 @@ namespace Primera_Practica
                 CNcolmado.AnularVenta(idVenta);
                 MessageBox.Show("Venta anulada correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Anular Venta - exitoso");
                 btnVerHistorial_Click(sender, e); // recargar historial
             }
         }
@@ -748,25 +819,39 @@ namespace Primera_Practica
             CNcolmado.CompletarVenta(idVenta);
             MessageBox.Show("Venta completada correctamente.", "Éxito",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Completar Venta - exitoso");
             btnVerHistorial_Click(sender, e);
         }
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            activarbtn(btnVerHistorial);
+            ocultarbtn(btnAnularVenta);
+            ocultarbtn(btnAprobarVenta);
+            ocultarbtn(btnRegistrar_venta);
             if (dgvHistorialVentas.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Selecciona una venta primero.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
-            dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
+                string idVenta = dgvHistorialVentas.SelectedRows[0].Cells["IdVenta"].Value.ToString();
+                dgvHistorialVentas.DataSource = CNcolmado.ObtenerDetalleVenta(idVenta);
+           desactivarbtn(btnVerDetalle);
         }
 
 
-        #endregion
 
-       
+        #endregion
+        #region Panel Auditoria
+        private void TablaAuditoria()
+        {
+            
+            CN_Auditoria auditoria = new CN_Auditoria();
+            dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
+
+        }
+
+        #endregion
     }
 
 }

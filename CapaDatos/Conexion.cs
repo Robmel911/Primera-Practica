@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-    namespace CapaDatos
+namespace CapaDatos
+{
+
+    public class Conexion
     {
-        public class Conexion
-        {
+        
         private string cadenaConexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
 
         // Propiedad para obtener la conexión
@@ -55,7 +57,38 @@ using System.Data.SqlClient;
             catch { return false; }
         }
     }
-    
-    
+
+    public abstract class CD_Base
+    {
+        SqlCommand cmd = new SqlCommand();
+        Conexion conexion = new Conexion();
+        DataTable tabla = new DataTable();
+        SqlDataReader leer;
+        public abstract DataTable MostrarT();
+        public virtual DataTable MostrarTabla(string Procedimiento)
+        {
+            tabla = new DataTable();
+            cmd.Connection = conexion.ObtenerConexion();
+            cmd.CommandText = Procedimiento;
+            cmd.CommandType = CommandType.StoredProcedure;
+            leer = cmd.ExecuteReader();
+            tabla.Load(leer);
+            conexion.CerrarConexion();
+            return tabla;
+        }
+        protected virtual DataTable MostrarTablaDesactivada(string Procedimiento)
+        {
+            tabla = new DataTable();
+            cmd.Connection = conexion.ObtenerConexion();
+            cmd.CommandText = Procedimiento;
+            cmd.CommandType = CommandType.StoredProcedure;
+            leer = cmd.ExecuteReader();
+            tabla.Load(leer);
+            conexion.CerrarConexion();
+            return tabla;
+        }
     }
+
+}    
+    
 
