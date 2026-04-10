@@ -11,9 +11,14 @@ using System.Windows.Forms;
 
 namespace Primera_Practica
 {
+    // TODO: Agregar búsqueda de producto por nombre en tiempo real al escribir en el combo
+    // TODO: Implementar impresión de recibo/factura al confirmar la venta
     public partial class Menu_Ventas : Form
     {
+        CN_Auditoria auditoria = new CN_Auditoria();
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Clientes CNcliente = new CN_Clientes();
+        CN_Producto CNproducto = new CN_Producto();
         decimal totalVenta = 0;
         public Menu_Ventas()
         {
@@ -69,7 +74,7 @@ namespace Primera_Practica
             cmbProductos.DisplayMember = "Nombre";
             cmbProductos.ValueMember = "IdProducto";
 
-            cmbCliente.DataSource = CNcolmado.Mostrartabla_Clientes();
+            cmbCliente.DataSource = CNcliente.Mostrartabla_Clientes();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "IdCliente";
         }
@@ -210,11 +215,13 @@ namespace Primera_Practica
             try
             {
                 CNcolmado.RegistrarVenta(idCliente, carrito, totalVenta,estado);
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registar Ventas - exitoso");
                 MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarVenta();
             }
             catch (Exception ex)
             {
+                auditoria.RegistrarAuditoria(Sesion.IdUsuario, "Registrar Ventas - Fallido");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -265,9 +272,9 @@ namespace Primera_Practica
         }
         private void txtBuscarCodigo_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscarCodigo.Text.Length >= 2)
+            if (txtcodigo.Text.Length >= 2)
             {
-                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtBuscarCodigo.Text);
+                cmbProductos.DataSource = CNcolmado.BuscarProducto(txtcodigo.Text);
                 cmbProductos.DisplayMember = "Nombre";
                 cmbProductos.ValueMember = "IdProducto";
             }

@@ -19,6 +19,7 @@
             }
             base.Dispose(disposing);
         }
+        //
 
         #region Windows Form Designer generated code
 
@@ -28,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Panel_activarprod = new System.Windows.Forms.Panel();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -43,7 +45,7 @@
             this.cmbProductos = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Panel_Saldo = new System.Windows.Forms.Panel();
-            this.txtSaldo = new System.Windows.Forms.TextBox();
+            this.txtSaldo = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnagregarSaldo = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
@@ -54,8 +56,10 @@
             this.lblSaldoCliente = new System.Windows.Forms.Label();
             this.lblNombreCliente = new System.Windows.Forms.Label();
             this.lblTelefonoCliente = new System.Windows.Forms.Label();
+            this.errorProviderAux = new System.Windows.Forms.ErrorProvider(this.components);
             this.Panel_activarprod.SuspendLayout();
             this.Panel_Saldo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAux)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_activarprod
@@ -76,16 +80,16 @@
             this.Panel_activarprod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_activarprod.Location = new System.Drawing.Point(0, 0);
             this.Panel_activarprod.Name = "Panel_activarprod";
-            this.Panel_activarprod.Size = new System.Drawing.Size(515, 531);
+            this.Panel_activarprod.Size = new System.Drawing.Size(508, 634);
             this.Panel_activarprod.TabIndex = 0;
             // 
             // btnAgregarProducto
             // 
             this.btnAgregarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(379, 440);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(192, 505);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(124, 79);
+            this.btnAgregarProducto.Size = new System.Drawing.Size(124, 78);
             this.btnAgregarProducto.TabIndex = 14;
             this.btnAgregarProducto.Text = "Agregar";
             this.btnAgregarProducto.UseVisualStyleBackColor = true;
@@ -140,7 +144,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label9.Location = new System.Drawing.Point(50, 139);
+            this.label9.Location = new System.Drawing.Point(50, 138);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 20);
             this.label9.TabIndex = 9;
@@ -150,7 +154,7 @@
             // 
             this.lblCodigoProducto.AutoSize = true;
             this.lblCodigoProducto.ForeColor = System.Drawing.Color.Green;
-            this.lblCodigoProducto.Location = new System.Drawing.Point(187, 443);
+            this.lblCodigoProducto.Location = new System.Drawing.Point(188, 443);
             this.lblCodigoProducto.Name = "lblCodigoProducto";
             this.lblCodigoProducto.Size = new System.Drawing.Size(14, 20);
             this.lblCodigoProducto.TabIndex = 6;
@@ -160,7 +164,7 @@
             // 
             this.lblDescripcionProducto.AutoSize = true;
             this.lblDescripcionProducto.ForeColor = System.Drawing.Color.Green;
-            this.lblDescripcionProducto.Location = new System.Drawing.Point(187, 374);
+            this.lblDescripcionProducto.Location = new System.Drawing.Point(188, 374);
             this.lblDescripcionProducto.Name = "lblDescripcionProducto";
             this.lblDescripcionProducto.Size = new System.Drawing.Size(14, 20);
             this.lblDescripcionProducto.TabIndex = 5;
@@ -170,7 +174,7 @@
             // 
             this.lblStockProducto.AutoSize = true;
             this.lblStockProducto.ForeColor = System.Drawing.Color.Green;
-            this.lblStockProducto.Location = new System.Drawing.Point(187, 303);
+            this.lblStockProducto.Location = new System.Drawing.Point(188, 303);
             this.lblStockProducto.Name = "lblStockProducto";
             this.lblStockProducto.Size = new System.Drawing.Size(14, 20);
             this.lblStockProducto.TabIndex = 4;
@@ -180,7 +184,7 @@
             // 
             this.lblPrecioProducto.AutoSize = true;
             this.lblPrecioProducto.ForeColor = System.Drawing.Color.Green;
-            this.lblPrecioProducto.Location = new System.Drawing.Point(187, 217);
+            this.lblPrecioProducto.Location = new System.Drawing.Point(188, 217);
             this.lblPrecioProducto.Name = "lblPrecioProducto";
             this.lblPrecioProducto.Size = new System.Drawing.Size(14, 20);
             this.lblPrecioProducto.TabIndex = 3;
@@ -190,7 +194,7 @@
             // 
             this.lblNombreProducto.AutoSize = true;
             this.lblNombreProducto.ForeColor = System.Drawing.Color.Green;
-            this.lblNombreProducto.Location = new System.Drawing.Point(187, 139);
+            this.lblNombreProducto.Location = new System.Drawing.Point(188, 138);
             this.lblNombreProducto.Name = "lblNombreProducto";
             this.lblNombreProducto.Size = new System.Drawing.Size(14, 20);
             this.lblNombreProducto.TabIndex = 2;
@@ -200,7 +204,7 @@
             // 
             this.cmbProductos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProductos.FormattingEnabled = true;
-            this.cmbProductos.Location = new System.Drawing.Point(243, 36);
+            this.cmbProductos.Location = new System.Drawing.Point(243, 35);
             this.cmbProductos.Name = "cmbProductos";
             this.cmbProductos.Size = new System.Drawing.Size(121, 28);
             this.cmbProductos.TabIndex = 1;
@@ -211,7 +215,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label1.Location = new System.Drawing.Point(16, 39);
+            this.label1.Location = new System.Drawing.Point(16, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(198, 20);
             this.label1.TabIndex = 0;
@@ -233,23 +237,25 @@
             this.Panel_Saldo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Saldo.Location = new System.Drawing.Point(0, 0);
             this.Panel_Saldo.Name = "Panel_Saldo";
-            this.Panel_Saldo.Size = new System.Drawing.Size(515, 531);
+            this.Panel_Saldo.Size = new System.Drawing.Size(508, 634);
             this.Panel_Saldo.TabIndex = 15;
             // 
             // txtSaldo
             // 
-            this.txtSaldo.ForeColor = System.Drawing.Color.Green;
-            this.txtSaldo.Location = new System.Drawing.Point(177, 397);
+            this.txtSaldo.Location = new System.Drawing.Point(192, 400);
+            this.txtSaldo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSaldo.Mask = "99999";
             this.txtSaldo.Name = "txtSaldo";
             this.txtSaldo.Size = new System.Drawing.Size(100, 26);
             this.txtSaldo.TabIndex = 23;
+            this.txtSaldo.ValidatingType = typeof(int);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label3.Location = new System.Drawing.Point(25, 400);
+            this.label3.Location = new System.Drawing.Point(26, 400);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 20);
             this.label3.TabIndex = 22;
@@ -259,7 +265,7 @@
             // 
             this.btnagregarSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnagregarSaldo.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnagregarSaldo.Location = new System.Drawing.Point(338, 426);
+            this.btnagregarSaldo.Location = new System.Drawing.Point(171, 478);
             this.btnagregarSaldo.Name = "btnagregarSaldo";
             this.btnagregarSaldo.Size = new System.Drawing.Size(153, 86);
             this.btnagregarSaldo.TabIndex = 21;
@@ -272,7 +278,7 @@
             this.lbl.AutoSize = true;
             this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lbl.Location = new System.Drawing.Point(26, 293);
+            this.lbl.Location = new System.Drawing.Point(26, 292);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(116, 20);
             this.lbl.TabIndex = 20;
@@ -293,7 +299,7 @@
             this.lbl1.AutoSize = true;
             this.lbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lbl1.Location = new System.Drawing.Point(44, 207);
+            this.lbl1.Location = new System.Drawing.Point(44, 208);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(84, 20);
             this.lbl1.TabIndex = 19;
@@ -304,7 +310,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label2.Location = new System.Drawing.Point(16, 47);
+            this.label2.Location = new System.Drawing.Point(16, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(116, 20);
             this.label2.TabIndex = 0;
@@ -325,7 +331,7 @@
             // 
             this.lblSaldoCliente.AutoSize = true;
             this.lblSaldoCliente.ForeColor = System.Drawing.Color.Green;
-            this.lblSaldoCliente.Location = new System.Drawing.Point(181, 293);
+            this.lblSaldoCliente.Location = new System.Drawing.Point(182, 292);
             this.lblSaldoCliente.Name = "lblSaldoCliente";
             this.lblSaldoCliente.Size = new System.Drawing.Size(14, 20);
             this.lblSaldoCliente.TabIndex = 17;
@@ -335,7 +341,7 @@
             // 
             this.lblNombreCliente.AutoSize = true;
             this.lblNombreCliente.ForeColor = System.Drawing.Color.Green;
-            this.lblNombreCliente.Location = new System.Drawing.Point(181, 129);
+            this.lblNombreCliente.Location = new System.Drawing.Point(182, 129);
             this.lblNombreCliente.Name = "lblNombreCliente";
             this.lblNombreCliente.Size = new System.Drawing.Size(14, 20);
             this.lblNombreCliente.TabIndex = 15;
@@ -345,29 +351,37 @@
             // 
             this.lblTelefonoCliente.AutoSize = true;
             this.lblTelefonoCliente.ForeColor = System.Drawing.Color.Green;
-            this.lblTelefonoCliente.Location = new System.Drawing.Point(181, 207);
+            this.lblTelefonoCliente.Location = new System.Drawing.Point(182, 208);
             this.lblTelefonoCliente.Name = "lblTelefonoCliente";
             this.lblTelefonoCliente.Size = new System.Drawing.Size(14, 20);
             this.lblTelefonoCliente.TabIndex = 16;
             this.lblTelefonoCliente.Text = "-";
             // 
+            // errorProviderAux
+            // 
+            this.errorProviderAux.ContainerControl = this;
+            // 
             // Menu_auxiliar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 531);
-            this.Controls.Add(this.Panel_activarprod);
+            this.ClientSize = new System.Drawing.Size(508, 634);
             this.Controls.Add(this.Panel_Saldo);
+            this.Controls.Add(this.Panel_activarprod);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Menu_auxiliar";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Load += new System.EventHandler(this.Menu_auxiliar_Load);
             this.Panel_activarprod.ResumeLayout(false);
             this.Panel_activarprod.PerformLayout();
             this.Panel_Saldo.ResumeLayout(false);
             this.Panel_Saldo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAux)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,8 +411,9 @@
         private System.Windows.Forms.Label lblSaldoCliente;
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.Label lblTelefonoCliente;
-        private System.Windows.Forms.TextBox txtSaldo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnagregarSaldo;
+        private System.Windows.Forms.MaskedTextBox txtSaldo;
+        private System.Windows.Forms.ErrorProvider errorProviderAux;
     }
 }

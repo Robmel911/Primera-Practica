@@ -40,7 +40,6 @@
             this.cmbCliente = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtBuscarCodigo = new System.Windows.Forms.TextBox();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.lblStockProducto = new System.Windows.Forms.Label();
@@ -58,6 +57,7 @@
             this.colmado_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colmado_Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtcodigo = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
@@ -180,8 +180,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtcodigo);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.txtBuscarCodigo);
             this.panel2.Controls.Add(this.nudCantidad);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.lblStockProducto);
@@ -210,15 +210,6 @@
             this.label5.Size = new System.Drawing.Size(70, 20);
             this.label5.TabIndex = 12;
             this.label5.Text = "Codigo:";
-            // 
-            // txtBuscarCodigo
-            // 
-            this.txtBuscarCodigo.ForeColor = System.Drawing.Color.DarkGreen;
-            this.txtBuscarCodigo.Location = new System.Drawing.Point(424, 14);
-            this.txtBuscarCodigo.Name = "txtBuscarCodigo";
-            this.txtBuscarCodigo.Size = new System.Drawing.Size(197, 26);
-            this.txtBuscarCodigo.TabIndex = 11;
-            this.txtBuscarCodigo.TextChanged += new System.EventHandler(this.txtBuscarCodigo_TextChanged);
             // 
             // nudCantidad
             // 
@@ -296,6 +287,7 @@
             // 
             // cmbProductos
             // 
+            this.cmbProductos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProductos.ForeColor = System.Drawing.Color.DarkGreen;
             this.cmbProductos.FormattingEnabled = true;
             this.cmbProductos.Location = new System.Drawing.Point(102, 14);
@@ -412,6 +404,15 @@
             this.colmado_Subtotal.ReadOnly = true;
             this.colmado_Subtotal.Width = 150;
             // 
+            // txtcodigo
+            // 
+            this.txtcodigo.Location = new System.Drawing.Point(418, 14);
+            this.txtcodigo.Mask = "aa-000";
+            this.txtcodigo.Name = "txtcodigo";
+            this.txtcodigo.Size = new System.Drawing.Size(100, 26);
+            this.txtcodigo.TabIndex = 13;
+            this.txtcodigo.TextChanged += new System.EventHandler(this.txtBuscarCodigo_TextChanged);
+            // 
             // Menu_Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -421,6 +422,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Menu_Ventas";
             this.Text = "Ventas";
@@ -463,7 +465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colmado_Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colmado_Subtotal;
         private System.Windows.Forms.CheckBox chkAsociarCliente;
-        private System.Windows.Forms.TextBox txtBuscarCodigo;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MaskedTextBox txtcodigo;
     }
 }
