@@ -58,6 +58,7 @@ namespace CapaNegocios
             CDUsuarios.EliminarUsuario(IdUsuario);
         }
     }
+
     public static class Sesion
     {
         public static int IdUsuario { get; set; }
