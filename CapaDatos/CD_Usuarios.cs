@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_Usuarios
+    public class CD_Usuarios : CD_Base
     {
         private Conexion con = new Conexion();
+        SqlCommand cmd = new SqlCommand();
 
         // Valida si el usuario existe — retorna bool
         public async Task<bool> ValidarUsuarioAsync(string usuario, string contrasena)
@@ -75,7 +77,47 @@ namespace CapaDatos
                 throw new Exception("Error al obtener id: " + ex.Message);
             }
         }
+        public override DataTable MostrarT()
+        {
+            return MostrarTabla("MostrarUsuario");
+        }
+        public void Insertar(string Usuario,string Contrasena, string Rol)
+        {
+            cmd.Connection = con.ObtenerConexion();
+            cmd.CommandText = "InsertarUsuario";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+            cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
+            cmd.Parameters.AddWithValue("@Rol", Rol);
 
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.Clear();
+
+        }
+        public virtual void EditarUsuario(string Usuario, string Rol, int IdUsuario)
+        {
+            cmd.Connection = con.ObtenerConexion();
+            cmd.CommandText = "EditarUsuario";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+            cmd.Parameters.AddWithValue("@Rol", Rol);
+            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+
+            cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        public virtual void EliminarUsuario(int IdUsuario)
+        {
+
+            cmd.Connection = con.ObtenerConexion();
+            cmd.CommandText = "EliminarUsuario";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+            cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
     }
 }
 

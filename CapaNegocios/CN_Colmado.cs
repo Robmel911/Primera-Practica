@@ -21,7 +21,7 @@ namespace CapaNegocios
         public DataTable Mostrartabla_Clientes()
         {
             DataTable tabla = new DataTable();
-            tabla = CDclientes.MostrarTabla();
+            tabla = CDclientes.MostrarT();
             return tabla;
         }
         public void Registrar_Cliente(string nombre,string telefono, string informacion)
@@ -57,14 +57,14 @@ namespace CapaNegocios
         public DataTable ObtenerProductos_Venta()
         {
             DataTable tabla = new DataTable();
-            tabla = CDproductos.ObtenerProductos();
+            tabla = CDproductos.MostrarT();
             return tabla;
         }
 
         public DataTable ObtenerClientes_Venta()
         {
             DataTable tabla = new DataTable();
-            tabla = CDclientes.MostrarTabla();
+            tabla = CDclientes.MostrarT();
             return tabla;
         }
 
@@ -74,7 +74,7 @@ namespace CapaNegocios
         }
         public DataTable HistorialVentas()
         {
-            return CDventas.HistorialVentas();
+            return CDventas.MostrarT();
         }
 
         public void AnularVenta(string idVenta)

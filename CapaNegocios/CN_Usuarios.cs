@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,33 @@ namespace CapaNegocios
             }
         }
 
+        public DataTable MostrarUsuario()
+        {
+            DataTable tabla = new DataTable();
+            tabla = CDUsuarios.MostrarT();
+            return tabla;
+        }
 
+        public void InsertarUsuario(string usuario, string Contrasena, string Rol)
+        {
+            CDUsuarios.Insertar(usuario, Contrasena, Rol);
+        }
 
+        public void EditarUsuario(string  Usuario, string rol, string IdUsuario)
+        {
+            CDUsuarios.EditarUsuario(Usuario, rol, Convert.ToInt32(IdUsuario));
+        }
+
+        public void EliminarUsuario(int IdUsuario)
+        {
+            CDUsuarios.EliminarUsuario(IdUsuario);
+        }
     }
     public static class Sesion
     {
         public static int IdUsuario { get; set; }
 
     }
+
+
 }

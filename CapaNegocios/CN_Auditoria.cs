@@ -20,7 +20,7 @@ namespace CapaNegocios
         public DataTable MostrarAuditoria()
         {
             DataTable tabla = new DataTable();
-            tabla = auditoriaCD.MostrarTabla();
+            tabla = auditoriaCD.MostrarT();
             return tabla;
         }
     }

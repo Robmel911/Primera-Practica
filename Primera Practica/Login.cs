@@ -51,7 +51,7 @@ namespace Primera_Practica
                 if (existe)
                 {
                     Sesion.IdUsuario = idUsuario;                            // guardar en sesión global
-                    auditoria.RegistrarAuditoria(Sesion.IdUsuario, $"{txtUsuario} Ingreso al sistema"); // auditar el ingreso
+                    auditoria.RegistrarAuditoria(Sesion.IdUsuario,"Ingreso al sistema"); // auditar el ingreso
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

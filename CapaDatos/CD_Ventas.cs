@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_Ventas
+    public class CD_Ventas : CD_Base
     {
         SqlCommand cmd = new SqlCommand();
 
@@ -86,21 +86,9 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
-        public DataTable HistorialVentas()
+        public override DataTable MostrarT()
         {
-            Conexion conexion = new Conexion();
-            DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT v.IdVenta, 
-                        ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
-                        v.Fecha, v.MontoTotal, v.Estado
-                        FROM Ventas v
-                        LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
-                        ORDER BY v.Fecha DESC";
-            SqlDataReader leer = cmd.ExecuteReader();
-            tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
-            return tabla;
+            return MostrarTabla("MostrarVentas");
         }
 
         public void AnularVenta(int idVenta)
