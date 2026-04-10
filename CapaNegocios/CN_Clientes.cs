@@ -15,7 +15,7 @@ namespace CapaNegocios
 
         public DataTable Mostrartabla_Clientes()
         {
-            return CDclientes.MostrarTabla();
+            return CDclientes.MostrarTabla("MostrarClientes");
         }
         public void Registrar_Cliente(string nombre, string telefono, string informacion)
         {

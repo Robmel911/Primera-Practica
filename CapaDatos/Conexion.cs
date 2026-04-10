@@ -65,7 +65,7 @@ namespace CapaDatos
         DataTable tabla = new DataTable();
         SqlDataReader leer;
         public abstract DataTable MostrarT();
-        protected virtual DataTable MostrarTabla(string Procedimiento)
+        public virtual DataTable MostrarTabla(string Procedimiento)
         {
             tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();

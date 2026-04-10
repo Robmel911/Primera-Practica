@@ -88,7 +88,26 @@ namespace CapaDatos
         }
         public override DataTable MostrarT()
         {
-            return MostrarTabla("MostrarVentas");
+            try
+            {
+                Conexion conexion = new Conexion();
+                DataTable tabla = new DataTable();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = @"SELECT v.IdVenta, 
+                        ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
+                        v.Fecha, v.MontoTotal, v.Estado
+                        FROM Ventas v
+                        LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
+                        ORDER BY v.Fecha DESC";
+                SqlDataReader leer = cmd.ExecuteReader();
+                tabla.Load(leer);
+                cmd.Connection = conexion.CerrarConexion();
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void AnularVenta(int idVenta)
