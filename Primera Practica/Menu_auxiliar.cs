@@ -11,10 +11,13 @@ using System.Windows.Forms;
 
 namespace Primera_Practica
 {
+    // TODO: Agregar confirmación visual al reactivar un producto o agregar saldo a un cliente
+    // TODO: Separar en dos formularios distintos: uno para productos y otro para clientes
     public partial class Menu_auxiliar : Form
     {
         CN_Producto CNproducto = new CN_Producto();
         CN_Colmado CNcolmado = new CN_Colmado();
+        CN_Clientes CNcliente = new CN_Clientes();
         ValidacionNumero validaciones = new ValidacionNumero("Saldo",1,1000);
        
         CN_Auditoria auditoria = new CN_Auditoria();
@@ -101,7 +104,7 @@ namespace Primera_Practica
         // Cargar clientes activos
         private void CargarDatosClientes()
         {
-            cmbClientes.DataSource = CNproducto.Mostrartabla_Clientes();
+            cmbClientes.DataSource = CNcliente.Mostrartabla_Clientes();
             cmbClientes.DisplayMember = "Nombre";
             cmbClientes.ValueMember = "IdCliente";
             cmbClientes.SelectedIndex = -1;
@@ -143,9 +146,9 @@ namespace Primera_Practica
                 return;
             }
             // Agregar saldo al cliente
-            CNcolmado.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
+            CNcliente.Agrgarsaldo_Cliente(txtSaldo.Text, ID);
             // Mostrar mensaje de éxito y preguntar si desea seguir en la ventana
-            DialogResult salir = MessageBox.Show(@"Saldo agregado exitosamente. r\n\ Quieres seguir en esta ventana","Operacion Existosa",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+            DialogResult salir = MessageBox.Show(@"Saldo agregado exitosamente.  Quieres seguir en esta ventana","Operacion Existosa",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
             CargarDatosClientes();  
             if(salir == DialogResult.Yes) this.Close();
             else if(salir == DialogResult.No) return;

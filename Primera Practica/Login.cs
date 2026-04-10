@@ -12,13 +12,14 @@ using CapaNegocios;
 namespace Primera_Practica
 {
     
+    // TODO: Agregar opción de "Recordar usuario" guardando el nombre en configuración local
     public partial class Login : Form
     {
         private CN_Auditoria auditoria = new CN_Auditoria();
         private CN_Usuarios CNUsuarios = new CN_Usuarios();
         private string IdUsuario ;
-        
-        
+
+        public string RolUsuario { get; private set; }
         public Login()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace Primera_Practica
 
                 if (existe)
                 {
+                    RolUsuario = rol;                              // guardar rol para uso posterior
                     Sesion.IdUsuario = idUsuario;                            // guardar en sesión global
                     auditoria.RegistrarAuditoria(Sesion.IdUsuario,"Ingreso al sistema"); // auditar el ingreso
                     this.DialogResult = DialogResult.OK;
@@ -73,6 +75,7 @@ namespace Primera_Practica
                 btnIngresar.Text = "Ingresar";
             }
         }
+        // TODO: Implementar límite de intentos fallidos y bloqueo temporal de la cuenta
         // Permite presionar Enter para iniciar sesión
         private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
         {
