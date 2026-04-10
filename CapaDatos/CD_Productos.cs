@@ -47,7 +47,13 @@ namespace CapaDatos
                 SqlCommand cmd = new SqlCommand();
                 SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"INSERT INTO Productos (Nombre, Descripcion, Marca, Precio, Stock,Codigo) VALUES ('{nombre}', '{desc}', '{marca}', {precio}, {stock}, '{codigo}' )";
+                cmd.CommandText = "InsertarProducto";
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Descripcion", desc);
+                cmd.Parameters.AddWithValue("@Marca", marca);
+                cmd.Parameters.AddWithValue("@Precio", precio);
+                cmd.Parameters.AddWithValue("@Stock", stock);
+                cmd.Parameters.AddWithValue("@Codigo", codigo);
                 cmd.CommandType = CommandType.Text;
                 Leer = cmd.ExecuteReader();
                 cmd.Parameters.Clear();
@@ -67,8 +73,16 @@ namespace CapaDatos
                 SqlCommand cmd = new SqlCommand();
                 SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Productos SET Nombre='{nombre}', Descripcion='{desc}', Marca='{marca}', Precio={precio}, Stock={stock}, Codigo='{codigo}'  WHERE IdProducto={id}";
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "EditarProducto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdProducto", id);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Descripcion", desc);
+                cmd.Parameters.AddWithValue("@Marca", marca);
+                cmd.Parameters.AddWithValue("@Precio", precio);
+                cmd.Parameters.AddWithValue("@Stock", stock);
+                cmd.Parameters.AddWithValue("@Codigo", codigo);
+                cmd.Parameters.AddWithValue("@Activo", 1);
                 Leer = cmd.ExecuteReader();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
@@ -85,11 +99,11 @@ namespace CapaDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Productos SET Activo=0 WHERE IdProducto={id}";
-                cmd.CommandType = CommandType.Text;
-                Leer = cmd.ExecuteReader();
+                cmd.CommandText = "EliminarProducto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdProducto", id);
+                cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -98,18 +112,17 @@ namespace CapaDatos
                 throw new Exception("No se pudo eliminar los productos :" + ex.Message);
             }
         }
-
         // TODO: Reactivar_Productos - Recibe IdProducto como int, cambia el campo Activo a 1 para volver a habilitar el producto en la BD
         public void Reactivar_Productos(int id)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Productos SET Activo=1 WHERE IdProducto={id}";
-                cmd.CommandType = CommandType.Text;
-                Leer = cmd.ExecuteReader();
+                cmd.CommandText = "ReactivarProducto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdProducto", id);
+                cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -118,7 +131,6 @@ namespace CapaDatos
                 throw new Exception("No se pudo reactivar los productos :" + ex.Message);
             }
         }
-
         // TODO: ExisteProducto - Recibe nombre y marca del producto, consulta la BD y retorna bool indicando si ya existe esa combinación
         public bool ExisteProducto(string nombre, string marca)
         {
@@ -126,7 +138,10 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}'";
+                cmd.CommandText = "ExisteProducto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Marca", marca);
                 int cantidad = (int)cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
@@ -137,7 +152,6 @@ namespace CapaDatos
                 throw new Exception("No se pudo verificar si existe el producto :" + ex.Message);
             }
         }
-
         // TODO: ExisteProductoEditar - Recibe nombre, marca e IdProducto, verifica si existe un duplicado excluyendo el registro actual y retorna bool
         public bool ExisteProductoEditar(string nombre, string marca, int id)
         {
@@ -145,7 +159,11 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"SELECT COUNT(*) FROM Productos WHERE Nombre='{nombre}' AND Marca='{marca}' AND IdProducto != {id}";
+                cmd.CommandText = "ExisteProductoEditar";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Marca", marca);
+                cmd.Parameters.AddWithValue("@IdProducto", id);
                 int cantidad = (int)cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
@@ -156,21 +174,20 @@ namespace CapaDatos
                 throw new Exception("No se pudo editar producto existente :" + ex.Message);
             }
         }
-
         // TODO: ObtenerMarcas - Sin parámetros, consulta las marcas distintas de productos activos en la BD y retorna DataTable
         public DataTable ObtenerMarcas()
         {
             SqlCommand cmd = new SqlCommand();
             DataTable tabla = new DataTable();
             cmd.Connection = Conector.ObtenerConexion();
-            cmd.CommandText = "SELECT DISTINCT Marca FROM Productos WHERE Activo=1";
+            cmd.CommandText = "ObtenerMarcas";
+            cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader leer = cmd.ExecuteReader();
             tabla.Load(leer);
             cmd.Parameters.Clear();
             cmd.Connection = Conector.CerrarConexion();
             return tabla;
         }
-
         // TODO: BuscarPorCodigo - Recibe criterio de búsqueda como string, busca por código o nombre en productos activos y retorna DataTable
         public DataTable BuscarPorCodigo(string codigo)
         {
@@ -178,12 +195,9 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = @"SELECT IdProducto, Nombre, Codigo, Precio, Stock
-                        FROM Productos
-                        WHERE Activo = 1
-                        AND (Codigo LIKE @codigo OR Nombre LIKE @nombre)";
-                cmd.Parameters.AddWithValue("@codigo", "%" + codigo + "%");
-                cmd.Parameters.AddWithValue("@nombre", "%" + codigo + "%");
+                cmd.CommandText = "BuscarProducto";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Criterio", codigo);
                 SqlDataReader leer = cmd.ExecuteReader();
                 DataTable tabla = new DataTable();
                 tabla.Load(leer);

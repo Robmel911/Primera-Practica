@@ -18,19 +18,14 @@ namespace CapaDatos
         {
             try
             {
-                // Utiliza una consulta parametrizada para llamadas asíncronas
                 using (SqlConnection sqlCon = await con.ObtenerConexionAsync())
                 {
-                    string query = @"SELECT COUNT(*) FROM Usuarios
-                             WHERE Usuario = @usuario
-                             AND Contrasena = @contrasena";
-
-                    SqlCommand cmd = new SqlCommand(query, sqlCon);
-                    cmd.Parameters.AddWithValue("@usuario", usuario);
-                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
-                    // Ejecuta la consulta de forma asíncrona y obtiene el resultado
+                    SqlCommand cmd = new SqlCommand("ValidarLogin", sqlCon);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Usuario", usuario);
+                    cmd.Parameters.AddWithValue("@Contrasena", contrasena);
                     var resultado = await cmd.ExecuteScalarAsync();
-                    return Convert.ToInt32(resultado) > 0;
+                    return resultado != null; // El SP devuelve las columnas IdUsuario y Rol si es exitoso
                 }
             }
             catch (Exception ex)
@@ -46,12 +41,15 @@ namespace CapaDatos
             {
                 using (SqlConnection sqlCon = await con.ObtenerConexionAsync())
                 {
-                    string query = "SELECT Rol FROM Usuarios WHERE Usuario = @usuario";
-                    SqlCommand cmd = new SqlCommand(query, sqlCon);
-                    cmd.Parameters.AddWithValue("@usuario", usuario);
-                    // Ejecuta la consulta de forma asíncrona y obtiene el resultado
-                    object resultado = await cmd.ExecuteScalarAsync();
-                    return resultado != null ? resultado.ToString() : string.Empty;
+                    SqlCommand cmd = new SqlCommand("ObtenerDetalleUsuario", sqlCon);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Usuario", usuario);
+                    SqlDataReader leer = await cmd.ExecuteReaderAsync();
+                    if (await leer.ReadAsync())
+                    {
+                        return leer["Rol"].ToString();
+                    }
+                    return string.Empty;
                 }
             }
             catch (Exception ex)
@@ -67,11 +65,15 @@ namespace CapaDatos
             {
                 using (SqlConnection sqlCon = await con.ObtenerConexionAsync())
                 {
-                    string query = "SELECT IdUsuario FROM Usuarios WHERE Usuario = @usuario";
-                    SqlCommand cmd = new SqlCommand(query, sqlCon);
-                    cmd.Parameters.AddWithValue("@usuario", usuario);
-                    object resultado = await cmd.ExecuteScalarAsync();
-                    return resultado != null ? Convert.ToInt32(resultado) : 0;
+                    SqlCommand cmd = new SqlCommand("ObtenerDetalleUsuario", sqlCon);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Usuario", usuario);
+                    SqlDataReader leer = await cmd.ExecuteReaderAsync();
+                    if (await leer.ReadAsync())
+                    {
+                        return Convert.ToInt32(leer["IdUsuario"]);
+                    }
+                    return 0;
                 }
             }
             catch (Exception ex)
@@ -79,6 +81,7 @@ namespace CapaDatos
                 throw new Exception("Error al obtener id: " + ex.Message);
             }
         }
+
 
         // TODO: MostrarT - Sin parámetros, llama al SP MostrarUsuario y retorna DataTable con todos los usuarios registrados
         public override DataTable MostrarT()

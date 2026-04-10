@@ -21,14 +21,14 @@ namespace CapaDatos
                 cmd.Transaction = transaccion;
 
                 // 1 — Insertar cabecera de venta
-                cmd.CommandText = @"INSERT INTO Ventas (IdCliente, Fecha, MontoTotal, Estado)
-                    VALUES (@idCliente, GETDATE(), @total, @estado);
-                    SELECT SCOPE_IDENTITY();";
+                cmd.CommandText = "InsertarVenta";
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idCliente", (object)idCliente ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@total", total);
-                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@IdCliente", (object)idCliente ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Fecha", DateTime.Now);
+                cmd.Parameters.AddWithValue("@MontoTotal", total);
+                cmd.Parameters.AddWithValue("@Estado", estado);
 
                 int idVenta = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -39,40 +39,31 @@ namespace CapaDatos
                     int cantidad = Convert.ToInt32(fila["Cantidad"]);
                     decimal precio = Convert.ToDecimal(fila["Precio"]);
 
-                    // Verificar stock
-                    cmd.CommandText = "SELECT Stock FROM Productos WHERE IdProducto = @idProducto";
+                    // Insertar detalle usando SP
+                    cmd.CommandText = "InsertarVentaDetalle";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
-                    int stockActual = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (stockActual < cantidad)
-                        throw new Exception($"Stock insuficiente para el producto {fila["Nombre"]}");
-
-                    // Insertar detalle
-                    cmd.CommandText = @"INSERT INTO VentaDetalle (IdVenta, IdProducto, Cantidad, PrecioUnitario)
-                                        VALUES (@idVenta, @idProducto, @cantidad, @precio)";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idVenta", idVenta);
-                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
-                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                    cmd.Parameters.AddWithValue("@precio", precio);
+                    cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@Cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@PrecioUnitario", precio);
                     cmd.ExecuteNonQuery();
 
-                    // Actualizar stock
-                    cmd.CommandText = @"UPDATE Productos
-                                        SET Stock = Stock - @cantidad
-                                        WHERE IdProducto = @idProducto";
+                    // Nota: El descuento de stock se maneja mediante el SP o manteniendo el UPDATE parametrizado aquí
+                    cmd.CommandText = "UPDATE Productos SET Stock = Stock - @cantidad WHERE IdProducto = @idProducto";
+                    cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
                     cmd.Parameters.AddWithValue("@idProducto", idProducto);
                     cmd.ExecuteNonQuery();
                 }
+
                 if (estado == "Pendiente" && idCliente != null)
                 {
-                    cmd.CommandText = "UPDATE Clientes SET Saldo = Saldo - @monto WHERE IdCliente = @idCliente";
+                    cmd.CommandText = "AgregarSaldoCliente";
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@monto", total);
-                    cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                    cmd.Parameters.AddWithValue("@IdCliente", idCliente);
+                    cmd.Parameters.AddWithValue("@Monto", -total); // Restar saldo (o sumar deuda)
                     cmd.ExecuteNonQuery();
                 }
 
@@ -96,12 +87,8 @@ namespace CapaDatos
                 Conexion conexion = new Conexion();
                 DataTable tabla = new DataTable();
                 cmd.Connection = conexion.ObtenerConexion();
-                cmd.CommandText = @"SELECT v.IdVenta,
-                        ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
-                        v.Fecha, v.MontoTotal, v.Estado
-                        FROM Ventas v
-                        LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
-                        ORDER BY v.Fecha DESC";
+                cmd.CommandText = "MostrarHistorialVentas";
+                cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader leer = cmd.ExecuteReader();
                 tabla.Load(leer);
                 cmd.Connection = conexion.CerrarConexion();
@@ -125,20 +112,10 @@ namespace CapaDatos
                 cmd.Connection = con;
                 cmd.Transaction = transaccion;
 
-                // Restaurar stock de cada producto
-                cmd.CommandText = @"UPDATE Productos
-                            SET Stock = Stock + vd.Cantidad
-                            FROM Productos p
-                            INNER JOIN VentaDetalle vd ON p.IdProducto = vd.IdProducto
-                            WHERE vd.IdVenta = @idVenta";
+                cmd.CommandText = "AnularVenta";
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idVenta", idVenta);
-                cmd.ExecuteNonQuery();
-
-                // Marcar venta como anulada
-                cmd.CommandText = "UPDATE Ventas SET Estado = 'Anulada' WHERE IdVenta = @idVenta";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idVenta", idVenta);
+                cmd.Parameters.AddWithValue("@IdVenta", idVenta);
                 cmd.ExecuteNonQuery();
 
                 transaccion.Commit();
@@ -155,22 +132,19 @@ namespace CapaDatos
         // TODO: CompletarVenta - Recibe IdVenta como int, actualiza el estado de la venta a "Completada" en la BD
         public void CompletarVenta(int idVenta)
         {
-            Conexion conexion = new Conexion();
-            SqlConnection con = conexion.ObtenerConexion();
-            SqlTransaction transaccion = con.BeginTransaction();
-
             try
             {
+                Conexion conexion = new Conexion();
                 cmd.Connection = conexion.ObtenerConexion();
-                cmd.CommandText = "UPDATE Ventas SET Estado = 'Completada' WHERE IdVenta = @idVenta";
+                cmd.CommandText = "CompletarVenta";
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idVenta", idVenta);
+                cmd.Parameters.AddWithValue("@IdVenta", idVenta);
                 cmd.ExecuteNonQuery();
                 cmd.Connection = conexion.CerrarConexion();
             }
             catch (Exception ex)
             {
-                conexion.CerrarConexion();
                 throw new Exception(ex.Message);
             }
         }
@@ -178,59 +152,67 @@ namespace CapaDatos
         // TODO: ObtenerDetalleVenta - Recibe IdVenta como int, consulta los productos del detalle con cantidades y precios y retorna DataTable
         public DataTable ObtenerDetalleVenta(int idVenta)
         {
-            Conexion conexion = new Conexion();
-            DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT p.Nombre, p.Marca,
-                        vd.Cantidad, vd.PrecioUnitario, vd.Subtotal
-                        FROM VentaDetalle vd
-                        INNER JOIN Productos p ON vd.IdProducto = p.IdProducto
-                        WHERE vd.IdVenta = @idVenta";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@idVenta", idVenta);
-            SqlDataReader leer = cmd.ExecuteReader();
-            tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
-            return tabla;
+            try
+            {
+                Conexion conexion = new Conexion();
+                DataTable tabla = new DataTable();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = "MostrarVentaDetalle";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                SqlDataReader leer = cmd.ExecuteReader();
+                tabla.Load(leer);
+                cmd.Connection = conexion.CerrarConexion();
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         // TODO: VentasDelDia - Sin parámetros, consulta las ventas del día actual excluyendo las anuladas y retorna DataTable
         public DataTable VentasDelDia()
         {
-            Conexion conexion = new Conexion();
-            DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT v.IdVenta,
-                        ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
-                        v.Fecha, v.MontoTotal, v.Estado
-                        FROM Ventas v
-                        LEFT JOIN Clientes c ON v.IdCliente = c.IdCliente
-                        WHERE CAST(v.Fecha AS DATE) = CAST(GETDATE() AS DATE)
-                        AND v.Estado != 'Anulada'";
-            SqlDataReader leer = cmd.ExecuteReader();
-            tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
-            return tabla;
+            try
+            {
+                Conexion conexion = new Conexion();
+                DataTable tabla = new DataTable();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = "ReporteVentasDelDia";
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader leer = cmd.ExecuteReader();
+                tabla.Load(leer);
+                cmd.Connection = conexion.CerrarConexion();
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         // TODO: Top5Productos - Sin parámetros, consulta los 5 productos con mayor cantidad vendida (excluye ventas anuladas) y retorna DataTable
         public DataTable Top5Productos()
         {
-            Conexion conexion = new Conexion();
-            DataTable tabla = new DataTable();
-            cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT TOP 5 p.Nombre, p.Marca,
-                        SUM(vd.Cantidad) AS TotalVendido
-                        FROM VentaDetalle vd
-                        INNER JOIN Productos p ON vd.IdProducto = p.IdProducto
-                        INNER JOIN Ventas v    ON vd.IdVenta    = v.IdVenta
-                        WHERE v.Estado != 'Anulada'
-                        GROUP BY p.Nombre, p.Marca
-                        ORDER BY TotalVendido DESC";
-            SqlDataReader leer = cmd.ExecuteReader();
-            tabla.Load(leer);
-            cmd.Connection = conexion.CerrarConexion();
-            return tabla;
+            try
+            {
+                Conexion conexion = new Conexion();
+                DataTable tabla = new DataTable();
+                cmd.Connection = conexion.ObtenerConexion();
+                cmd.CommandText = "Top5ProductosMasVendidos";
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader leer = cmd.ExecuteReader();
+                tabla.Load(leer);
+                cmd.Connection = conexion.CerrarConexion();
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+
     }
 }

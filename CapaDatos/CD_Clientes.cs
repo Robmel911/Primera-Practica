@@ -27,11 +27,11 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = "INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES (@nombre, @telefono, @informacion)";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@informacion", informacion);
+                cmd.CommandText = "InsertarCliente";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Telefono", telefono);
+                cmd.Parameters.AddWithValue("@Informacion", informacion);
                 cmd.ExecuteNonQuery();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -48,12 +48,14 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = "UPDATE Clientes SET Nombre=@nombre, Telefono=@telefono, Informacion=@informacion WHERE IdCliente=@id";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@informacion", informacion);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = "EditarCliente";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdCliente", id);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Telefono", telefono);
+                cmd.Parameters.AddWithValue("@Informacion", informacion);
+                cmd.Parameters.AddWithValue("@Saldo", 0); // Valor por defecto o actual
+                cmd.Parameters.AddWithValue("@Activo", 1); // Valor por defecto
                 cmd.ExecuteNonQuery();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -69,11 +71,12 @@ namespace CapaDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Clientes SET Saldo= Saldo + {saldo} WHERE IdCliente={id}";
-                cmd.CommandType = CommandType.Text;
-                Leer = cmd.ExecuteReader();
+                cmd.CommandText = "AgregarSaldoCliente";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdCliente", id);
+                cmd.Parameters.AddWithValue("@Monto", saldo);
+                cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -89,11 +92,11 @@ namespace CapaDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Clientes SET Activo=0 WHERE IdCliente={id}";
-                cmd.CommandType = CommandType.Text;
-                Leer = cmd.ExecuteReader();
+                cmd.CommandText = "DesactivarCliente";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdCliente", id);
+                cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -109,11 +112,11 @@ namespace CapaDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = $"UPDATE Clientes SET Activo=1 WHERE IdCliente={id}";
-                cmd.CommandType = CommandType.Text;
-                Leer = cmd.ExecuteReader();
+                cmd.CommandText = "ReactivarCliente";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdCliente", id);
+                cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
             }
@@ -130,8 +133,9 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono";
-                cmd.Parameters.AddWithValue("@telefono", telefono);
+                cmd.CommandText = "ExisteTelefono";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Telefono", telefono);
                 int cantidad = (int)cmd.ExecuteScalar();
                 cmd.Connection = Conector.CerrarConexion();
                 return cantidad > 0;
@@ -149,9 +153,10 @@ namespace CapaDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                cmd.CommandText = "SELECT COUNT(*) FROM Clientes WHERE Telefono = @telefono AND IdCliente != @id";
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = "ExisteTelefonoEditar";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Telefono", telefono);
+                cmd.Parameters.AddWithValue("@IdCliente", id);
                 int cantidad = (int)cmd.ExecuteScalar();
                 cmd.Connection = Conector.CerrarConexion();
                 return cantidad > 0;
@@ -161,5 +166,6 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+
     }
 }
