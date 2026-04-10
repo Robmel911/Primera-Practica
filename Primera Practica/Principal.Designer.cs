@@ -86,10 +86,19 @@ namespace Primera_Practica
             this.tituloauxCl = new System.Windows.Forms.Label();
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.panelAuditoria = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panelReg = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
             this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dataGrid1 = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnMostrarReg = new System.Windows.Forms.Button();
+            this.btnModusuario = new System.Windows.Forms.Button();
+            this.btnAgrusurio = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,7 +119,10 @@ namespace Primera_Practica
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             this.panelAuditoria.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panelReg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -695,9 +707,9 @@ namespace Primera_Practica
             this.panelVentas.Controls.Add(this.panel3);
             this.panelVentas.Controls.Add(this.dgvHistorialVentas);
             this.panelVentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelVentas.Location = new System.Drawing.Point(35, 0);
+            this.panelVentas.Location = new System.Drawing.Point(0, 0);
             this.panelVentas.Name = "panelVentas";
-            this.panelVentas.Size = new System.Drawing.Size(1245, 733);
+            this.panelVentas.Size = new System.Drawing.Size(1280, 733);
             this.panelVentas.TabIndex = 3;
             // 
             // label12
@@ -721,7 +733,7 @@ namespace Primera_Practica
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 573);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1245, 160);
+            this.panel3.Size = new System.Drawing.Size(1280, 160);
             this.panel3.TabIndex = 6;
             // 
             // btnRegistrar_venta
@@ -1040,21 +1052,66 @@ namespace Primera_Practica
             // 
             // panelAuditoria
             // 
-            this.panelAuditoria.Controls.Add(this.dataGridAuditoria);
+            this.panelAuditoria.Controls.Add(this.panel5);
+            this.panelAuditoria.Controls.Add(this.panel1);
+            this.panelAuditoria.Controls.Add(this.panel4);
+            this.panelAuditoria.Controls.Add(this.panelReg);
+            this.panelAuditoria.Controls.Add(this.pictureBox2);
             this.panelAuditoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAuditoria.Location = new System.Drawing.Point(0, 0);
             this.panelAuditoria.Name = "panelAuditoria";
             this.panelAuditoria.Size = new System.Drawing.Size(1280, 733);
             this.panelAuditoria.TabIndex = 5;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnAgrusurio);
+            this.panel4.Controls.Add(this.btnModusuario);
+            this.panel4.Controls.Add(this.btnMostrarReg);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 569);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1280, 164);
+            this.panel4.TabIndex = 7;
+            // 
+            // panelReg
+            // 
+            this.panelReg.Controls.Add(this.label13);
+            this.panelReg.Controls.Add(this.dataGridAuditoria);
+            this.panelReg.Location = new System.Drawing.Point(90, 13);
+            this.panelReg.Name = "panelReg";
+            this.panelReg.Size = new System.Drawing.Size(587, 469);
+            this.panelReg.TabIndex = 1;
+            this.panelReg.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(257, 29);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 25);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "label13";
+            // 
             // dataGridAuditoria
             // 
             this.dataGridAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridAuditoria.Location = new System.Drawing.Point(193, 73);
+            this.dataGridAuditoria.Location = new System.Drawing.Point(13, 86);
             this.dataGridAuditoria.Name = "dataGridAuditoria";
             this.dataGridAuditoria.RowHeadersWidth = 62;
             this.dataGridAuditoria.Size = new System.Drawing.Size(558, 369);
             this.dataGridAuditoria.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::Primera_Practica.Properties.Resources.Colmado;
+            this.pictureBox2.Location = new System.Drawing.Point(103, 48);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(559, 385);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // dataGrid1
             // 
@@ -1074,18 +1131,83 @@ namespace Primera_Practica
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnMostrarReg
+            // 
+            this.btnMostrarReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnMostrarReg.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMostrarReg.FlatAppearance.BorderSize = 0;
+            this.btnMostrarReg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnMostrarReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarReg.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnMostrarReg.ForeColor = System.Drawing.Color.White;
+            this.btnMostrarReg.Location = new System.Drawing.Point(0, 0);
+            this.btnMostrarReg.Name = "btnMostrarReg";
+            this.btnMostrarReg.Size = new System.Drawing.Size(209, 164);
+            this.btnMostrarReg.TabIndex = 4;
+            this.btnMostrarReg.Text = "Mostrar registro";
+            this.btnMostrarReg.UseVisualStyleBackColor = false;
+            this.btnMostrarReg.Click += new System.EventHandler(this.btnMostrarReg_Click);
+            // 
+            // btnModusuario
+            // 
+            this.btnModusuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnModusuario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnModusuario.FlatAppearance.BorderSize = 0;
+            this.btnModusuario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnModusuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModusuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnModusuario.ForeColor = System.Drawing.Color.White;
+            this.btnModusuario.Location = new System.Drawing.Point(209, 0);
+            this.btnModusuario.Name = "btnModusuario";
+            this.btnModusuario.Size = new System.Drawing.Size(209, 164);
+            this.btnModusuario.TabIndex = 5;
+            this.btnModusuario.Text = "Modificar usuario";
+            this.btnModusuario.UseVisualStyleBackColor = false;
+            this.btnModusuario.Click += new System.EventHandler(this.btnModusuario_Click);
+            // 
+            // btnAgrusurio
+            // 
+            this.btnAgrusurio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnAgrusurio.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAgrusurio.FlatAppearance.BorderSize = 0;
+            this.btnAgrusurio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnAgrusurio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgrusurio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAgrusurio.ForeColor = System.Drawing.Color.White;
+            this.btnAgrusurio.Location = new System.Drawing.Point(418, 0);
+            this.btnAgrusurio.Name = "btnAgrusurio";
+            this.btnAgrusurio.Size = new System.Drawing.Size(209, 164);
+            this.btnAgrusurio.TabIndex = 6;
+            this.btnAgrusurio.Text = "Agregar usuario";
+            this.btnAgrusurio.UseVisualStyleBackColor = false;
+            this.btnAgrusurio.Click += new System.EventHandler(this.btnAgrusurio_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(-33, -67);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 8;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(1068, 197);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.TabIndex = 9;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1280, 733);
-            this.Controls.Add(this.panelVentas);
             this.Controls.Add(this.panelLateral);
-            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelAuditoria);
             this.Controls.Add(this.panelInicio);
             this.Controls.Add(this.panelClientes);
+            this.Controls.Add(this.panelVentas);
+            this.Controls.Add(this.panelProductos);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -1121,7 +1243,11 @@ namespace Primera_Practica
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             this.panelAuditoria.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panelReg.ResumeLayout(false);
+            this.panelReg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -1203,5 +1329,14 @@ namespace Primera_Practica
         private System.Windows.Forms.Button btnMostraropciones;
         private System.Windows.Forms.DataGridView dataGrid1;
         private System.Windows.Forms.DataGridView dataGridAuditoria;
+        private System.Windows.Forms.Panel panelReg;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnAgrusurio;
+        private System.Windows.Forms.Button btnModusuario;
+        private System.Windows.Forms.Button btnMostrarReg;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel1;
     }
 }

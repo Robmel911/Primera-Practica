@@ -43,17 +43,17 @@ namespace Primera_Practica
         }
         private async void Form1_Load(object sender, EventArgs e)
         {// Oculta el principal 
-            this.Hide();
-            Login login = new Login();
-            if (login.ShowDialog() != DialogResult.OK)
-            {
-                // Si cierra sin loguearse cierra toda la app
-                Application.Exit();
-                return;
-            }
-            // Login exitoso, muestra el principal
-            this.Show();
-            // Maximiza la ventana
+            //this.Hide();
+            //Login login = new Login();
+            //if (login.ShowDialog() != DialogResult.OK)
+            //{
+            //    // Si cierra sin loguearse cierra toda la app
+            //    Application.Exit();
+            //    return;
+            //}
+            //// Login exitoso, muestra el principal
+            //this.Show();
+            //// Maximiza la ventana
             this.WindowState = FormWindowState.Maximized;
             Tablaproductos();
             await Tablaclientes();
@@ -246,7 +246,8 @@ namespace Primera_Practica
         {
             MostrarPanel(panelAuditoria);
             MarcarBotonActivo(btnAuditoria);
-            TablaAuditoria();
+            activarbtn(btnMostrarReg);
+            panelReg.Visible = false;
 
         }
         private void panelLateral_MouseEnter(object sender, EventArgs e)
@@ -850,8 +851,25 @@ namespace Primera_Practica
             dataGridAuditoria.DataSource = auditoria.MostrarAuditoria();
 
         }
+        private void btnMostrarReg_Click(object sender, EventArgs e)
+        {
+            panelReg.Visible = true;   
+            desactivarbtn(btnMostrarReg);
+            TablaAuditoria();
+        }
 
+        private void btnModusuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAgrusurio_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
+
+
     }
 
 }
