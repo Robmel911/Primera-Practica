@@ -656,6 +656,10 @@ namespace Primera_Practica
             return valido;
         }
         #endregion
+        private void Limpiartextos_Clientes()
+        {
+            textNombreCl.Clear(); textTelefonoCl.Clear(); textInfoCl.Clear();
+        }
         private void EstiloDataGrid_Clientes()
         {
             dataGrid_Clientes.BackgroundColor = Color.White;
@@ -698,7 +702,7 @@ namespace Primera_Practica
         {
             panelAux_Clientes.Visible = true;
             tituloauxCl.Text = "Registrar cliente";
-            textInfoCl.Clear(); textNombreCl.Clear(); textTelefonoCl.Clear();
+            Limpiartextos_Clientes();
         }
 
         private void btneditar_Cl_Click(object sender, EventArgs e)
@@ -770,7 +774,7 @@ namespace Primera_Practica
                 RealizarAct = VentanaConfirmacion();
                 ID = dataGrid_Clientes.CurrentRow.Cells["IdCliente"].Value.ToString();
                 CNclientes.Desactivar_Cliente(ID);
-                Tablaclientes();
+                await Tablaclientes();
                 panelAux_Clientes.Visible = false;
             }
             else 
@@ -820,6 +824,11 @@ namespace Primera_Practica
                 }
                 else { VentanaEmergente("Seleccione una fila", "Error"); }
             }
+        }
+        private void btnCerrarpnlAuxCl_Click(object sender, EventArgs e)
+        {
+            panelAux_Clientes.Visible = false;
+            Limpiartextos_Clientes();
         }
         #endregion
         #region Panel Ventas
@@ -1150,9 +1159,10 @@ namespace Primera_Practica
 
 
 
+
         #endregion
 
-      
+       
     }
     }
 
