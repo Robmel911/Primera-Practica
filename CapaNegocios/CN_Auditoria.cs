@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
-    // TODO: Agregar método para exportar el historial de auditoría a PDF o CSV
     public class CN_Auditoria
     {
         private CD_Auditoria auditoriaCD = new CD_Auditoria();
 
-        // TODO: Agregar parámetro de nivel de acción (Consulta, Modificación, Eliminación)
+        // TODO: RegistrarAuditoria - Recibe IdUsuario (int) y Accion (string), los envía a la capa de datos para guardar el registro de la acción realizada en el sistema
         public void RegistrarAuditoria(int IdUsuario, string Accion)
         {
             auditoriaCD.Insertar(IdUsuario, Accion);
         }
 
+        // TODO: MostrarAuditoria - Sin parámetros, obtiene todos los registros de auditoría desde la capa de datos y retorna DataTable
         public DataTable MostrarAuditoria()
         {
             DataTable tabla = new DataTable();

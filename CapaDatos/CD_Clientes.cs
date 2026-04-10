@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,25 +9,24 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    // TODO: Migrar todas las consultas con interpolación de cadenas a consultas parametrizadas
     public class CD_Clientes : CD_Base
     {
         private Conexion Conector = new Conexion();
-
-
         SqlCommand cmd = new SqlCommand();
-        // TODO: Agregar filtro por nombre o teléfono para búsqueda rápida de clientes
+
+        // TODO: MostrarT - Sin parámetros, llama al SP MostrarClientes y retorna DataTable con todos los clientes activos
         public override DataTable MostrarT()
         {
             return MostrarTabla("MostrarClientes");
         }
+
+        // TODO: Registrar_Clientes - Recibe nombre, telefono e informacion, inserta un nuevo cliente en la tabla Clientes de la BD
         public void Registrar_Clientes(string nombre, string telefono, string informacion)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                //Linea de productos en la bd
                 cmd.CommandText = "INSERT INTO Clientes (Nombre, Telefono, Informacion) VALUES (@nombre, @telefono, @informacion)";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -41,13 +40,14 @@ namespace CapaDatos
                 throw new Exception("Error al registrar el cliente: " + ex.Message);
             }
         }
+
+        // TODO: Editar_Clientes - Recibe nombre, telefono, informacion e IdCliente, actualiza los datos del cliente en la BD
         public void Editar_Clientes(string nombre, string telefono, string informacion, int id)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = Conector.ObtenerConexion();
-                //Linea para editar productos a la bd
                 cmd.CommandText = "UPDATE Clientes SET Nombre=@nombre, Telefono=@telefono, Informacion=@informacion WHERE IdCliente=@id";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -60,9 +60,10 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 throw new Exception("Error al editar el cliente: " + ex.Message);
-            } 
+            }
         }
-        // TODO: Agregar validación para no permitir saldo negativo en la cuenta
+
+        // TODO: Agregarsaldo - Recibe saldo (int) e IdCliente (int), suma el monto al campo Saldo del cliente en la BD
         public void Agregarsaldo(int saldo, int id)
         {
             try
@@ -70,7 +71,6 @@ namespace CapaDatos
                 SqlCommand cmd = new SqlCommand();
                 SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                //Linea para editar productos a la bd
                 cmd.CommandText = $"UPDATE Clientes SET Saldo= Saldo + {saldo} WHERE IdCliente={id}";
                 cmd.CommandType = CommandType.Text;
                 Leer = cmd.ExecuteReader();
@@ -82,6 +82,8 @@ namespace CapaDatos
                 throw new Exception("Error al agregar saldo al cliente: " + ex.Message);
             }
         }
+
+        // TODO: Desactivar_Clientes - Recibe IdCliente como int, cambia el campo Activo a 0 para desactivar el cliente en la BD
         public void Desactivar_Clientes(int id)
         {
             try
@@ -89,7 +91,6 @@ namespace CapaDatos
                 SqlCommand cmd = new SqlCommand();
                 SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                //Linea para editar productos a la bd
                 cmd.CommandText = $"UPDATE Clientes SET Activo=0 WHERE IdCliente={id}";
                 cmd.CommandType = CommandType.Text;
                 Leer = cmd.ExecuteReader();
@@ -101,6 +102,8 @@ namespace CapaDatos
                 throw new Exception("Error al desactivar el cliente: " + ex.Message);
             }
         }
+
+        // TODO: Reactivar_Clientes - Recibe IdCliente como int, cambia el campo Activo a 1 para reactivar el cliente en la BD
         public void Reactivar_Clientes(int id)
         {
             try
@@ -108,7 +111,6 @@ namespace CapaDatos
                 SqlCommand cmd = new SqlCommand();
                 SqlDataReader Leer;
                 cmd.Connection = Conector.ObtenerConexion();
-                //Linea para editar productos a la bd
                 cmd.CommandText = $"UPDATE Clientes SET Activo=1 WHERE IdCliente={id}";
                 cmd.CommandType = CommandType.Text;
                 Leer = cmd.ExecuteReader();
@@ -120,6 +122,8 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+
+        // TODO: ExisteTelefono - Recibe un número de teléfono como string, consulta la BD y retorna bool indicando si ya existe
         public bool ExisteTelefono(string telefono)
         {
             try
@@ -137,6 +141,8 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+
+        // TODO: ExisteTelefonoEditar - Recibe teléfono e IdCliente, verifica si el teléfono pertenece a otro cliente y retorna bool
         public bool ExisteTelefonoEditar(string telefono, int id)
         {
             try

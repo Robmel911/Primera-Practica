@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    // TODO: Agregar reporte de ventas mensual y comparativo entre períodos
     public class CD_Ventas : CD_Base
     {
         SqlCommand cmd = new SqlCommand();
 
-        // TODO: Implementar descuentos y cupones en el registro de ventas
-        public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total,string estado)
+        // TODO: RegistrarVenta - Recibe IdCliente (nullable), carrito (DataTable), total y estado; registra la venta con sus detalles en una transacción y retorna bool
+        public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total, string estado)
         {
             Conexion conexion = new Conexion();
             SqlConnection con = conexion.ObtenerConexion();
@@ -22,7 +21,7 @@ namespace CapaDatos
                 cmd.Transaction = transaccion;
 
                 // 1 — Insertar cabecera de venta
-                cmd.CommandText = @"INSERT INTO Ventas (IdCliente, Fecha, MontoTotal, Estado) 
+                cmd.CommandText = @"INSERT INTO Ventas (IdCliente, Fecha, MontoTotal, Estado)
                     VALUES (@idCliente, GETDATE(), @total, @estado);
                     SELECT SCOPE_IDENTITY();";
 
@@ -60,8 +59,8 @@ namespace CapaDatos
                     cmd.ExecuteNonQuery();
 
                     // Actualizar stock
-                    cmd.CommandText = @"UPDATE Productos 
-                                        SET Stock = Stock - @cantidad 
+                    cmd.CommandText = @"UPDATE Productos
+                                        SET Stock = Stock - @cantidad
                                         WHERE IdProducto = @idProducto";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
@@ -88,6 +87,8 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+
+        // TODO: MostrarT - Sin parámetros, consulta todas las ventas con nombre de cliente (LEFT JOIN) y retorna DataTable ordenado por fecha descendente
         public override DataTable MostrarT()
         {
             try
@@ -95,7 +96,7 @@ namespace CapaDatos
                 Conexion conexion = new Conexion();
                 DataTable tabla = new DataTable();
                 cmd.Connection = conexion.ObtenerConexion();
-                cmd.CommandText = @"SELECT v.IdVenta, 
+                cmd.CommandText = @"SELECT v.IdVenta,
                         ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
                         v.Fecha, v.MontoTotal, v.Estado
                         FROM Ventas v
@@ -112,6 +113,7 @@ namespace CapaDatos
             }
         }
 
+        // TODO: AnularVenta - Recibe IdVenta como int, restaura el stock de los productos del detalle y cambia el estado de la venta a "Anulada" en una transacción
         public void AnularVenta(int idVenta)
         {
             Conexion conexion = new Conexion();
@@ -124,7 +126,7 @@ namespace CapaDatos
                 cmd.Transaction = transaccion;
 
                 // Restaurar stock de cada producto
-                cmd.CommandText = @"UPDATE Productos 
+                cmd.CommandText = @"UPDATE Productos
                             SET Stock = Stock + vd.Cantidad
                             FROM Productos p
                             INNER JOIN VentaDetalle vd ON p.IdProducto = vd.IdProducto
@@ -149,15 +151,16 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
-            public void CompletarVenta(int idVenta)
-             {
+
+        // TODO: CompletarVenta - Recibe IdVenta como int, actualiza el estado de la venta a "Completada" en la BD
+        public void CompletarVenta(int idVenta)
+        {
             Conexion conexion = new Conexion();
             SqlConnection con = conexion.ObtenerConexion();
             SqlTransaction transaccion = con.BeginTransaction();
 
             try
             {
-               
                 cmd.Connection = conexion.ObtenerConexion();
                 cmd.CommandText = "UPDATE Ventas SET Estado = 'Completada' WHERE IdVenta = @idVenta";
                 cmd.Parameters.Clear();
@@ -167,18 +170,18 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-               
                 conexion.CerrarConexion();
                 throw new Exception(ex.Message);
             }
-
         }
+
+        // TODO: ObtenerDetalleVenta - Recibe IdVenta como int, consulta los productos del detalle con cantidades y precios y retorna DataTable
         public DataTable ObtenerDetalleVenta(int idVenta)
         {
             Conexion conexion = new Conexion();
             DataTable tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT p.Nombre, p.Marca, 
+            cmd.CommandText = @"SELECT p.Nombre, p.Marca,
                         vd.Cantidad, vd.PrecioUnitario, vd.Subtotal
                         FROM VentaDetalle vd
                         INNER JOIN Productos p ON vd.IdProducto = p.IdProducto
@@ -190,13 +193,14 @@ namespace CapaDatos
             cmd.Connection = conexion.CerrarConexion();
             return tabla;
         }
-        // TODO: Agregar filtro de ventas por rango de fechas y estado
+
+        // TODO: VentasDelDia - Sin parámetros, consulta las ventas del día actual excluyendo las anuladas y retorna DataTable
         public DataTable VentasDelDia()
         {
             Conexion conexion = new Conexion();
             DataTable tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT v.IdVenta, 
+            cmd.CommandText = @"SELECT v.IdVenta,
                         ISNULL(c.Nombre, 'Consumidor Final') AS Cliente,
                         v.Fecha, v.MontoTotal, v.Estado
                         FROM Ventas v
@@ -208,12 +212,14 @@ namespace CapaDatos
             cmd.Connection = conexion.CerrarConexion();
             return tabla;
         }
+
+        // TODO: Top5Productos - Sin parámetros, consulta los 5 productos con mayor cantidad vendida (excluye ventas anuladas) y retorna DataTable
         public DataTable Top5Productos()
         {
             Conexion conexion = new Conexion();
             DataTable tabla = new DataTable();
             cmd.Connection = conexion.ObtenerConexion();
-            cmd.CommandText = @"SELECT TOP 5 p.Nombre, p.Marca, 
+            cmd.CommandText = @"SELECT TOP 5 p.Nombre, p.Marca,
                         SUM(vd.Cantidad) AS TotalVendido
                         FROM VentaDetalle vd
                         INNER JOIN Productos p ON vd.IdProducto = p.IdProducto
@@ -227,5 +233,4 @@ namespace CapaDatos
             return tabla;
         }
     }
-    
 }
