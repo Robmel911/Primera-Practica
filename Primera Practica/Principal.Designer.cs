@@ -16,6 +16,9 @@ namespace Primera_Practica
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.panelLateral = new System.Windows.Forms.Panel();
             this.btnAuditoria = new System.Windows.Forms.Button();
@@ -86,7 +89,11 @@ namespace Primera_Practica
             this.tituloauxCl = new System.Windows.Forms.Label();
             this.dataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.panelAuditoria = new System.Windows.Forms.Panel();
+            this.panelAuxUsuario = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAgrusurio = new System.Windows.Forms.Button();
+            this.btnModusuario = new System.Windows.Forms.Button();
+            this.btnMostrarReg = new System.Windows.Forms.Button();
             this.panelReg = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
@@ -94,11 +101,12 @@ namespace Primera_Practica
             this.dataGrid1 = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnMostrarReg = new System.Windows.Forms.Button();
-            this.btnModusuario = new System.Windows.Forms.Button();
-            this.btnAgrusurio = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnCerrarpnlAuxCl = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -119,6 +127,7 @@ namespace Primera_Practica
             this.panelAux_Clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).BeginInit();
             this.panelAuditoria.SuspendLayout();
+            this.panelAuxUsuario.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelReg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAuditoria)).BeginInit();
@@ -269,9 +278,8 @@ namespace Primera_Practica
             this.lblAlerta.ForeColor = System.Drawing.Color.OrangeRed;
             this.lblAlerta.Location = new System.Drawing.Point(174, 546);
             this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(98, 25);
+            this.lblAlerta.Size = new System.Drawing.Size(0, 25);
             this.lblAlerta.TabIndex = 10;
-            this.lblAlerta.Text = "Productos";
             // 
             // pictureBox1
             // 
@@ -940,6 +948,7 @@ namespace Primera_Practica
             // panelAux_Clientes
             // 
             this.panelAux_Clientes.BackColor = System.Drawing.Color.White;
+            this.panelAux_Clientes.Controls.Add(this.btnCerrarpnlAuxCl);
             this.panelAux_Clientes.Controls.Add(this.btnguardar_Cl);
             this.panelAux_Clientes.Controls.Add(this.label9);
             this.panelAux_Clientes.Controls.Add(this.label8);
@@ -1052,8 +1061,7 @@ namespace Primera_Practica
             // 
             // panelAuditoria
             // 
-            this.panelAuditoria.Controls.Add(this.panel5);
-            this.panelAuditoria.Controls.Add(this.panel1);
+            this.panelAuditoria.Controls.Add(this.panelAuxUsuario);
             this.panelAuditoria.Controls.Add(this.panel4);
             this.panelAuditoria.Controls.Add(this.panelReg);
             this.panelAuditoria.Controls.Add(this.pictureBox2);
@@ -1063,16 +1071,79 @@ namespace Primera_Practica
             this.panelAuditoria.Size = new System.Drawing.Size(1280, 733);
             this.panelAuditoria.TabIndex = 5;
             // 
+            // panelAuxUsuario
+            // 
+            this.panelAuxUsuario.Controls.Add(this.button4);
+            this.panelAuxUsuario.Controls.Add(this.label17);
+            this.panelAuxUsuario.Controls.Add(this.label16);
+            this.panelAuxUsuario.Controls.Add(this.label15);
+            this.panelAuxUsuario.Controls.Add(this.label14);
+            this.panelAuxUsuario.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelAuxUsuario.Location = new System.Drawing.Point(1003, 0);
+            this.panelAuxUsuario.Name = "panelAuxUsuario";
+            this.panelAuxUsuario.Size = new System.Drawing.Size(277, 733);
+            this.panelAuxUsuario.TabIndex = 9;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnAgrusurio);
             this.panel4.Controls.Add(this.btnModusuario);
             this.panel4.Controls.Add(this.btnMostrarReg);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 569);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1280, 164);
             this.panel4.TabIndex = 7;
+            // 
+            // btnAgrusurio
+            // 
+            this.btnAgrusurio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnAgrusurio.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAgrusurio.FlatAppearance.BorderSize = 0;
+            this.btnAgrusurio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnAgrusurio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgrusurio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAgrusurio.ForeColor = System.Drawing.Color.White;
+            this.btnAgrusurio.Location = new System.Drawing.Point(418, 0);
+            this.btnAgrusurio.Name = "btnAgrusurio";
+            this.btnAgrusurio.Size = new System.Drawing.Size(209, 164);
+            this.btnAgrusurio.TabIndex = 6;
+            this.btnAgrusurio.Text = "Agregar usuario";
+            this.btnAgrusurio.UseVisualStyleBackColor = false;
+            this.btnAgrusurio.Click += new System.EventHandler(this.btnAgrusurio_Click);
+            // 
+            // btnModusuario
+            // 
+            this.btnModusuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnModusuario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnModusuario.FlatAppearance.BorderSize = 0;
+            this.btnModusuario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnModusuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModusuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnModusuario.ForeColor = System.Drawing.Color.White;
+            this.btnModusuario.Location = new System.Drawing.Point(209, 0);
+            this.btnModusuario.Name = "btnModusuario";
+            this.btnModusuario.Size = new System.Drawing.Size(209, 164);
+            this.btnModusuario.TabIndex = 5;
+            this.btnModusuario.Text = "Modificar usuario";
+            this.btnModusuario.UseVisualStyleBackColor = false;
+            this.btnModusuario.Click += new System.EventHandler(this.btnModusuario_Click);
+            // 
+            // btnMostrarReg
+            // 
+            this.btnMostrarReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnMostrarReg.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMostrarReg.FlatAppearance.BorderSize = 0;
+            this.btnMostrarReg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnMostrarReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarReg.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnMostrarReg.ForeColor = System.Drawing.Color.White;
+            this.btnMostrarReg.Location = new System.Drawing.Point(0, 0);
+            this.btnMostrarReg.Name = "btnMostrarReg";
+            this.btnMostrarReg.Size = new System.Drawing.Size(209, 164);
+            this.btnMostrarReg.TabIndex = 4;
+            this.btnMostrarReg.Text = "Mostrar registro";
+            this.btnMostrarReg.UseVisualStyleBackColor = false;
+            this.btnMostrarReg.Click += new System.EventHandler(this.btnMostrarReg_Click);
             // 
             // panelReg
             // 
@@ -1115,10 +1186,34 @@ namespace Primera_Practica
             // 
             // dataGrid1
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGrid1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGrid1.Location = new System.Drawing.Point(5, 80);
             this.dataGrid1.Name = "dataGrid1";
             this.dataGrid1.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGrid1.RowHeadersWidth = 62;
             this.dataGrid1.Size = new System.Drawing.Size(240, 150);
             this.dataGrid1.TabIndex = 0;
@@ -1131,70 +1226,69 @@ namespace Primera_Practica
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // btnMostrarReg
+            // label14
             // 
-            this.btnMostrarReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.btnMostrarReg.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMostrarReg.FlatAppearance.BorderSize = 0;
-            this.btnMostrarReg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
-            this.btnMostrarReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMostrarReg.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnMostrarReg.ForeColor = System.Drawing.Color.White;
-            this.btnMostrarReg.Location = new System.Drawing.Point(0, 0);
-            this.btnMostrarReg.Name = "btnMostrarReg";
-            this.btnMostrarReg.Size = new System.Drawing.Size(209, 164);
-            this.btnMostrarReg.TabIndex = 4;
-            this.btnMostrarReg.Text = "Mostrar registro";
-            this.btnMostrarReg.UseVisualStyleBackColor = false;
-            this.btnMostrarReg.Click += new System.EventHandler(this.btnMostrarReg_Click);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(92, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(69, 25);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "label14";
             // 
-            // btnModusuario
+            // label15
             // 
-            this.btnModusuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.btnModusuario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnModusuario.FlatAppearance.BorderSize = 0;
-            this.btnModusuario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
-            this.btnModusuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModusuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnModusuario.ForeColor = System.Drawing.Color.White;
-            this.btnModusuario.Location = new System.Drawing.Point(209, 0);
-            this.btnModusuario.Name = "btnModusuario";
-            this.btnModusuario.Size = new System.Drawing.Size(209, 164);
-            this.btnModusuario.TabIndex = 5;
-            this.btnModusuario.Text = "Modificar usuario";
-            this.btnModusuario.UseVisualStyleBackColor = false;
-            this.btnModusuario.Click += new System.EventHandler(this.btnModusuario_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(17, 87);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(69, 25);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "label15";
             // 
-            // btnAgrusurio
+            // label16
             // 
-            this.btnAgrusurio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.btnAgrusurio.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnAgrusurio.FlatAppearance.BorderSize = 0;
-            this.btnAgrusurio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
-            this.btnAgrusurio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgrusurio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnAgrusurio.ForeColor = System.Drawing.Color.White;
-            this.btnAgrusurio.Location = new System.Drawing.Point(418, 0);
-            this.btnAgrusurio.Name = "btnAgrusurio";
-            this.btnAgrusurio.Size = new System.Drawing.Size(209, 164);
-            this.btnAgrusurio.TabIndex = 6;
-            this.btnAgrusurio.Text = "Agregar usuario";
-            this.btnAgrusurio.UseVisualStyleBackColor = false;
-            this.btnAgrusurio.Click += new System.EventHandler(this.btnAgrusurio_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(17, 200);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(69, 25);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "label16";
             // 
-            // panel1
+            // label17
             // 
-            this.panel1.Location = new System.Drawing.Point(-33, -67);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 8;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(22, 272);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(69, 25);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "label17";
             // 
-            // panel5
+            // button4
             // 
-            this.panel5.Location = new System.Drawing.Point(1068, 197);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 100);
-            this.panel5.TabIndex = 9;
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(11, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(31, 34);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "X";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // btnCerrarpnlAuxCl
+            // 
+            this.btnCerrarpnlAuxCl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.btnCerrarpnlAuxCl.FlatAppearance.BorderSize = 0;
+            this.btnCerrarpnlAuxCl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarpnlAuxCl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnCerrarpnlAuxCl.ForeColor = System.Drawing.Color.White;
+            this.btnCerrarpnlAuxCl.Location = new System.Drawing.Point(13, 11);
+            this.btnCerrarpnlAuxCl.Name = "btnCerrarpnlAuxCl";
+            this.btnCerrarpnlAuxCl.Size = new System.Drawing.Size(31, 34);
+            this.btnCerrarpnlAuxCl.TabIndex = 14;
+            this.btnCerrarpnlAuxCl.Text = "X";
+            this.btnCerrarpnlAuxCl.UseVisualStyleBackColor = false;
             // 
             // Principal
             // 
@@ -1243,6 +1337,8 @@ namespace Primera_Practica
             this.panelAux_Clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Clientes)).EndInit();
             this.panelAuditoria.ResumeLayout(false);
+            this.panelAuxUsuario.ResumeLayout(false);
+            this.panelAuxUsuario.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panelReg.ResumeLayout(false);
             this.panelReg.PerformLayout();
@@ -1336,7 +1432,12 @@ namespace Primera_Practica
         private System.Windows.Forms.Button btnAgrusurio;
         private System.Windows.Forms.Button btnModusuario;
         private System.Windows.Forms.Button btnMostrarReg;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelAuxUsuario;
+        private System.Windows.Forms.Button btnCerrarpnlAuxCl;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
