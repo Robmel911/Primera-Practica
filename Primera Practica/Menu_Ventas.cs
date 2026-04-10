@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace Primera_Practica
 {
+    // TODO: Agregar búsqueda de producto por nombre en tiempo real al escribir en el combo
+    // TODO: Implementar impresión de recibo/factura al confirmar la venta
     public partial class Menu_Ventas : Form
     {
         CN_Auditoria auditoria = new CN_Auditoria();

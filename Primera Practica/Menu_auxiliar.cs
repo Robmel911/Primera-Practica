@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace Primera_Practica
 {
+    // TODO: Agregar confirmación visual al reactivar un producto o agregar saldo a un cliente
+    // TODO: Separar en dos formularios distintos: uno para productos y otro para clientes
     public partial class Menu_auxiliar : Form
     {
         CN_Producto CNproducto = new CN_Producto();

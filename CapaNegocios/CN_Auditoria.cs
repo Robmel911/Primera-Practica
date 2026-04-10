@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +12,13 @@ namespace CapaNegocios
     {
         private CD_Auditoria auditoriaCD = new CD_Auditoria();
 
+        // TODO: RegistrarAuditoria - Recibe IdUsuario (int) y Accion (string), los envía a la capa de datos para guardar el registro de la acción realizada en el sistema
         public void RegistrarAuditoria(int IdUsuario, string Accion)
         {
             auditoriaCD.Insertar(IdUsuario, Accion);
         }
 
+        // TODO: MostrarAuditoria - Sin parámetros, obtiene todos los registros de auditoría desde la capa de datos y retorna DataTable
         public DataTable MostrarAuditoria()
         {
             DataTable tabla = new DataTable();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,20 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
+    /// <summary>
+    /// Interfaz que obliga a todas las clases de datos a implementar el método de consulta general.
+    /// </summary>
+    public interface IMostrarTabla
+    {
+        // TODO: MostrarT - Sin parámetros, retorna un DataTable con todos los registros de la entidad correspondiente
+        DataTable MostrarT();
+    }
 
     public class Conexion
     {
-        
         private string cadenaConexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
 
-        // Propiedad para obtener la conexión
+        // TODO: ObtenerConexion - Sin parámetros, crea y abre una SqlConnection usando la cadena de conexión, retorna SqlConnection activa
         public SqlConnection ObtenerConexion()
         {
             SqlConnection conexion = new SqlConnection(cadenaConexion);
@@ -28,7 +35,8 @@ namespace CapaDatos
                 throw new Exception("Error al conectar con la base de datos: " + ex.Message);
             }
         }
-        // Método asíncrono Para tareas asincronas
+
+        // TODO: ObtenerConexionAsync - Sin parámetros, abre la conexión de forma asíncrona y retorna Task<SqlConnection>
         public async Task<SqlConnection> ObtenerConexionAsync()
         {
             SqlConnection conexion = new SqlConnection(cadenaConexion);
@@ -36,7 +44,7 @@ namespace CapaDatos
             return conexion;
         }
 
-        // Método para cerrar la conexión
+        // TODO: CerrarConexion - Sin parámetros, verifica si la conexión está abierta y la cierra, retorna SqlConnection
         public SqlConnection CerrarConexion()
         {
             if (ObtenerConexion().State == System.Data.ConnectionState.Open)
@@ -44,9 +52,9 @@ namespace CapaDatos
                 ObtenerConexion().Close();
             }
             return ObtenerConexion();
-
         }
-        // Método para probar la conexión
+
+        // TODO: ProbarConexion - Sin parámetros, intenta abrir la conexión para verificar disponibilidad, retorna bool
         public bool ProbarConexion()
         {
             try
@@ -58,13 +66,17 @@ namespace CapaDatos
         }
     }
 
-    public abstract class CD_Base
+    public abstract class CD_Base : IMostrarTabla
     {
         SqlCommand cmd = new SqlCommand();
         Conexion conexion = new Conexion();
         DataTable tabla = new DataTable();
         SqlDataReader leer;
+
+        // TODO: MostrarT - Sin parámetros, método abstracto que cada clase hija implementa para retornar su DataTable completo
         public abstract DataTable MostrarT();
+
+        // TODO: MostrarTabla - Recibe el nombre del procedimiento almacenado como string, lo ejecuta y retorna DataTable con los resultados
         public virtual DataTable MostrarTabla(string Procedimiento)
         {
             tabla = new DataTable();
@@ -76,6 +88,8 @@ namespace CapaDatos
             conexion.CerrarConexion();
             return tabla;
         }
+
+        // TODO: MostrarTablaDesactivada - Recibe nombre del procedimiento almacenado, lo ejecuta y retorna DataTable con registros desactivados
         protected virtual DataTable MostrarTablaDesactivada(string Procedimiento)
         {
             tabla = new DataTable();
@@ -89,6 +103,4 @@ namespace CapaDatos
         }
     }
 
-}    
-    
-
+}

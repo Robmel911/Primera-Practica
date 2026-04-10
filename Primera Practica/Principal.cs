@@ -12,6 +12,7 @@ using CapaNegocios;
 
 namespace Primera_Practica
 {
+    // TODO: Agregar control de permisos por rol (Admin vs Empleado) para habilitar/deshabilitar secciones
     public partial class Principal : Form
     {
         private CN_Auditoria auditoria = new CN_Auditoria();
@@ -41,8 +42,9 @@ namespace Primera_Practica
             EstiloDataGrid_VentasDelDia();
             EstiloDataGrid_Top5();
         }
+        // TODO: Mostrar nombre y rol del usuario autenticado en la barra superior del formulario
         private async void Form1_Load(object sender, EventArgs e)
-        {// Oculta el principal 
+        {// Oculta el principal
             this.Hide();
             Login login = new Login();
             if (login.ShowDialog() != DialogResult.OK)
