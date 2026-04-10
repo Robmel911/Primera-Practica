@@ -21,6 +21,7 @@ namespace Primera_Practica
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.panelLateral = new System.Windows.Forms.Panel();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnAcercade = new System.Windows.Forms.Button();
             this.btnRegistro = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
@@ -74,6 +75,7 @@ namespace Primera_Practica
             this.btnVerHistorial = new System.Windows.Forms.Button();
             this.dgvHistorialVentas = new System.Windows.Forms.DataGridView();
             this.panelClientes = new System.Windows.Forms.Panel();
+            this.chkClientesdesactivados = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnReacCliente = new System.Windows.Forms.Button();
@@ -110,6 +112,7 @@ namespace Primera_Practica
             this.btnModusuario = new System.Windows.Forms.Button();
             this.btnMostrarReg = new System.Windows.Forms.Button();
             this.panelReg = new System.Windows.Forms.Panel();
+            this.chkAuditoriadetalle = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.dataGridAuditoria = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -117,9 +120,6 @@ namespace Primera_Practica
             this.dataGrid1 = new System.Windows.Forms.DataGridView();
             this.timerMenu = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.chkClientesdesactivados = new System.Windows.Forms.CheckBox();
-            this.chkAuditoriadetalle = new System.Windows.Forms.CheckBox();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -167,6 +167,27 @@ namespace Primera_Practica
             this.panelLateral.TabIndex = 0;
             this.panelLateral.MouseEnter += new System.EventHandler(this.panelLateral_MouseEnter);
             this.panelLateral.MouseLeave += new System.EventHandler(this.panelLateral_MouseLeave);
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrarSesion.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.btnCerrarSesion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(0, 633);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(35, 50);
+            this.btnCerrarSesion.TabIndex = 6;
+            this.btnCerrarSesion.Text = "⬅️      Cerrar Sesión";
+            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCerrarSesion.UseVisualStyleBackColor = false;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            this.btnCerrarSesion.MouseEnter += new System.EventHandler(this.panelLateral_MouseEnter);
+            this.btnCerrarSesion.MouseLeave += new System.EventHandler(this.panelLateral_MouseLeave);
             // 
             // btnAcercade
             // 
@@ -906,6 +927,17 @@ namespace Primera_Practica
             this.panelClientes.Size = new System.Drawing.Size(1280, 733);
             this.panelClientes.TabIndex = 4;
             // 
+            // chkClientesdesactivados
+            // 
+            this.chkClientesdesactivados.AutoSize = true;
+            this.chkClientesdesactivados.Location = new System.Drawing.Point(727, 28);
+            this.chkClientesdesactivados.Name = "chkClientesdesactivados";
+            this.chkClientesdesactivados.Size = new System.Drawing.Size(274, 29);
+            this.chkClientesdesactivados.TabIndex = 11;
+            this.chkClientesdesactivados.Text = "Mostrar Clientes desactivados";
+            this.chkClientesdesactivados.UseVisualStyleBackColor = true;
+            this.chkClientesdesactivados.CheckedChanged += new System.EventHandler(this.chkClientesdesactivados_CheckedChanged);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -1048,6 +1080,7 @@ namespace Primera_Practica
             this.btnCerrarpnlAuxCl.TabIndex = 14;
             this.btnCerrarpnlAuxCl.Text = "X";
             this.btnCerrarpnlAuxCl.UseVisualStyleBackColor = false;
+            this.btnCerrarpnlAuxCl.Click += new System.EventHandler(this.btnCerrarpnlAuxCl_Click);
             // 
             // btnguardar_Cl
             // 
@@ -1366,6 +1399,17 @@ namespace Primera_Practica
             this.panelReg.TabIndex = 1;
             this.panelReg.Visible = false;
             // 
+            // chkAuditoriadetalle
+            // 
+            this.chkAuditoriadetalle.AutoSize = true;
+            this.chkAuditoriadetalle.Location = new System.Drawing.Point(536, 28);
+            this.chkAuditoriadetalle.Name = "chkAuditoriadetalle";
+            this.chkAuditoriadetalle.Size = new System.Drawing.Size(167, 29);
+            this.chkAuditoriadetalle.TabIndex = 2;
+            this.chkAuditoriadetalle.Text = "Mostrar Detalles";
+            this.chkAuditoriadetalle.UseVisualStyleBackColor = true;
+            this.chkAuditoriadetalle.CheckedChanged += new System.EventHandler(this.chkAuditoriadetalle_CheckedChanged);
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -1450,49 +1494,6 @@ namespace Primera_Practica
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // chkClientesdesactivados
-            // 
-            this.chkClientesdesactivados.AutoSize = true;
-            this.chkClientesdesactivados.Location = new System.Drawing.Point(727, 28);
-            this.chkClientesdesactivados.Name = "chkClientesdesactivados";
-            this.chkClientesdesactivados.Size = new System.Drawing.Size(274, 29);
-            this.chkClientesdesactivados.TabIndex = 11;
-            this.chkClientesdesactivados.Text = "Mostrar Clientes desactivados";
-            this.chkClientesdesactivados.UseVisualStyleBackColor = true;
-            this.chkClientesdesactivados.CheckedChanged += new System.EventHandler(this.chkClientesdesactivados_CheckedChanged);
-            // 
-            // chkAuditoriadetalle
-            // 
-            this.chkAuditoriadetalle.AutoSize = true;
-            this.chkAuditoriadetalle.Location = new System.Drawing.Point(536, 28);
-            this.chkAuditoriadetalle.Name = "chkAuditoriadetalle";
-            this.chkAuditoriadetalle.Size = new System.Drawing.Size(167, 29);
-            this.chkAuditoriadetalle.TabIndex = 2;
-            this.chkAuditoriadetalle.Text = "Mostrar Detalles";
-            this.chkAuditoriadetalle.UseVisualStyleBackColor = true;
-            this.chkAuditoriadetalle.CheckedChanged += new System.EventHandler(this.chkAuditoriadetalle_CheckedChanged);
-            // 
-            // btnCerrarSesion
-            // 
-            this.btnCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCerrarSesion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            this.btnCerrarSesion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
-            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(0, 633);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(35, 50);
-            this.btnCerrarSesion.TabIndex = 6;
-            this.btnCerrarSesion.Text = "⬅️      Cerrar Sesión";
-            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrarSesion.UseVisualStyleBackColor = false;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
-            this.btnCerrarSesion.MouseEnter += new System.EventHandler(this.panelLateral_MouseEnter);
-            this.btnCerrarSesion.MouseLeave += new System.EventHandler(this.panelLateral_MouseLeave);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -1500,11 +1501,11 @@ namespace Primera_Practica
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(250)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1280, 733);
             this.Controls.Add(this.panelLateral);
+            this.Controls.Add(this.panelClientes);
+            this.Controls.Add(this.panelVentas);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelRegistros);
             this.Controls.Add(this.panelInicio);
-            this.Controls.Add(this.panelClientes);
-            this.Controls.Add(this.panelVentas);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
