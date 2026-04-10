@@ -12,6 +12,7 @@ using CapaNegocios;
 namespace Primera_Practica
 {
     
+    // TODO: Agregar opción de "Recordar usuario" guardando el nombre en configuración local
     public partial class Login : Form
     {
         private CN_Auditoria auditoria = new CN_Auditoria();
@@ -73,6 +74,7 @@ namespace Primera_Practica
                 btnIngresar.Text = "Ingresar";
             }
         }
+        // TODO: Implementar límite de intentos fallidos y bloqueo temporal de la cuenta
         // Permite presionar Enter para iniciar sesión
         private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
         {

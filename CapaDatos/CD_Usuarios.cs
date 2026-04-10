@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
+    // TODO: Implementar encriptación de contraseña (hash SHA-256) antes de guardar y validar
     public class CD_Usuarios : CD_Base
     {
         private Conexion con = new Conexion();
         SqlCommand cmd = new SqlCommand();
 
         // Valida si el usuario existe — retorna bool
+        // TODO: Agregar bloqueo de cuenta tras N intentos fallidos de login
         public async Task<bool> ValidarUsuarioAsync(string usuario, string contrasena)
         {
             try
@@ -77,10 +79,12 @@ namespace CapaDatos
                 throw new Exception("Error al obtener id: " + ex.Message);
             }
         }
+        // TODO: Agregar paginación al resultado para sistemas con muchos usuarios
         public override DataTable MostrarT()
         {
             return MostrarTabla("MostrarUsuario");
         }
+        // TODO: Validar que el nombre de usuario no contenga caracteres especiales
         public void Insertar(string Usuario,string Contrasena, string Rol)
         {
             cmd.Connection = con.ObtenerConexion();

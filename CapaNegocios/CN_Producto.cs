@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
+    // TODO: Agregar importación masiva de productos desde archivo CSV o Excel
     public class CN_Producto : CN_Colmado
     {
         private CD_Productos CDproductos = new CD_Productos();
+        // TODO: Agregar parámetro de ordenamiento (por nombre, marca, precio, stock)
         public DataTable Obtenerdatos_Producto()
         {
             DataTable tabla = new DataTable();
@@ -37,6 +39,7 @@ namespace CapaNegocios
             CDproductos.Eliminar_Productos(Convert.ToInt32(id));
 
         }
+        // TODO: Enviar notificación cuando un producto sea reactivado
         public void Reactivar_Producto(string id)
         {
             CDproductos.Reactivar_Productos(Convert.ToInt32(id));

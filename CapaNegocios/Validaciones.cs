@@ -3,6 +3,7 @@ using System;
 
 namespace CapaNegocios
 {
+    // TODO: Centralizar todos los mensajes de error en un archivo de recursos para soporte multilenguaje
     public class Validaciones
     {
         private CD_Productos CDproductos = new CD_Productos();
@@ -35,6 +36,7 @@ namespace CapaNegocios
 
     
    
+        // TODO: Agregar soporte para validación de formato de correo electrónico y URL
         public abstract class ValidacionBase
         {
             protected string NombreCampo;
@@ -104,6 +106,7 @@ namespace CapaNegocios
         
         }
 
+    // TODO: Agregar validación de formato de moneda con símbolo configurable por región
     public class ValidacionNumero : ValidacionBase
     {
         // Campos

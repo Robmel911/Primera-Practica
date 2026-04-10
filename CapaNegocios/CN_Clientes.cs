@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
+    // TODO: Agregar exportación de la lista de clientes a CSV o Excel
     public class CN_Clientes
     {
         private CD_Clientes CDclientes = new CD_Clientes();
 
+        // TODO: Agregar búsqueda por nombre o teléfono para filtrar clientes
         public DataTable Mostrartabla_Clientes()
         {
             return CDclientes.MostrarTabla("MostrarClientes");

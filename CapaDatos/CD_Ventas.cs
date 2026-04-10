@@ -4,10 +4,12 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
+    // TODO: Agregar reporte de ventas mensual y comparativo entre períodos
     public class CD_Ventas : CD_Base
     {
         SqlCommand cmd = new SqlCommand();
 
+        // TODO: Implementar descuentos y cupones en el registro de ventas
         public bool RegistrarVenta(int? idCliente, DataTable carrito, decimal total,string estado)
         {
             Conexion conexion = new Conexion();
@@ -188,6 +190,7 @@ namespace CapaDatos
             cmd.Connection = conexion.CerrarConexion();
             return tabla;
         }
+        // TODO: Agregar filtro de ventas por rango de fechas y estado
         public DataTable VentasDelDia()
         {
             Conexion conexion = new Conexion();

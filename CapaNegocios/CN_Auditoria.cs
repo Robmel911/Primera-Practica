@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
+    // TODO: Agregar método para exportar el historial de auditoría a PDF o CSV
     public class CN_Auditoria
     {
         private CD_Auditoria auditoriaCD = new CD_Auditoria();
 
+        // TODO: Agregar parámetro de nivel de acción (Consulta, Modificación, Eliminación)
         public void RegistrarAuditoria(int IdUsuario, string Accion)
         {
             auditoriaCD.Insertar(IdUsuario, Accion);
