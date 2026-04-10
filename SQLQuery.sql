@@ -169,6 +169,7 @@ CREATE PROC ExisteTelefonoEditar
 AS
     SELECT COUNT(*) FROM Clientes WHERE Telefono = @Telefono AND IdCliente <> @IdCliente;
 GO
+
 -- Procedimiento para mostrar clientes desactivados
 CREATE PROC MostrarClientesDesactivados
 AS
@@ -463,14 +464,15 @@ CREATE PROC MostrarAuditoria
 AS
 	SELECT * FROM Auditoria
 GO
+
+-- Procedimiento para mostrar auditoria con nombre de usuario
 CREATE PROC MostrarAuditoriaDetalle
 AS
     SELECT a.AuditoriaID, u.Usuario, a.Accion, a.Fecha
     FROM Auditoria a
     INNER JOIN Usuarios u ON a.IdUsuario = u.IdUsuario
     ORDER BY a.Fecha DESC
-GO-- Procedimiento para mostrar auditoria con nombre de usuario
-
+GO
 ---===========================================================================
 --- FOREIGN KEYS
 ---===========================================================================
