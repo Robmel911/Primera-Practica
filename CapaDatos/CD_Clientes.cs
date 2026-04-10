@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
+    // TODO: Migrar todas las consultas con interpolación de cadenas a consultas parametrizadas
     public class CD_Clientes : CD_Base
     {
         private Conexion Conector = new Conexion();
 
 
         SqlCommand cmd = new SqlCommand();
+        // TODO: Agregar filtro por nombre o teléfono para búsqueda rápida de clientes
         public override DataTable MostrarT()
         {
             return MostrarTabla("MostrarClientes");
@@ -60,6 +62,7 @@ namespace CapaDatos
                 throw new Exception("Error al editar el cliente: " + ex.Message);
             } 
         }
+        // TODO: Agregar validación para no permitir saldo negativo en la cuenta
         public void Agregarsaldo(int saldo, int id)
         {
             try

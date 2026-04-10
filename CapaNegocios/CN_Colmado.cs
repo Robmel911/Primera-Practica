@@ -9,6 +9,7 @@ using CapaDatos;
 
 namespace CapaNegocios
 {
+    // TODO: Dividir esta clase en clases separadas (CN_GestionClientes, CN_GestionVentas, CN_Reportes)
     public class CN_Colmado
     {
         private CD_Productos CDproductos = new CD_Productos();
@@ -95,10 +96,12 @@ namespace CapaNegocios
         }
         #endregion
         #region Funciones de Reportes
+        // TODO: Agregar reporte de ventas por rango de fechas y exportación a PDF/Excel
         public DataTable ReporteVentas()
         {
             return CDventas.VentasDelDia();
         }
+        // TODO: Ampliar a Top 10 y agregar filtro por período (semana, mes, año)
         public DataTable Top5Productos()
         {
             return CDventas.Top5Productos();

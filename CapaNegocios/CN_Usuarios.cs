@@ -8,10 +8,12 @@ using CapaDatos;
 
 namespace CapaNegocios
 {
+    // TODO: Implementar política de contraseñas (mínimo 8 caracteres, mayúscula, número)
     public class CN_Usuarios
     {
         private CD_Usuarios CDUsuarios = new CD_Usuarios();
         // Valida el login del usuario y obtiene su rol
+        // TODO: Registrar intentos fallidos de login y bloquear tras 5 intentos
         public async Task<(bool Existe, string Rol, int IdUsuario)> LoginAsync(string usuario, string contrasena)
         {
             try
@@ -59,6 +61,7 @@ namespace CapaNegocios
         }
     }
 
+    // TODO: Agregar expiración de sesión por inactividad y almacenar el Rol del usuario en sesión
     public static class Sesion
     {
         public static int IdUsuario { get; set; }

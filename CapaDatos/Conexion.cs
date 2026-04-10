@@ -8,10 +8,19 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
+    // TODO: Considerar mover todas las interfaces a un archivo Interfaces.cs independiente
+    /// <summary>
+    /// Interfaz que obliga a todas las clases de datos a implementar el método de consulta general.
+    /// </summary>
+    public interface IMostrarTabla
+    {
+        // TODO: Agregar método MostrarFiltrado(string criterio) para consultas con filtro
+        DataTable MostrarT();
+    }
 
     public class Conexion
     {
-        
+        // TODO: Mover la cadena de conexión a App.config para mayor seguridad y portabilidad
         private string cadenaConexion = "Server=.;Database=SistemaColmado;Integrated Security=True";
 
         // Propiedad para obtener la conexión
@@ -36,6 +45,7 @@ namespace CapaDatos
             return conexion;
         }
 
+        // TODO: Implementar IDisposable para liberar la conexión automáticamente
         // Método para cerrar la conexión
         public SqlConnection CerrarConexion()
         {
@@ -58,7 +68,8 @@ namespace CapaDatos
         }
     }
 
-    public abstract class CD_Base
+    // TODO: Agregar registro de auditoría automático en CD_Base para cada operación
+    public abstract class CD_Base : IMostrarTabla
     {
         SqlCommand cmd = new SqlCommand();
         Conexion conexion = new Conexion();

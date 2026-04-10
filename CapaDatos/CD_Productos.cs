@@ -9,11 +9,12 @@ using System.Runtime.ConstrainedExecution;
 
 namespace CapaDatos
 {
+    // TODO: Migrar consultas con interpolación de cadenas a consultas parametrizadas para evitar SQL Injection
     public class CD_Productos : CD_Base
     {
         private Conexion Conector = new Conexion();
 
-
+        // TODO: Agregar soporte para imagen de producto (campo ImagenUrl en la tabla)
         public override DataTable MostrarT()
         {
             try
@@ -158,6 +159,7 @@ namespace CapaDatos
             }
 
         }
+        // TODO: Agregar alerta automática cuando el stock de un producto llegue a cero
         public DataTable ObtenerMarcas()
         {
             SqlCommand cmd = new SqlCommand();
