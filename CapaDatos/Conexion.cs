@@ -47,11 +47,11 @@ namespace CapaDatos
         // TODO: CerrarConexion - Sin parámetros, verifica si la conexión está abierta y la cierra, retorna SqlConnection
         public SqlConnection CerrarConexion()
         {
-            if (ObtenerConexion().State == System.Data.ConnectionState.Open)
-            {
-                ObtenerConexion().Close();
-            }
-            return ObtenerConexion();
+            SqlConnection conexion = ObtenerConexion(); 
+            if (conexion.State == ConnectionState.Open)
+                conexion.Close();                      
+            return conexion;                            
+
         }
 
         // TODO: ProbarConexion - Sin parámetros, intenta abrir la conexión para verificar disponibilidad, retorna bool

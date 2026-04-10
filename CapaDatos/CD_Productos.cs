@@ -54,7 +54,7 @@ namespace CapaDatos
                 cmd.Parameters.AddWithValue("@Precio", precio);
                 cmd.Parameters.AddWithValue("@Stock", stock);
                 cmd.Parameters.AddWithValue("@Codigo", codigo);
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.StoredProcedure;
                 Leer = cmd.ExecuteReader();
                 cmd.Parameters.Clear();
                 cmd.Connection = Conector.CerrarConexion();
